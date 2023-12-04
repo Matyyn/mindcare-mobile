@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import useStore from "../../screens/zustand/store";
 import axios from "axios";
 import SinglePost from "./SinglePost";
+import { trackEvent } from "@aptabase/react-native";
 
 const CommunityForumMainScreen = () => {
   const navigation = useNavigation();
@@ -13,8 +14,8 @@ const CommunityForumMainScreen = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    trackEvent("Community Forum Posts");
     axios.get("/posts").then((response) => {
-
       // //console.log("response: ", response);
       // //console.log("response data: ", response.data);
       // //console.log("post: ", response.data.data);
@@ -37,7 +38,6 @@ const CommunityForumMainScreen = () => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
           {postData.map((post) => {
             if (post) {
-
               ////console.log("single post: ", post);
 
               return <SinglePost key={post._id} post={post} />;

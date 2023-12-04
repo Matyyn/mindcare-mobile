@@ -8,7 +8,7 @@
 //   return (
 //     <WebView
 //       source={{ uri: dailyCoUrl }}
-//       style={{ flex: 1 }}      
+//       style={{ flex: 1 }}
 //     />
 //   );
 // };
@@ -72,46 +72,47 @@
 
 // export default ReviewScreen;
 
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { TextInput, Text} from "react-native-paper"; 
+import { TextInput, Text } from "react-native-paper";
 import { Formik } from "formik";
-import StarRating from 'react-native-star-rating';
+import StarRating from "react-native-star-rating";
 import * as yup from "yup";
 import useStore from "../zustand/store";
 import { useNavigation } from "@react-navigation/native";
-const validationSchema = yup.object().shape({  
+const validationSchema = yup.object().shape({
   description: yup.string().required("Description is required"),
 });
 import axios from "axios";
+import { trackEvent } from "@aptabase/react-native";
 
-const App = () => {  
+const App = () => {
+  useEffect(() => {
+    trackEvent("Call Screen");
+  }, []);
   const TherapistDetails = useStore((state) => state.selectedItem);
-  const navigation = useNavigation()
-  const description = useStore((state) => state.problemDesciption); 
+  const navigation = useNavigation();
+  const description = useStore((state) => state.problemDesciption);
   const [starCount, setStarCount] = useState(1); // set initial star count to 1
 
   const handleStarPress = (rating) => {
     setStarCount(rating);
   };
-  
+
   const headers = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
-  
-  const onSubmit = async (values, { setSubmitting }) => {      
+
+  const onSubmit = async (values, { setSubmitting }) => {
     const object = {
-      review : values.description,
-      rating:values.stars
-    }
-    const id ='6568eb75090f3ade761638dc';
-    const response = await axios.patch(`/therapist-review/${id}`, object );
+      review: values.description,
+      rating: values.stars,
+    };
+    const id = "6568eb75090f3ade761638dc";
+    const response = await axios.patch(`/therapist-review/${id}`, object);
     console.log(response.status);
-    navigation.goBack()
+    navigation.goBack();
     // setSubmitting(false);
-    
-          
-    
   };
 
   return (
@@ -132,54 +133,70 @@ const App = () => {
           errors,
           touched,
           isSubmitting,
-          setFieldValue, 
+          setFieldValue,
         }) => (
           <View>
-            <Text style={{fontSize:22,fontWeight:700,marginBottom:25}}>Rate Your Experience:</Text>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' ,marginBottom:25}}>
-            <StarRating
-                  disabled={false}
-                  maxStars={5}
-                  minStars={1}
-                  rating={values.stars} 
-                  selectedStar={(rating) => {
-                    setFieldValue('stars', rating); 
-                    handleStarPress(rating);
-                  }}
-                  starSize={40}
-                  fullStarColor="gold"
-                  starStyle={{ marginRight: 20 }} 
-                />
+            <Text style={{ fontSize: 22, fontWeight: 700, marginBottom: 25 }}>
+              Rate Your Experience:
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-evenly",
+                marginBottom: 25,
+              }}
+            >
+              <StarRating
+                disabled={false}
+                maxStars={5}
+                minStars={1}
+                rating={values.stars}
+                selectedStar={(rating) => {
+                  setFieldValue("stars", rating);
+                  handleStarPress(rating);
+                }}
+                starSize={40}
+                fullStarColor="gold"
+                starStyle={{ marginRight: 20 }}
+              />
             </View>
-            <Text style={{fontSize:22,fontWeight:700,marginBottom:15}}>Review:</Text>
-            <TextInput              
-              onChangeText={text => {
+            <Text style={{ fontSize: 22, fontWeight: 700, marginBottom: 15 }}>
+              Review:
+            </Text>
+            <TextInput
+              onChangeText={(text) => {
                 const wordCount = text.trim().split(/\s+/).length;
                 if (wordCount <= 30) {
-                  handleChange("description")(text);                      
+                  handleChange("description")(text);
                 }
               }}
               onBlur={handleBlur("description")}
               value={values.description}
               multiline
               numberOfLines={5}
-              style={{fontSize:22, backgroundColor: '#d3d3d3'}}
+              style={{ fontSize: 22, backgroundColor: "#d3d3d3" }}
               error={touched.description && errors.description}
             />
             <Text style={styles.wordCount}>
               {values.description.trim().split(/\s+/).length}/30 words
-            </Text>            
+            </Text>
             <TouchableOpacity
               mode="contained"
               onPress={handleSubmit}
-              disabled={!values.description.trim() || isSubmitting} 
+              disabled={!values.description.trim() || isSubmitting}
               style={[
                 styles.button,
                 {
-                  backgroundColor: !values.description.trim() || isSubmitting ? "#696B81" : "#2D3748",
+                  backgroundColor:
+                    !values.description.trim() || isSubmitting
+                      ? "#696B81"
+                      : "#2D3748",
                 },
-              ]}>
-              <Text style={{ color: "white", fontWeight: "bold", fontSize: 22 }}>
+              ]}
+            >
+              <Text
+                style={{ color: "white", fontWeight: "bold", fontSize: 22 }}
+              >
                 Next
               </Text>
             </TouchableOpacity>
@@ -210,23 +227,6 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // DailyWebView.js
 // import React, { useEffect } from 'react';

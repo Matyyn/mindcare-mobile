@@ -4,6 +4,7 @@ import { List, RadioButton } from "react-native-paper";
 import color from "../../constants/colors";
 import axios from "axios";
 import useStore from "../../screens/zustand/store";
+import { trackEvent } from "@aptabase/react-native";
 
 const Report = ({ route }) => {
   const { id, clientId, type } = route.params;
@@ -11,8 +12,8 @@ const Report = ({ route }) => {
   const { responseData } = useStore();
   const userId = responseData._id;
 
-
   useEffect(() => {
+    trackEvent("Report");
     //console.log("clientId: ", clientId);
     //console.log("id: ", id);
   }, []);

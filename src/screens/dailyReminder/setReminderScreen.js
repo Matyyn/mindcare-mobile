@@ -19,6 +19,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Entypo } from "@expo/vector-icons";
 import color from "../../constants/colors";
 import { Checkbox } from "react-native-paper";
+import { trackEvent } from "@aptabase/react-native";
 
 const SetReminderScreen = ({ route, navigation }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -33,14 +34,11 @@ const SetReminderScreen = ({ route, navigation }) => {
   const { responseData } = useStore();
   const [userId, setUserId] = useState();
   const [paramsReminderId, setParamsReminderId] = useState("");
-  // let flag;
-  // if (route.params) {
-  //   // const { reminderId } = route.params;
-  //   console.log("route params rmeinder id: ", route.params.reminderId);
-  //   flag = route.params.reminderId;
-  //   console.log("flag: ", flag);
-  //   // setParamsReminderId(flag);
-  // }
+
+  useEffect(() => {
+    trackEvent("Setting Reminder");
+  }, []);
+
   useEffect(() => {
     setUserId(responseData._id);
   }, [responseData]);
@@ -131,13 +129,14 @@ const SetReminderScreen = ({ route, navigation }) => {
       turnOn: true,
     };
 
-//    console.log("SET reminder object: ", setReminderObject);
+    //    console.log("SET reminder object: ", setReminderObject);
     if (route.params) {
-       console.log(route.params.flag)
+      console.log(route.params.flag);
       if (route.params.flag == "with params") {
-  ///      console.log("inside if route params");
-     //   console.log("route.params.reminderId: ", route.params.reminderId);
-      await  axios.patch(`/reminders/${route.params.reminderId}`, setReminderObject)
+        ///      console.log("inside if route params");
+        //   console.log("route.params.reminderId: ", route.params.reminderId);
+        await axios
+          .patch(`/reminders/${route.params.reminderId}`, setReminderObject)
           .then((response) => {
             //console.log("response: ", response.data);
             setParamsReminderId("");

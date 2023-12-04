@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Linking,
   TouchableOpacity,
@@ -11,8 +11,12 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import useStore from "../zustand/store";
 import axios from "axios";
+import { trackEvent } from "@aptabase/react-native";
 
 const CongratulationsScreen = () => {
+  useEffect(() => {
+    trackEvent("Payment Confirmation");
+  }, []);
   const {
     selectedItem,
     paymentId,
@@ -65,14 +69,12 @@ const CongratulationsScreen = () => {
               `/payments-confirm/${paymentId}`
             );
             //console.log('pr',paymentResponse.data.data)
-            if (paymentLink === '') {
+            if (paymentLink === "") {
               ToastAndroid.show(
                 "Payment is already Confirmed",
                 ToastAndroid.LONG
               );
-              navigation.navigate(
-                'Sessions'                
-              )
+              navigation.navigate("Sessions");
             } else {
               if (paymentResponse.data.data == "paid") {
                 ToastAndroid.show(
@@ -101,15 +103,18 @@ const CongratulationsScreen = () => {
                   appointmentId: response.data.data._id,
                 });
                 setPaymentLink("");
-                console.log(selectedItem._id)
-                const notificationResponse =await axios.post(`https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/therapist/notification/${selectedItem._id}`, {
-                   clientId: responseData._id,
-                   therapistId: selectedItem._id,
-                   notificationTitle: "Appointment Booked",
-                   notificationBody: `Appointment Booked by ${responseData.firstName} ${responseData.lastName}`,
-                   notificationTime: Date.now(), 
-                })
-                console.log(notificationResponse)
+                console.log(selectedItem._id);
+                const notificationResponse = await axios.post(
+                  `https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/therapist/notification/${selectedItem._id}`,
+                  {
+                    clientId: responseData._id,
+                    therapistId: selectedItem._id,
+                    notificationTitle: "Appointment Booked",
+                    notificationBody: `Appointment Booked by ${responseData.firstName} ${responseData.lastName}`,
+                    notificationTime: Date.now(),
+                  }
+                );
+                console.log(notificationResponse);
                 navigation.navigate("Congratulations");
               } else {
                 ToastAndroid.show(

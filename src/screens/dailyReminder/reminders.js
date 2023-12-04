@@ -16,6 +16,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import axios from "axios";
 import useStore from "../zustand/store";
+import { trackEvent } from "@aptabase/react-native";
 
 const Reminders = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
@@ -25,6 +26,7 @@ const Reminders = ({ navigation }) => {
   const { responseData } = useStore();
 
   useEffect(() => {
+    trackEvent("Reminders");
     console.log("inside reminders useeffect");
     axios.get(`/reminders/${responseData._id}`).then((response) => {
       console.log("reminders response: ", response);

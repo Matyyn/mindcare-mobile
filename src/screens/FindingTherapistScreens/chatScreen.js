@@ -169,7 +169,7 @@
 //       try {
 //         const response = await axios.get(
 //           `/appointments-client/${responseData._id}`
-//         );        
+//         );
 //         setAppointments(response.data.data);
 //       } catch (err) {
 //         console.log(err);
@@ -219,7 +219,7 @@
 //   };
 
 //   const renderUserItem = ({ item }) => {
-//     const isOnline = onlineUsers.some((onlineUser) => onlineUser.id === item.id);  
+//     const isOnline = onlineUsers.some((onlineUser) => onlineUser.id === item.id);
 //     return (
 //       <TouchableOpacity onPress={() => handleUserSelect(item.userId)}>
 //         <View style={styles.userItem}>
@@ -233,7 +233,7 @@
 //   };
 
 //   return (
-//     <View style={styles.container}>      
+//     <View style={styles.container}>
 //       {!selectedUser ? (
 //         <FlatList
 //           data={onlineUsers}
@@ -398,11 +398,13 @@ import {
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import useStore from "../zustand/store";
+import { trackEvent } from "@aptabase/react-native";
 
 const ChatScreen = ({ route }) => {
   const { responseData } = useStore();
-  const { item } = route.params;  
-  console.log('item',item)
+  const { item } = route.params;
+  console.log("item", item);
+
   // const [chatData, setChatData] = useState([
   //   {
   //     id: "1",
@@ -434,13 +436,14 @@ const ChatScreen = ({ route }) => {
     timeStamp: new Date().toLocaleTimeString(),
   };
   useEffect(() => {
+    trackEvent("Chat Screen");
     const newSocket = io.connect(
       "https://mind-care-backend-7dd9b4794b38.herokuapp.com"
     );
     setSocket(newSocket);
     newSocket.emit("addUser", messageObject);
     newSocket.on("get-message", (message) => {
-      setMessages((messages) => [...messages, message]);    
+      setMessages((messages) => [...messages, message]);
     });
 
     return () => {
@@ -458,7 +461,7 @@ const ChatScreen = ({ route }) => {
 
   const [selectedChat, setSelectedChat] = useState(true);
 
-  const array = [...messages];  
+  const array = [...messages];
   const sortedMessages = array.sort((a, b) => {
     const timestampA = new Date(a.timeStamp).getTime();
     const timestampB = new Date(b.timeStamp).getTime();
@@ -508,29 +511,33 @@ const ChatScreen = ({ route }) => {
           >
             {sortedMessages.map((message, index) => (
               <View
-              style={{
-                backgroundColor: "#575f6d",
-                padding: 10,
-                fontSize: 20,
-                borderRadius: 10,
-                color: "white",
-                alignSelf: message.senderRole === "client" ? "flex-end" : "flex-start",
-                
-              }}
-            >
-              <Text
-                key={index}
-                                style={{
-                  textAlign: message.senderRole === "client" ? "right" : "left",color:'white',fontSize:18
-
+                style={{
+                  backgroundColor: "#575f6d",
+                  padding: 10,
+                  fontSize: 20,
+                  borderRadius: 10,
+                  color: "white",
+                  alignSelf:
+                    message.senderRole === "client" ? "flex-end" : "flex-start",
                 }}
               >
-                {message.message}
-              </Text>
-              <Text style={{ textAlign: "right", fontSize: 12,color:'white' }}>
-                {message.timeStamp}
-              </Text>
-            </View>
+                <Text
+                  key={index}
+                  style={{
+                    textAlign:
+                      message.senderRole === "client" ? "right" : "left",
+                    color: "white",
+                    fontSize: 18,
+                  }}
+                >
+                  {message.message}
+                </Text>
+                <Text
+                  style={{ textAlign: "right", fontSize: 12, color: "white" }}
+                >
+                  {message.timeStamp}
+                </Text>
+              </View>
             ))}
 
             {/* {messages.map((item, index) => (
@@ -563,7 +570,7 @@ const ChatScreen = ({ route }) => {
           </View>
         </KeyboardAvoidingView>
       )}
-{/* 
+      {/* 
       {!selectedChat && (
         <FlatList
           data={chatData}

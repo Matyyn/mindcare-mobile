@@ -11,6 +11,8 @@ import axios from "axios";
 import useStore from "../../screens/zustand/store";
 import color from "../../constants/colors";
 import { useNavigation } from "@react-navigation/native";
+import { trackEvent } from "@aptabase/react-native";
+
 const CreatePost = () => {
   const { responseData } = useStore();
   const navigation = useNavigation();
@@ -19,6 +21,10 @@ const CreatePost = () => {
   const [postBody, setPostBody] = useState("");
   const [selectedTags, setSelectedTags] = useState([]); // State to track the selected button
   const [postData, setPostData] = useState();
+
+  useEffect(() => {
+    trackEvent("Create Post");
+  }, []);
 
   const uploadData = () => {
     //console.log("client OSAASA: ", responseData._id);
@@ -33,15 +39,14 @@ const CreatePost = () => {
       clientId: responseData._id,
     });
 
-
     // //console.log(postData, "postBody");
 
     // //console.log("post data: ", postData);
   };
-  
+
   const fetchData = async () => {
     // //console.log("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNNNNNNNNNNnnn");
-    
+
     try {
       //console.log("post data: ", postData);
       const response = await axios.post("/posts", postData);
@@ -50,11 +55,10 @@ const CreatePost = () => {
       console.error(error);
     }
   };
-
   useEffect(() => {
     if (postData != null) {
       fetchData();
-      navigation.navigate('main screen')
+      navigation.navigate("main screen");
     } // Call the async function
   }, [postData]);
 
@@ -139,8 +143,9 @@ const CreatePost = () => {
             borderRadius: 10,
             width: "90%",
           }}
-
-          onPress={() => {uploadData()}}
+          onPress={() => {
+            uploadData();
+          }}
         >
           <Text
             style={{
@@ -148,7 +153,6 @@ const CreatePost = () => {
               fontFamily: "Inter_700Bold",
               fontSize: 20,
             }}
-
           >
             Create Post
           </Text>

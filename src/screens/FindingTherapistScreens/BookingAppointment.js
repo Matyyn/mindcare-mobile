@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { useNavigation } from "@react-navigation/native";
 import useStore from "../zustand/store";
+import { trackEvent } from "@aptabase/react-native";
 const CalendarScreen = () => {
+  useEffect(() => {
+    trackEvent("Booking Appointment");
+  }, []);
   const navigation = useNavigation();
   const { setAppointmentSelectedDate, setAppointmentSelectedTimeIndex } =
     useStore();

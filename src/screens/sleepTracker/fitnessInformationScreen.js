@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import MapView, { Marker } from 'react-native-maps';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
-import * as Location from 'expo-location';
-import { Accelerometer } from 'expo-sensors';
-import axios from 'axios';
-import useStore from '../zustand/store';
-import color from '../../constants/colors';
+import React, { useState, useEffect } from "react";
+import MapView, { Marker } from "react-native-maps";
+import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import * as Location from "expo-location";
+import { Accelerometer } from "expo-sensors";
+import axios from "axios";
+import useStore from "../zustand/store";
+import color from "../../constants/colors";
+import { trackEvent } from "@aptabase/react-native";
 
 export default function App() {
   const [mapRegion, setMapRegion] = useState({
@@ -18,8 +19,8 @@ export default function App() {
 
   const userLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      setErrorMsg('Location Permission not Granted');
+    if (status !== "granted") {
+      setErrorMsg("Location Permission not Granted");
       return;
     }
     let location = await Location.getCurrentPositionAsync({
@@ -34,9 +35,10 @@ export default function App() {
   };
 
   useEffect(() => {
+    trackEvent("Fitness Information");
     userLocation();
   }, []);
-  
+
   const [isAccelerometerAvailable, setIsAccelerometerAvailable] =
     useState(false);
   const [stepCount, setStepCount] = useState(0);
@@ -69,25 +71,25 @@ export default function App() {
   const stepLengthMeters = 0.7;
   const distanceTraveledKm = (stepCount * stepLengthMeters) / 1000;
   //const bmi = 23.5;
-  const {responseData} = useStore()
-  const[bmi,setBmi] = useState(0)  
-  const [weight,setWeight] = useState(0)
-  useEffect(()=>{
-    async function getBMI(){
-      const response = await axios.get(`/fitness-tracker/${responseData._id}`)
+  const { responseData } = useStore();
+  const [bmi, setBmi] = useState(0);
+  const [weight, setWeight] = useState(0);
+  useEffect(() => {
+    async function getBMI() {
+      const response = await axios.get(`/fitness-tracker/${responseData._id}`);
       //console.log(response.data.data)
-      const array = response.data.data
+      const array = response.data.data;
       const firstBmi = array[0].bmi;
       const firstWeight = array[0].weight;
-      setBmi(firstBmi.toFixed(2))
-      setWeight(firstWeight.toFixed(2))
-     // console.log(firstBmi)
+      setBmi(firstBmi.toFixed(2));
+      setWeight(firstWeight.toFixed(2));
+      // console.log(firstBmi)
     }
-    getBMI()
-  },[])
+    getBMI();
+  }, []);
   const calculateCaloriesBurned = () => {
     const metValue = 3.9;
-  
+
     const bmr = 88.362 + 13.397 * weight;
 
     const caloriesBurned = (bmr / 24) * metValue * stepCount;
@@ -106,10 +108,7 @@ export default function App() {
           <Marker coordinate={mapRegion} title="Marker" />
         </MapView>
         {errorMsg && <Text style={styles.errorText}>{errorMsg}</Text>}
-        <TouchableOpacity
-          onPress={userLocation}
-          style={styles.locationButton}
-        >
+        <TouchableOpacity onPress={userLocation} style={styles.locationButton}>
           <Text style={styles.locationButtonText}>Get Location</Text>
         </TouchableOpacity>
       </View>
@@ -157,48 +156,48 @@ const styles = StyleSheet.create({
   },
   locationButton: {
     backgroundColor: color.grey,
-    width: '100%',
+    width: "100%",
     paddingVertical: 15,
     paddingHorizontal: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 10,
     marginVertical: 10,
   },
   locationButtonText: {
-    fontWeight: 'bold',
-    color: 'white',
+    fontWeight: "bold",
+    color: "white",
     fontSize: 18,
   },
   errorText: {
-    color: 'red',
-    textAlign: 'center',
+    color: "red",
+    textAlign: "center",
     marginVertical: 10,
   },
   statsContainer: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     paddingVertical: 16,
     paddingHorizontal: 16,
   },
   statsTitle: {
     fontSize: 25,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 15,
   },
   statsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 15,
   },
   statCard: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 10,
     padding: 20,
     marginHorizontal: 8,
     elevation: 4,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -208,12 +207,12 @@ const styles = StyleSheet.create({
   },
   statTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 8,
-    color: '#333',
+    color: "#333",
   },
   statValue: {
     fontSize: 24,
-    color: '#333',
+    color: "#333",
   },
 });

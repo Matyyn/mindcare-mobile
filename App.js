@@ -5,7 +5,9 @@ import { name as appName } from "./app.json";
 import color from "./src/constants/colors";
 import Navigation from "./src/components/StartingScreenNavigator";
 import axios from "axios";
-axios.defaults.baseURL = "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/client";
+import Aptabase from "@aptabase/react-native";
+axios.defaults.baseURL =
+  "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/client";
 
 import {
   useFonts,
@@ -19,7 +21,7 @@ import {
   Inter_800ExtraBold,
   Inter_900Black,
 } from "@expo-google-fonts/inter";
-
+Aptabase.init("A-US-8017784997");
 export default function App() {
   let [fontsLoaded] = useFonts({
     Inter_100Thin,

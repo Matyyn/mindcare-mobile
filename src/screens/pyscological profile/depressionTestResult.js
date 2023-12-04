@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { trackEvent } from "@aptabase/react-native";
 
 const ResultScreen = ({ route }) => {
+  useEffect(() => {
+    trackEvent("Depression Test Result");
+  }, []);
   const { score } = route.params;
 
   const getAnxietyLevel = () => {
@@ -23,11 +27,11 @@ const ResultScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Test Results</Text>
-      <Text style={styles.anxietyLevel}>
-        {getAnxietyLevel()}
-      </Text>
+      <Text style={styles.anxietyLevel}>{getAnxietyLevel()}</Text>
       <Text style={styles.score}>Score Range: {score}</Text>
-      <Text style={styles.range}>1-10 → These ups and downs are considered normal</Text>
+      <Text style={styles.range}>
+        1-10 → These ups and downs are considered normal
+      </Text>
       <Text style={styles.range}>11-16 → Mild mood disturbance</Text>
       <Text style={styles.range}>17-20 → Borderline clinical depression</Text>
       <Text style={styles.range}>21-30 → Moderate depression</Text>
@@ -53,7 +57,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginBottom: 20,
     textAlign: "left",
-    fontWeight:600,
+    fontWeight: 600,
   },
   range: {
     fontSize: 18,

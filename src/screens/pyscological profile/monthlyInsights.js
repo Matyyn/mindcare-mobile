@@ -11,7 +11,7 @@
 // //import { LineChart } from 'react-native-chart-kit';
 
 // const MyLineChart = () => {
-    
+
 //       {/* <LineChart
 //         data={data}
 //         width={Dimensions.get('window').width - 35}
@@ -38,11 +38,11 @@
 //       return (
 //         <View style={styles.chartContainer}>
 //         <View style={styles.gridContainer}>
-          
+
 //         </View>
 //         <View style={styles.barContainer}>
 //           {data.map((value, index) => (
-            
+
 //             <View key={index}>
 //             <View style={[styles.bar, { height: (value / maxDataValue) * 200 }]}>
 //               <Text style={styles.barText}>{value}</Text>
@@ -52,10 +52,9 @@
 //           ))}
 //         </View>
 //       </View>
-        
+
 //   );
 // };
-
 
 // const FrequentEmotions=()=>{
 //   return (
@@ -137,8 +136,8 @@
 
 // const App = () => {
 //   return (
-//     <SafeAreaView style={{flex: 1}}>      
-//         <View style={styles.container}>          
+//     <SafeAreaView style={{flex: 1}}>
+//         <View style={styles.container}>
 //               <Text style={styles.header}>Mood Graph</Text>
 //               <MyLineChart />
 //               <Text style={styles.header}>Frequent Emotions</Text>
@@ -147,7 +146,7 @@
 //               <Text style={styles.header}>Stress Scale</Text>
 //               <Text style={styles.paragraph}>Stress scale in this period</Text>
 //               <StressScale/>
-//         </View>      
+//         </View>
 //     </SafeAreaView>
 //   );
 // };
@@ -155,22 +154,22 @@
 // export default App;
 
 // const styles = StyleSheet.create({
-//   sliderContainer: {    
+//   sliderContainer: {
 //     marginTop:'6%',
-//     backgroundColor: 'orange',    
+//     backgroundColor: 'orange',
 //     textAlign: 'center',
 //     paddingTop: 15,
-//     paddingBottom: 15,    
+//     paddingBottom: 15,
 //     borderRadius:10,
 //     marginLeft:'6%',
 //     marginRight:'6%'
 //   },
 //   container: {
 //     flex: 1,
-//     backgroundColor: 'white',    
+//     backgroundColor: 'white',
 //     textAlign: 'center',
-//     padding: 10,   
-//     height:'100%' 
+//     padding: 10,
+//     height:'100%'
 //   },
 //   header: {
 //     textAlign: 'left',
@@ -181,8 +180,8 @@
 //   },
 //   paragraph: {
 //     textAlign: 'left',
-//     fontSize: 12,   
-//     paddingLeft: 25, 
+//     fontSize: 12,
+//     paddingLeft: 25,
 //   },
 //   tag: {
 //     padding: 10,
@@ -199,12 +198,12 @@
 //   },
 //   tag3: {
 //     backgroundColor: '#FFD700', // Yellow
-    
+
 //   },
 //   tagText: {
 //     color: 'white',
 //     fontWeight: 'bold',
-//   },    
+//   },
 //   slider: {
 //     width: '90%',
 //     marginLeft:'5%',
@@ -271,39 +270,43 @@
 //     fontSize: 10,
 //   },
 // });
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import Slider from '@react-native-community/slider';
-import { View, StyleSheet, Text } from 'react-native';
-import { VictoryBar, VictoryChart, VictoryAxis } from 'victory-native';
-import useStore from '../zustand/store';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import Slider from "@react-native-community/slider";
+import { View, StyleSheet, Text } from "react-native";
+import { VictoryBar, VictoryChart, VictoryAxis } from "victory-native";
+import useStore from "../zustand/store";
+import { trackEvent } from "@aptabase/react-native";
 
 const dailyInsights = () => {
   const { responseData } = useStore();
 
   const weekdays = [
-    { name: 'Sun', emoji: '🙂' },
-    { name: 'Mon', emoji: '' },
-    { name: 'Tue', emoji: '' },
-    { name: 'Wed', emoji: '🙂' },
-    { name: 'Thu', emoji: '' },
-    { name: 'Fri', emoji: '' },
-    { name: 'Sat', emoji: '' },
+    { name: "Sun", emoji: "🙂" },
+    { name: "Mon", emoji: "" },
+    { name: "Tue", emoji: "" },
+    { name: "Wed", emoji: "🙂" },
+    { name: "Thu", emoji: "" },
+    { name: "Fri", emoji: "" },
+    { name: "Sat", emoji: "" },
   ];
 
   const [userData, setData] = useState([]);
   const [stress, setStress] = useState();
   useEffect(async () => {
-    const response = await axios.get(`/psychological-profile/${responseData._id}`);
+    trackEvent("Monthly Insights");
+    const response = await axios.get(
+      `/psychological-profile/${responseData._id}`
+    );
     console.log(response.data.data.profile);
     const rawData = response.data.data.profile;
-  
+
     const emojiMapping = {
-      Happy: '😄',
-      Awesome: '🤩',
-      Neutral: '😐',
-      Sad: '😢',
-      Griefed: '😔',
+      Happy: "😄",
+      Awesome: "🤩",
+      Neutral: "😐",
+      Sad: "😢",
+      Griefed: "😔",
     };
     const moodValueMapping = {
       Awesome: 1,
@@ -312,52 +315,51 @@ const dailyInsights = () => {
       Sad: 4,
       Griefed: 5,
     };
-  
+
     const stressTimelineMap = {};
     const processedData = [];
-  
-    rawData.forEach(item => {
+
+    rawData.forEach((item) => {
       const { checkinDate, emotion, stressTimeline } = item;
       const checkinDateObj = new Date(checkinDate);
-      const day = checkinDateObj.toLocaleString('en-US', { weekday: 'long' });
+      const day = checkinDateObj.toLocaleString("en-US", { weekday: "long" });
       const emoji = emojiMapping[emotion];
       const moodValue = moodValueMapping[emotion];
-  
-      if (!processedData.some(data => data.day === day)) {
+
+      if (!processedData.some((data) => data.day === day)) {
         processedData.push({
-          day: day.split(',')[0],
+          day: day.split(",")[0],
           emoji,
           moodValue,
           stressTimeline,
         });
       }
-  
+
       if (stressTimeline in stressTimelineMap) {
         stressTimelineMap[stressTimeline]++;
       } else {
         stressTimelineMap[stressTimeline] = 1;
       }
     });
-  
-    let mostFrequentStressTimeline = '';
+
+    let mostFrequentStressTimeline = "";
     let maxFrequency = 0;
-  
-    Object.keys(stressTimelineMap).forEach(stressTimeline => {
+
+    Object.keys(stressTimelineMap).forEach((stressTimeline) => {
       if (stressTimelineMap[stressTimeline] > maxFrequency) {
         mostFrequentStressTimeline = stressTimeline;
         maxFrequency = stressTimelineMap[stressTimeline];
       }
     });
-  
-    console.log('Most frequent stressTimeline:', mostFrequentStressTimeline);
+
+    console.log("Most frequent stressTimeline:", mostFrequentStressTimeline);
     setStress(mostFrequentStressTimeline);
     setData(processedData);
   }, []);
-  
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Monthly Mood</Text>      
+      <Text style={styles.heading}>Monthly Mood</Text>
       <View style={styles.circleContainer}>
         {userData.map((selected, index) => (
           <View key={index} style={styles.circle}>
@@ -373,19 +375,11 @@ const dailyInsights = () => {
       <Text style={styles.chartHeading}>Monthly Mood Graph</Text>
       <VictoryChart domainPadding={{ x: 25 }}>
         <VictoryAxis
-          tickValues={userData.map(item => item.day)}
+          tickValues={userData.map((item) => item.day)}
           style={styles.axis}
         />
-        <VictoryAxis
-          dependentAxis
-          style={styles.axis}
-        />
-        <VictoryBar
-          data={userData}
-          x="day"
-          y="moodValue"
-          style={styles.bar}
-        />
+        <VictoryAxis dependentAxis style={styles.axis} />
+        <VictoryBar data={userData} x="day" y="moodValue" style={styles.bar} />
       </VictoryChart>
       <Text style={styles.chartHeading}>Frequent Stress Level</Text>
       <View style={styles.stressTag}>
@@ -398,26 +392,26 @@ const dailyInsights = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
     padding: 20,
     paddingTop: 20,
   },
   heading: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
   sliderContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginVertical: 20,
   },
   circleContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   circle: {
-    alignItems: 'center',
+    alignItems: "center",
     marginHorizontal: 8,
   },
   emptyCircle: {
@@ -425,7 +419,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     marginBottom: 5,
   },
   emoji: {
@@ -434,34 +428,34 @@ const styles = StyleSheet.create({
   },
   weekday: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   stressTag: {
-    backgroundColor: '#007acc',
+    backgroundColor: "#007acc",
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 20,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     marginVertical: 10,
   },
   stressTagText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize:22
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 22,
   },
   chartHeading: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 20,
   },
   axis: {
     tickLabels: {
       fontSize: 12,
-      fontWeight: 'bold',
+      fontWeight: "bold",
     },
   },
   bar: {
-    data: { fill: '#007acc' },
+    data: { fill: "#007acc" },
   },
 });
 

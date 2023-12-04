@@ -7,7 +7,7 @@
 // const GuidedJournalingMain = ({navigation}) => {
 //   const [numColumns, setNumColumns] = useState(2);
 //   React.useLayoutEffect(() => {
-//     navigation.setOptions({     
+//     navigation.setOptions({
 //       headerRight: () => (
 //         <TouchableOpacity onPress={() => navigation.navigate('RescueSessionsTab')}>
 //           <Icon name="clipboard-list" size={30} color="black" style={styles.copyIcon} />
@@ -15,7 +15,7 @@
 //       ),
 //     });
 //   }, [navigation]);
-//   return (    
+//   return (
 //     <View>
 //       <FlatList
 //         data={rescueData}
@@ -25,7 +25,7 @@
 //           <RescueSessionCard title={item.title} image={item.imgUrl} />
 //         )}
 //         keyExtractor={(item) => item.id}
-//       />   
+//       />
 //     </View>
 //   );
 // };
@@ -36,20 +36,27 @@
 // RecommendedScreen.js
 import React from "react";
 import { useState, useEffect } from "react";
-import { TouchableOpacity,View, StyleSheet, FlatList, Text } from "react-native";
+import {
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  FlatList,
+  Text,
+} from "react-native";
 import RescueSessionCard from "../../components/RescueSessionsCard";
 import rescueData from "../../data/rescueSessionData";
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from "react-native-vector-icons/FontAwesome5";
+import { trackEvent } from "@aptabase/react-native";
 
 const RecommendedScreen = ({ navigation }) => {
   const [numColumns, setNumColumns] = useState(2);
   const [recommendedData, setRecommendedData] = useState([]);
-
   useEffect(() => {
-    
-    const randomData = getRandomData(rescueData, 2); 
+    trackEvent("Recommended Rescue Sessions");
+  }, []);
+  useEffect(() => {
+    const randomData = getRandomData(rescueData, 2);
     setRecommendedData(randomData);
-    
   }, [navigation]);
 
   const getRandomData = (data, count) => {
@@ -59,7 +66,9 @@ const RecommendedScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text style={{fontSize:18,margin:10}}>Recommended Rescue Sessions</Text>
+      <Text style={{ fontSize: 18, margin: 10 }}>
+        Recommended Rescue Sessions
+      </Text>
       <FlatList
         data={recommendedData}
         key={numColumns}

@@ -7,7 +7,7 @@ import {
   Button,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { TextInput, Checkbox, RadioButton } from "react-native-paper";
@@ -21,8 +21,12 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import * as ImagePicker from "expo-image-picker";
 import { firebaseApp } from "../../firebase/firebase";
 import { getStorage, uploadBytes, ref, getDownloadURL } from "firebase/storage";
+import { trackEvent } from "@aptabase/react-native";
 
 const Profile = () => {
+  useEffect(() => {
+    trackEvent("User Profile");
+  }, []);
   // var d = new Date().toLocaleDateString();
   const [image, setImage] = useState("");
   const [uploading, setUploading] = useState(false);

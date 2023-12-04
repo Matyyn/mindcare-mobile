@@ -14,22 +14,24 @@ import {
 import axios from "axios";
 import Icon from "react-native-vector-icons/Entypo";
 import Icons from "react-native-vector-icons/Feather";
+import { trackEvent } from "@aptabase/react-native";
 
 const TextInputExample = () => {
   const navigation = useNavigation();
   const { responseData } = useStore();
   const [appointments, setAppointments] = useState();
   useEffect(() => {
+    trackEvent("Completed Session");
     async function gettingAppointment() {
       try {
         const response = await axios.get(
           `/appointments-client/${responseData._id}`
-        ); 
+        );
         const approvedAppointments = response.data.data.filter(
           (appointment) => appointment.status === "Completed"
         );
-        
-        console.log("Approved Appointments:", approvedAppointments);       
+
+        console.log("Approved Appointments:", approvedAppointments);
         setAppointments(approvedAppointments);
       } catch (err) {
         console.log(err);
@@ -37,7 +39,7 @@ const TextInputExample = () => {
     }
     gettingAppointment();
   }, []);
-  
+
   const Item = ({ item, onCallPress, onChatPress }) => (
     <View style={styles.card}>
       <View style={styles.leftContainer}>
@@ -65,9 +67,14 @@ const TextInputExample = () => {
           </TouchableOpacity>
           <TouchableOpacity onPress={() => onChatPress(item)}>
             {/* <Text style={styles.buttonText}>Chat</Text> */}
-            <Icon name="chat" size={25} color="black" onPress={()=>{
-               navigation.navigate("Chat")
-            }}/>
+            <Icon
+              name="chat"
+              size={25}
+              color="black"
+              onPress={() => {
+                navigation.navigate("Chat");
+              }}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -91,7 +98,7 @@ const TextInputExample = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>      
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={appointments}
         renderItem={renderItem}
@@ -107,7 +114,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingHorizontal: 16,
-    paddingTop:20
+    paddingTop: 20,
   },
   input: {
     height: 40,
@@ -127,7 +134,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     elevation: 3,
     marginBottom: 20,
-    padding: 16,    
+    padding: 16,
     flexDirection: "row",
     alignItems: "center",
   },

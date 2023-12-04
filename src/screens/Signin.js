@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Image,
   ScrollView,
-  TouchableOpacity,ToastAndroid,
+  TouchableOpacity,
+  ToastAndroid,
   KeyboardAvoidingView,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -17,10 +18,11 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import color from "../constants/colors";
 const splashImage = require("../../assets/images/splash.png");
-import useStore from '../screens/zustand/store'
+import useStore from "../screens/zustand/store";
+import { trackEvent } from "@aptabase/react-native";
 
 const Signin = ({ navigation }) => {
-  const {setResponseData} = useStore()
+  const { setResponseData } = useStore();
   const [checked, setChecked] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   // console.log(Constants.expoConfig.extra.apiUrl);
@@ -52,21 +54,17 @@ const Signin = ({ navigation }) => {
         validationSchema={loginValidationSchema}
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values) => {
-          const response = await axios.post("/login",values);
-          let value = response.data.data.data   
-          console.log('value',value)                           
-          if(value.isBlocked==false){
-            setResponseData(value)
-            ToastAndroid.show(
-              "Successful Sign In",
-              ToastAndroid.LONG
-            );
-            navigation.navigate('Tabs');
-          }
-          else if(value.isBlocked==true){
-            navigation.navigate('Blocked');
-          }
-          else{
+          const response = await axios.post("/login", values);
+          let value = response.data.data.data;
+          console.log("value", value);
+          if (value.isBlocked == false) {
+            setResponseData(value);
+            trackEvent("Signin");
+            ToastAndroid.show("Successful Sign In", ToastAndroid.LONG);
+            navigation.navigate("Tabs");
+          } else if (value.isBlocked == true) {
+            navigation.navigate("Blocked");
+          } else {
             ToastAndroid.show(
               "Please Enter Correct Credentials!",
               ToastAndroid.LONG

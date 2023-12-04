@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   TouchableOpacity,
   ScrollView,
@@ -14,6 +14,7 @@ import * as Yup from "yup";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import useStore from "../zustand/store";
 import { useNavigation } from "@react-navigation/native";
+import { trackEvent } from "@aptabase/react-native";
 
 const paymentValidationSchema = Yup.object().shape({
   cardName: Yup.string().required("Card Name is required"),
@@ -31,6 +32,9 @@ const CreditCardScreen = () => {
   const navigation = useNavigation();
   const description = useStore((state) => state.creditCardDetails);
   const setcreditDetails = useStore((state) => state.setcreditDetails);
+  useEffect(() => {
+    trackEvent("Payment Method");
+  }, []);
   return (
     <ScrollView>
       <View style={{ padding: 20 }}>
@@ -63,8 +67,9 @@ const CreditCardScreen = () => {
           onSubmit={(values) => {
             console.log(values);
             setcreditDetails(values.cardNumber.toString());
-            navigation.navigate('Review Summary')
-          }}>
+            navigation.navigate("Review Summary");
+          }}
+        >
           {({
             handleChange,
             handleBlur,

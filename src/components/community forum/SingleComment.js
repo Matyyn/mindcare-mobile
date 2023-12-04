@@ -9,7 +9,7 @@ import {
   Modal,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
+import { trackEvent } from "@aptabase/react-native";
 import { Avatar, Button, Card } from "react-native-paper";
 import useStore from "../../screens/zustand/store";
 import { AntDesign } from "@expo/vector-icons";
@@ -25,7 +25,6 @@ const SingleComment = ({ comment, post }) => {
 
   const [userId, setUserId] = useState(responseData._id);
 
-  
   const [isReadMore, setIsReadMore] = useState(true);
   const [commentData, setCommentData] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -71,6 +70,7 @@ const SingleComment = ({ comment, post }) => {
       .catch((error) => {
         console.error(error);
       });
+    trackEvent("Comment Deleted");
   };
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -84,6 +84,7 @@ const SingleComment = ({ comment, post }) => {
     axios
       .post(`/upvote-comments/${commentId}`, commentSelected)
       .then((response) => {
+        trackEvent("Comment Upvoted");
         //console.log("response: ", response.data);
       });
   };
@@ -96,6 +97,8 @@ const SingleComment = ({ comment, post }) => {
     axios
       .post(`/downvote-comments/${commentId}`, commentSelected)
       .then((response) => {
+        trackEvent("Comment Downvoted");
+
         //console.log("response: ", response.data);
       });
   };
@@ -111,6 +114,7 @@ const SingleComment = ({ comment, post }) => {
       .delete(`/upvote-comment/${commentId}/${upvoteId._id}`)
       .then((response) => {
         const deletedComment = response.data;
+        trackEvent("Upvote from Comment removed");
         //console.log("upvote undone: ", deletedComment);
       });
   };
@@ -126,6 +130,8 @@ const SingleComment = ({ comment, post }) => {
       .delete(`/downvote-comment/${commentId}/${downvoteId._id}`)
       .then((response) => {
         const deletedComment = response.data;
+        trackEvent("Downvote from Comment removed");
+
         //console.log("downvote undone: ", deletedComment);
       });
   };

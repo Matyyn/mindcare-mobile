@@ -10,6 +10,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import color from "../../constants/colors";
 import axios from "axios";
 import useStore from "../../screens/zustand/store";
+import { trackEvent } from "@aptabase/react-native";
 
 export default function Comment({ postId, clientId, type }) {
   const [isReplying, setIsReplying] = useState(false);
@@ -18,6 +19,7 @@ export default function Comment({ postId, clientId, type }) {
   const userId = responseData._id;
 
   useEffect(() => {
+    trackEvent("Create Comment");
     //console.log(responseData);
     //console.log("user iddddd: ", userId);
   }, []);

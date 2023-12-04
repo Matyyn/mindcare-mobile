@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import color from "../../constants/colors";
+import { trackEvent } from "@aptabase/react-native";
 
 const SleepJournal = ({ navigation }) => {
+  useEffect(() => {
+    trackEvent("Sleep Journal");
+  }, []);
   const handleJournalSelection = (journalTitle) => {
     navigation.navigate("writeJournal", { journalTitle });
   };
@@ -21,27 +25,39 @@ const SleepJournal = ({ navigation }) => {
       </Text>
       <View style={styles.mainContainer}>
         <View style={styles.container}>
-          <TouchableOpacity onPress={() => handleJournalSelection("Dream Journal")}>
+          <TouchableOpacity
+            onPress={() => handleJournalSelection("Dream Journal")}
+          >
             <Text style={styles.text}>Dream Journal</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.container}>
-          <TouchableOpacity onPress={() => handleJournalSelection("Finding a peaceful space")}>
+          <TouchableOpacity
+            onPress={() => handleJournalSelection("Finding a peaceful space")}
+          >
             <Text style={styles.text}>Finding a peaceful space</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.container}>
-          <TouchableOpacity onPress={() => handleJournalSelection("Finding the day ahead")}>
+          <TouchableOpacity
+            onPress={() => handleJournalSelection("Finding the day ahead")}
+          >
             <Text style={styles.text}>Finding the day ahead</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.container}>
-          <TouchableOpacity onPress={() => handleJournalSelection("Calming the mind")}>
+          <TouchableOpacity
+            onPress={() => handleJournalSelection("Calming the mind")}
+          >
             <Text style={styles.text}>Calming the mind</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.container}>
-          <TouchableOpacity onPress={() => handleJournalSelection("Looking forward to tomorrow")}>
+          <TouchableOpacity
+            onPress={() =>
+              handleJournalSelection("Looking forward to tomorrow")
+            }
+          >
             <Text style={styles.text}>Looking forward to tomorrow</Text>
           </TouchableOpacity>
         </View>
@@ -58,8 +74,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: color.grey,
     padding: 15,
-    paddingTop:25,
-    paddingBottom:25,
+    paddingTop: 25,
+    paddingBottom: 25,
     width: "80%",
     borderRadius: 15,
     margin: 10,
@@ -67,7 +83,7 @@ const styles = StyleSheet.create({
   text: {
     color: "white",
     textAlign: "center",
-    fontSize:16
+    fontSize: 16,
   },
 });
 

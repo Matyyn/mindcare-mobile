@@ -8,6 +8,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@aptabase/react-native": "^0.3.9",
     "@daily-co/daily-js": "^0.54.0",
     "@expo-google-fonts/inter": "^0.2.3",
     "@expo/vector-icons": "^13.0.0",

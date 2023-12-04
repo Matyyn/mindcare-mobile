@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,80 +10,94 @@ import {
 import useStore from "../zustand/store";
 import { useNavigation } from "@react-navigation/native";
 import { Card } from "react-native-paper";
+import { trackEvent } from "@aptabase/react-native";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
-  
+
+  useEffect(() => {
+    trackEvent("Doctor Details");
+  }, []);
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title:'Therapist Details',      
+      title: "Therapist Details",
     });
   }, [navigation]);
   const { selectedItem } = useStore();
   return (
     <ScrollView style={styles.container}>
-    <Card style={{padding:10,borderRadius:10}}>
-      <Text style={styles.name}>Therapist Profile</Text>
-      <View style={styles.header}>
-        <Image
-          source={{ uri: selectedItem.picture }}
-          style={styles.profileImage}
-        />
-        <Text style={{ fontSize: 22, fontWeight: 700 ,marginTop:10}}>
-          {selectedItem.firstName} {selectedItem.lastName}
-        </Text>
-      </View>
+      <Card style={{ padding: 10, borderRadius: 10 }}>
+        <Text style={styles.name}>Therapist Profile</Text>
+        <View style={styles.header}>
+          <Image
+            source={{ uri: selectedItem.picture }}
+            style={styles.profileImage}
+          />
+          <Text style={{ fontSize: 22, fontWeight: 700, marginTop: 10 }}>
+            {selectedItem.firstName} {selectedItem.lastName}
+          </Text>
+        </View>
 
-      <View style={styles.professionalDetails}>
-        <Text style={styles.detailsHeading}>Professional Details: </Text>
-        <View style={styles.detailRow}>
-          <Text style={styles.detailSubHeading}>Specialization:</Text>
-          <Text style={styles.detailText}>{selectedItem.specialization}</Text>
-        </View>
-        <View style={styles.detailRow}>
-          <Text style={styles.detailSubHeading}>Experience:</Text>
-          <Text style={styles.detailText}>{selectedItem.experience} Years</Text>
-        </View>
-        <View style={styles.detailRow}>
-          <Text style={styles.detailSubHeading}>Charges/Session:</Text>
-          <Text style={styles.detailText}>$ {selectedItem.sessionCharges/100} </Text>
-        </View>
-      </View>
-      <View style={styles.workingTime}>
-        <Text style={styles.detailSubHeading}>Working Time: </Text>
-        <Text style={styles.detailText}>{selectedItem.dateOfAvailability}</Text>
-      </View>
-      <TouchableOpacity
-        style={styles.reviewsTouchable}
-        onPress={() => {
-          navigation.navigate("Reviews");
-        }}
-      >
-        <View style={styles.reviews}>
-          <View style={styles.reviewsHeader}>
-            <Text style={styles.reviewsHeading}>Reviews</Text>
-            <TouchableOpacity
-              style={styles.seeAllButton}
-              onPress={() => {
-                navigation.navigate("Reviews");
-              }}
-            >
-              <Text style={styles.seeAllButtonText}>See All</Text>
-            </TouchableOpacity>
+        <View style={styles.professionalDetails}>
+          <Text style={styles.detailsHeading}>Professional Details: </Text>
+          <View style={styles.detailRow}>
+            <Text style={styles.detailSubHeading}>Specialization:</Text>
+            <Text style={styles.detailText}>{selectedItem.specialization}</Text>
           </View>
-          <View style={styles.reviewItem}>
-            <Text style={styles.reviewText}>
-              "Great therapist! Highly recommended."
+          <View style={styles.detailRow}>
+            <Text style={styles.detailSubHeading}>Experience:</Text>
+            <Text style={styles.detailText}>
+              {selectedItem.experience} Years
+            </Text>
+          </View>
+          <View style={styles.detailRow}>
+            <Text style={styles.detailSubHeading}>Charges/Session:</Text>
+            <Text style={styles.detailText}>
+              $ {selectedItem.sessionCharges / 100}{" "}
             </Text>
           </View>
         </View>
-      </TouchableOpacity>
-      
-        <TouchableOpacity style={styles.bookAppointmentButton} onPress={()=>{
-            navigation.navigate('Booking Appointment')
-        }}>
+        <View style={styles.workingTime}>
+          <Text style={styles.detailSubHeading}>Working Time: </Text>
+          <Text style={styles.detailText}>
+            {selectedItem.dateOfAvailability}
+          </Text>
+        </View>
+        <TouchableOpacity
+          style={styles.reviewsTouchable}
+          onPress={() => {
+            navigation.navigate("Reviews");
+          }}
+        >
+          <View style={styles.reviews}>
+            <View style={styles.reviewsHeader}>
+              <Text style={styles.reviewsHeading}>Reviews</Text>
+              <TouchableOpacity
+                style={styles.seeAllButton}
+                onPress={() => {
+                  navigation.navigate("Reviews");
+                }}
+              >
+                <Text style={styles.seeAllButtonText}>See All</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.reviewItem}>
+              <Text style={styles.reviewText}>
+                "Great therapist! Highly recommended."
+              </Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.bookAppointmentButton}
+          onPress={() => {
+            navigation.navigate("Booking Appointment");
+          }}
+        >
           <Text style={styles.bookAppointmentText}>Book Appointment</Text>
-        </TouchableOpacity>    
+        </TouchableOpacity>
       </Card>
     </ScrollView>
   );
@@ -142,10 +156,9 @@ const styles = StyleSheet.create({
   reviews: {
     marginBottom: 16,
   },
-  reviewText:{
-    fontSize:18
-  }
-  ,
+  reviewText: {
+    fontSize: 18,
+  },
   reviewsHeader: {
     flexDirection: "row",
     justifyContent: "space-between",

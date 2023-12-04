@@ -12,6 +12,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Avatar, Button, Card } from "react-native-paper";
 import useStore from "../../screens/zustand/store";
 import { AntDesign } from "@expo/vector-icons";
+import { trackEvent } from "@aptabase/react-native";
 
 import { FontAwesome5 } from "@expo/vector-icons";
 
@@ -21,13 +22,12 @@ import Comment from "./Comment";
 import { useNavigation } from "@react-navigation/native";
 
 const SinglePost = ({ post }) => {
-
-  const { responseData } = useStore();  
+  const { responseData } = useStore();
 
   const [userId, setUserId] = useState();
   useEffect(() => {
     setUserId(responseData._id);
-  }, [responseData]);  
+  }, [responseData]);
   const [isReadMore, setIsReadMore] = useState(true);
   const [upvoted, setUpvoted] = useState(false);
   const [downvoted, setDownvoted] = useState(false);
@@ -75,26 +75,26 @@ const SinglePost = ({ post }) => {
         console.error(error);
       });
     toggleModal();
+    trackEvent("Post Deleted");
   };
   const addUpvote = async (postId, clientId) => {
+    trackEvent("Post Upvoted");
+
     const postSelected = {
       postId: postId,
       clientId: userId,
     };
-    axios.post(`/upvote-post/${postId}`, postSelected).then((response) => {
-
-    });
+    axios.post(`/upvote-post/${postId}`, postSelected).then((response) => {});
     setUpvoted(true);
   };
   const addDownvote = async (postId, clientId) => {
-
+    trackEvent("Post Downvoted");
     const postSelected = {
       postId: postId,
       clientId: userId,
     };
     axios.post(`/downvote-post/${postId}`, postSelected).then((response) => {
       ////console.log("response: ", response.data);
-
     });
   };
 
@@ -108,6 +108,7 @@ const SinglePost = ({ post }) => {
     //////console.log("upvote Id after: ", upvoteId._id);
     axios.delete(`/upvote-post/${postId}/${upvoteId._id}`).then((response) => {
       const deletedPost = response.data;
+      trackEvent("Upvote removed from post");
       //////console.log("upvote undone: ", deletedPost);
     });
     setUpvoted(false);
@@ -125,6 +126,8 @@ const SinglePost = ({ post }) => {
       .delete(`/downvote-post/${postId}/${downvoteId._id}`)
       .then((response) => {
         const deletedPost = response.data;
+        trackEvent("Downvote removed from post");
+
         ////console.log("downvote undone: ", deletedPost);
       });
   };
@@ -132,7 +135,6 @@ const SinglePost = ({ post }) => {
     ////console.log("get upvote status function");
     ////console.log("postttttttt: ", post);
     ////console.log("post.upvotes: ", post.upvotes);
-
 
     const hasUpvoted = post.upvotes.some((upvote) => {
       if (upvote.clientId) {

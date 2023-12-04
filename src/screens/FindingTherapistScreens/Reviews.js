@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, FlatList, Image } from "react-native";
 import { Card, Text } from "react-native-paper";
 import StarRating from "react-native-star-rating";
+import { trackEvent } from "@aptabase/react-native";
 
 const data = [
   {
@@ -21,13 +22,13 @@ const data = [
 ];
 
 const renderItem = ({ item }) => (
-  <Card style={{ marginVertical: 10,backgroundColor: "#D3D3D3", }}>
+  <Card style={{ marginVertical: 10, backgroundColor: "#D3D3D3" }}>
     <Card.Content>
       <View
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
-          alignItems: "center",          
+          alignItems: "center",
         }}
       >
         <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -45,7 +46,7 @@ const renderItem = ({ item }) => (
           rating={item.rating}
           starSize={20}
           fullStarColor="gold"
-        />        
+        />
       </View>
       <Text>{item.review}</Text>
     </Card.Content>
@@ -53,6 +54,9 @@ const renderItem = ({ item }) => (
 );
 
 const App = () => {
+  useEffect(() => {
+    trackEvent("Therapist Reviews");
+  }, []);
   return (
     <View style={{ flex: 1, padding: 20 }}>
       <Text style={{ fontWeight: 800, fontSize: 18 }}>Reviews</Text>

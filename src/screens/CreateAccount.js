@@ -683,7 +683,7 @@ import {
   Button,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { TextInput, Checkbox, RadioButton } from "react-native-paper";
@@ -697,8 +697,12 @@ import * as ImagePicker from "expo-image-picker";
 import { firebaseApp } from "../../firebase/firebase";
 import { getStorage, uploadBytes, ref, getDownloadURL } from "firebase/storage";
 import { useNavigation } from "@react-navigation/native";
+import { trackEvent } from "@aptabase/react-native";
 
 const Profile = () => {
+  useEffect(() => {
+    trackEvent("Create Account");
+  }, []);
   const navigation = useNavigation();
   // var d = new Date().toLocaleDateString();
   const [image, setImage] = useState("");
@@ -794,111 +798,109 @@ const Profile = () => {
         )}
       </View>
        */}
-            <View>                
-                {/* <Text style={{textAlign:"center",fontSize:25,fontWeight:'700',marginTop:20,marginBottom:20}}>Sign Up</Text> */}
-                <View style={{ marginLeft: 115 }}>
-                  {isImage ? (
-                    <Image
-                      source={{ uri: image }}
-                      width={180}
-                      height={180}
-                      borderRadius={90}
-                      borderColor="black"
-                      marginBottom={10}
-                    />
-                  ) : (
-                    <Image
-                      source={{
-                        uri:"data:image/jpeg;base64,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",
-                      }}
-                      width={180}
-                      height={180}
-                      borderRadius={90}
-                      borderColor="black"
-                      marginBottom={10}
-                    />
-                  )}
-                </View>
-                <View flexDirection="row" gap={10} style={{ marginLeft: 70 }}>
-                  <TouchableOpacity
-                    onPress={pickImage}
-                    style={{
-                      backgroundColor: color.grey,
-                      padding: 17,
-                      borderRadius: 10,
-                      width: "40%",
-                      size: "md",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        color: "white",
-                        textAlign: "center",
-                        fontSize: 16,
-                      }}
-                    >
-                      Select Image
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={async () => {
-                      if (!image) {
-                        console.error("No image selected.");
-                        return;
-                      }
-                      const picRef = ref(storage, `Client/images/${isImage}`);
-                      const response = await fetch(image);
-                      const blob = await response.blob();
-                      try {
-                        const result = await uploadBytes(picRef, blob);
-                        const url = await getDownloadURL(result.ref);
-                        console.log("Image uploaded. URL:", url);
-                        setUrlImage(url);
-                        // Set the profilePicture value in Formik using setFieldValue
-                      } catch (error) {
-                        console.error("Error uploading image:", error);
-                      }
-                            
-                    }}
-                    style={{
-                      backgroundColor: color.grey,
-                      padding: 17,
-                      borderRadius: 10,
-                      width: "40%",
-                      size: "md",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        color: "white",
-                        textAlign: "center",
-                        fontSize: 16,
-                      }}
-                    >
-                      Upload Image
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-      
-              </View>
-            <Formik
-              validationSchema={createAccountValidationSchema}
-              enableReinitialize={true}
-              initialValues={{
-                firstName: "",
-                lastName: "",
-                email: "",
-                dateOfBirth: Date.now(),
-                gender: "Male",
-                password: "",
-                confirmPassword: "",
-                profilePicture: urlImage,
+      <View>
+        {/* <Text style={{textAlign:"center",fontSize:25,fontWeight:'700',marginTop:20,marginBottom:20}}>Sign Up</Text> */}
+        <View style={{ marginLeft: 115 }}>
+          {isImage ? (
+            <Image
+              source={{ uri: image }}
+              width={180}
+              height={180}
+              borderRadius={90}
+              borderColor="black"
+              marginBottom={10}
+            />
+          ) : (
+            <Image
+              source={{
+                uri: "data:image/jpeg;base64,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",
               }}
-              onSubmit={async (values) => {
+              width={180}
+              height={180}
+              borderRadius={90}
+              borderColor="black"
+              marginBottom={10}
+            />
+          )}
+        </View>
+        <View flexDirection="row" gap={10} style={{ marginLeft: 70 }}>
+          <TouchableOpacity
+            onPress={pickImage}
+            style={{
+              backgroundColor: color.grey,
+              padding: 17,
+              borderRadius: 10,
+              width: "40%",
+              size: "md",
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                textAlign: "center",
+                fontSize: 16,
+              }}
+            >
+              Select Image
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={async () => {
+              if (!image) {
+                console.error("No image selected.");
+                return;
+              }
+              const picRef = ref(storage, `Client/images/${isImage}`);
+              const response = await fetch(image);
+              const blob = await response.blob();
+              try {
+                const result = await uploadBytes(picRef, blob);
+                const url = await getDownloadURL(result.ref);
+                console.log("Image uploaded. URL:", url);
+                setUrlImage(url);
+                // Set the profilePicture value in Formik using setFieldValue
+              } catch (error) {
+                console.error("Error uploading image:", error);
+              }
+            }}
+            style={{
+              backgroundColor: color.grey,
+              padding: 17,
+              borderRadius: 10,
+              width: "40%",
+              size: "md",
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                textAlign: "center",
+                fontSize: 16,
+              }}
+            >
+              Upload Image
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <Formik
+        validationSchema={createAccountValidationSchema}
+        enableReinitialize={true}
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          email: "",
+          dateOfBirth: Date.now(),
+          gender: "Male",
+          password: "",
+          confirmPassword: "",
+          profilePicture: urlImage,
+        }}
+        onSubmit={async (values) => {
           console.log(values);
           delete values.confirmPassword;
           try {
-            const response = await axios.post("/signup", values);            
+            const response = await axios.post("/signup", values);
             if (response.status === 200) {
               ToastAndroid.show(
                 "Successfully Created An Account",
@@ -923,7 +925,7 @@ const Profile = () => {
           isValid,
         }) => (
           <KeyboardAwareScrollView>
-            <View>              
+            <View>
               <View style={styles.textInputContainer}>
                 <TextInput
                   onChangeText={handleChange("firstName")}
