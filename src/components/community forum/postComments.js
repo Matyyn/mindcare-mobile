@@ -24,11 +24,11 @@ const PostComments = ({ route }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    //console.log("post id in post comments: ", postId);
+    ////console.log("post id in post comments: ", postId);
     axios.get(`/comments/${postId}`).then((response) => {
-      //console.log("response: ", response);
-      //console.log("response data: ", response.data);
-      //console.log("comment response data data", response.data.data);
+      ////console.log("response: ", response);
+      ////console.log("response data: ", response.data);
+      ////console.log("comment response data data", response.data.data);
       setComments(response.data.data);
       setLoading(false);
     });
@@ -41,9 +41,9 @@ const PostComments = ({ route }) => {
     const day = date.getDate();
 
     const formattedDate = `${year}-${String(month).padStart(2, "0")}-${String(
-      day
+      day,
     )}`;
-    //console.log(formattedDate);
+    ////console.log(formattedDate);
     return formattedDate;
   };
 

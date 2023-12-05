@@ -29,8 +29,8 @@ const useStore = create((set) => ({
   totalPayments: [],
   initializePayments: (data) => set(() => ({ totalPayments: data })),
   //Journals
-  journalsCount:[],
-  setJournalsCount: (data) => set(() => ({ journalsCount: data })),  
+  journalsCount: [],
+  setJournalsCount: (data) => set(() => ({ journalsCount: data })),
   //client data
   responseData: null,
   setResponseData: (data) => set({ responseData: data }),
@@ -51,7 +51,7 @@ const useStore = create((set) => ({
   isUPUWValue: {},
   setUPUWData: (data) => set({ isUPUWValue: data }),
   // rescueSessionData: null,
-  // setRescueSessionData: (data) => set({ rescueSessionData: data }),  
+  // setRescueSessionData: (data) => set({ rescueSessionData: data }),
   // removeItem: (itemId) =>
   //   set((state) => ({ items: state.items.filter((item) => item.id !== itemId) })),
 }));

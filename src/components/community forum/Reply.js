@@ -26,10 +26,10 @@ export default function Reply({ postId, clientId, commentId }) {
   useEffect(() => {}, [replyState]);
 
   const postReply = async () => {
-    //console.log("reply body: ", replyBody);
-    //console.log("post id for comment: ", postId);
-    //console.log("reply therapist id: ", clientId);
-    //console.log("comment id for reply: ", commentId);
+    ////console.log("reply body: ", replyBody);
+    ////console.log("post id for comment: ", postId);
+    ////console.log("reply therapist id: ", clientId);
+    ////console.log("comment id for reply: ", commentId);
     const replyObject = {
       postId: postId,
       clientId: userId,
@@ -38,9 +38,9 @@ export default function Reply({ postId, clientId, commentId }) {
     };
     const response = await axios.post(
       `/reply-to-comment/${commentId}`,
-      replyObject
+      replyObject,
     );
-    //console.log("reply response: ", response);
+    ////console.log("reply response: ", response);
     setReplyBody("");
     // setCommentState(!replyState);
   };

@@ -41,16 +41,16 @@ const styles = StyleSheet.create({
   score: {
     fontSize: 20,
     marginBottom: 20,
-    textAlign: "center", 
+    textAlign: "center",
   },
   range: {
     fontSize: 20,
     marginBottom: 20,
-    textAlign: "center", 
+    textAlign: "center",
   },
   buttonContainer: {
     marginTop: 50,
-    width: "90%", 
+    width: "90%",
   },
   button: {
     backgroundColor: color.grey,

@@ -25,7 +25,7 @@ const Signin = ({ navigation }) => {
   const { setResponseData } = useStore();
   const [checked, setChecked] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
-  // console.log(Constants.expoConfig.extra.apiUrl);
+  // //console.log(Constants.expoConfig.extra.apiUrl);
 
   const loginValidationSchema = yup.object().shape({
     email: yup
@@ -56,7 +56,7 @@ const Signin = ({ navigation }) => {
         onSubmit={async (values) => {
           const response = await axios.post("/login", values);
           let value = response.data.data.data;
-          console.log("value", value);
+          //console.log("value", value);
           if (value.isBlocked == false) {
             setResponseData(value);
             trackEvent("Signin");
@@ -67,7 +67,7 @@ const Signin = ({ navigation }) => {
           } else {
             ToastAndroid.show(
               "Please Enter Correct Credentials!",
-              ToastAndroid.LONG
+              ToastAndroid.LONG,
             );
           }
         }}

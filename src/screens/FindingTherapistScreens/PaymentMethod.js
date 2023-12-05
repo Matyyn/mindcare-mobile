@@ -65,7 +65,7 @@ const CreditCardScreen = () => {
             expiryDate: "",
           }}
           onSubmit={(values) => {
-            console.log(values);
+            //console.log(values);
             setcreditDetails(values.cardNumber.toString());
             navigation.navigate("Review Summary");
           }}

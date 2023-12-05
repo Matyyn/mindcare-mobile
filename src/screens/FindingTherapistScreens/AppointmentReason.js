@@ -26,15 +26,15 @@ const App = () => {
   };
 
   const onSubmit = async (values, { setSubmitting }) => {
-    console.log(values);
+    //console.log(values);
     setProblemDescription(values.description);
     setSubmitting(false);
     const response = await axios.post("/payments", {
       sessionCharges: parseInt(TherapistDetails.sessionCharges),
     });
-    console.log(response.data.data.url);
+    //console.log(response.data.data.url);
     setPaymentId(response.data.data.id);
-    console.log(response.data.data.id);
+    //console.log(response.data.data.id);
     setPaymentLink(response.data.data.url);
     navigation.navigate("Payment Method");
   };

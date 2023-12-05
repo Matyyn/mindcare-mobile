@@ -22,8 +22,15 @@ const CompleteJournalScreen = ({ navigation, route }) => {
         </TouchableOpacity>
       ),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate('RescueSessionsTab')}>
-          <Icon name="clipboard-list" size={30} color="black" style={styles.copyIcon} />
+        <TouchableOpacity
+          onPress={() => navigation.navigate("RescueSessionsTab")}
+        >
+          <Icon
+            name="clipboard-list"
+            size={30}
+            color="black"
+            style={styles.copyIcon}
+          />
         </TouchableOpacity>
       ),
       //   headerRight: () => (
@@ -45,7 +52,7 @@ const CompleteJournalScreen = ({ navigation, route }) => {
         results: answer,
       };
       await axios.post(`/overcoming-distraction/${responseData._id}`, Object);
-      navigation.navigate('rescue sessions main')
+      navigation.navigate("rescue sessions main");
     } else if (journalTitle === "Anger & Frustration") {
       const Object = {
         checkInDate: Date.now(),
@@ -54,7 +61,7 @@ const CompleteJournalScreen = ({ navigation, route }) => {
         results: answer,
       };
       await axios.post(`/anger-and-frustration/${responseData._id}`, Object);
-      navigation.navigate('rescue sessions main')
+      navigation.navigate("rescue sessions main");
     } else if (journalTitle === "Regaining Motivation") {
       const Object = {
         checkInDate: Date.now(),
@@ -63,7 +70,7 @@ const CompleteJournalScreen = ({ navigation, route }) => {
         results: answer,
       };
       await axios.post(`/regaining-motivation/${responseData._id}`, Object);
-      navigation.navigate('rescue sessions main')
+      navigation.navigate("rescue sessions main");
     } else if (journalTitle === "Disappointment") {
       const Object = {
         checkInDate: Date.now(),
@@ -72,7 +79,7 @@ const CompleteJournalScreen = ({ navigation, route }) => {
         results: answer,
       };
       await axios.post(`/envy/${responseData._id}`, Object);
-      navigation.navigate('rescue sessions main')
+      navigation.navigate("rescue sessions main");
     } else if (journalTitle === "Sleep") {
       const Object = {
         checkInDate: Date.now(),
@@ -81,7 +88,7 @@ const CompleteJournalScreen = ({ navigation, route }) => {
         results: answer,
       };
       await axios.post(`/sleep/${responseData._id}`, Object);
-      navigation.navigate('rescue sessions main')
+      navigation.navigate("rescue sessions main");
     } else if (journalTitle === "Low Mood") {
       const Object = {
         checkInDate: Date.now(),
@@ -90,7 +97,7 @@ const CompleteJournalScreen = ({ navigation, route }) => {
         results: answer,
       };
       await axios.post(`/low-mood/${responseData._id}`, Object);
-      navigation.navigate('rescue sessions main')
+      navigation.navigate("rescue sessions main");
     } else if (journalTitle === "Critism") {
       const Object = {
         checkInDate: Date.now(),
@@ -99,7 +106,7 @@ const CompleteJournalScreen = ({ navigation, route }) => {
         results: answer,
       };
       await axios.post(`/criticism/${responseData._id}`, Object);
-      navigation.navigate('rescue sessions main')
+      navigation.navigate("rescue sessions main");
     } else if (journalTitle === "Relationships") {
       const Object = {
         checkInDate: Date.now(),
@@ -108,11 +115,11 @@ const CompleteJournalScreen = ({ navigation, route }) => {
         results: answer,
       };
       await axios.post(`/relationship/${responseData._id}`, Object);
-      navigation.navigate('rescue sessions main')
+      navigation.navigate("rescue sessions main");
     }
-    //console.log(rescueSessionData);
+    ////console.log(rescueSessionData);
 
-    // console.log(question)
+    // //console.log(question)
   };
   return (
     <View style={styles.container}>

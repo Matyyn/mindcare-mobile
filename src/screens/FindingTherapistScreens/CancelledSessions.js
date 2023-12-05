@@ -23,21 +23,21 @@ const TextInputExample = () => {
     async function gettingAppointment() {
       try {
         const response = await axios.get(
-          `/appointments-client/${responseData._id}`
-        ); 
-        const approvedAppointments = response.data.data.filter(
-          (appointment) => appointment.status === "pending"
+          `/appointments-client/${responseData._id}`,
         );
-        
-        console.log("Approved Appointments:", approvedAppointments);       
+        const approvedAppointments = response.data.data.filter(
+          (appointment) => appointment.status === "pending",
+        );
+
+        //console.log("Approved Appointments:", approvedAppointments);
         setAppointments(approvedAppointments);
       } catch (err) {
-        console.log(err);
+        //console.log(err);
       }
     }
     gettingAppointment();
   }, []);
-  
+
   const Item = ({ item, onCallPress, onChatPress }) => (
     <View style={styles.card}>
       <View style={styles.leftContainer}>
@@ -56,7 +56,6 @@ const TextInputExample = () => {
         <Text style={styles.cardSubtitle}>
           Time: {item.appointmentTime.split("T")[1]}
         </Text>
-        
       </View>
     </View>
   );
@@ -78,7 +77,7 @@ const TextInputExample = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>      
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={appointments}
         renderItem={renderItem}
@@ -94,7 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingHorizontal: 16,
-    paddingTop:20
+    paddingTop: 20,
   },
   input: {
     height: 40,
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     elevation: 3,
     marginBottom: 20,
-    padding: 16,    
+    padding: 16,
     flexDirection: "row",
     alignItems: "center",
   },

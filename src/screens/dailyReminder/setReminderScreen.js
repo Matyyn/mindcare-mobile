@@ -99,7 +99,7 @@ const SetReminderScreen = ({ route, navigation }) => {
   ];
 
   const handleCardPress = (title) => {
-    console.log("title: ", title);
+    //console.log("title: ", title);
     setSelectedCard(title);
     setDailyReminder(true);
   };
@@ -109,7 +109,7 @@ const SetReminderScreen = ({ route, navigation }) => {
     const hours = currentTime.getHours();
     const minutes = currentTime.getMinutes();
     const time = `${hours}:${minutes}`;
-    // console.log("current reminder time: ", time);
+    // //console.log("current reminder time: ", time);
 
     setReminderTime(time);
   };
@@ -117,10 +117,10 @@ const SetReminderScreen = ({ route, navigation }) => {
   const setReminder = async () => {
     // alert();
     setCustomTask("");
-    console.log("inside set reminder");
-    console.log(reminderTime);
-    console.log("reminder type: ", selectedCard);
-    console.log("daily reminder:", dailyReminder);
+    //console.log("inside set reminder");
+    //console.log(reminderTime);
+    //console.log("reminder type: ", selectedCard);
+    //console.log("daily reminder:", dailyReminder);
     const setReminderObject = {
       clientId: userId,
       type: selectedCard,
@@ -129,16 +129,16 @@ const SetReminderScreen = ({ route, navigation }) => {
       turnOn: true,
     };
 
-    //    console.log("SET reminder object: ", setReminderObject);
+    //    //console.log("SET reminder object: ", setReminderObject);
     if (route.params) {
-      console.log(route.params.flag);
+      //console.log(route.params.flag);
       if (route.params.flag == "with params") {
-        ///      console.log("inside if route params");
-        //   console.log("route.params.reminderId: ", route.params.reminderId);
+        ///      //console.log("inside if route params");
+        //   //console.log("route.params.reminderId: ", route.params.reminderId);
         await axios
           .patch(`/reminders/${route.params.reminderId}`, setReminderObject)
           .then((response) => {
-            //console.log("response: ", response.data);
+            ////console.log("response: ", response.data);
             setParamsReminderId("");
             Alert.alert(null, "Reminder set", [
               {
@@ -150,9 +150,9 @@ const SetReminderScreen = ({ route, navigation }) => {
       } else {
         const response = await axios.post(
           `/reminders/${userId}`,
-          setReminderObject
+          setReminderObject,
         );
-        console.log("set reminder response: ", response);
+        //console.log("set reminder response: ", response);
         Alert.alert(null, "Reminder set", [
           {
             text: "OK",
@@ -163,9 +163,9 @@ const SetReminderScreen = ({ route, navigation }) => {
     } else {
       const response = await axios.post(
         `/reminders/${userId}`,
-        setReminderObject
+        setReminderObject,
       );
-      console.log("set reminder response: ", response);
+      //console.log("set reminder response: ", response);
       Alert.alert(null, "Reminder set", [
         {
           text: "OK",
@@ -182,7 +182,7 @@ const SetReminderScreen = ({ route, navigation }) => {
 
   const onToggleDailyReminder = () => {
     setDailyReminder(!dailyReminder);
-    console.log("switch:", dailyReminder);
+    //console.log("switch:", dailyReminder);
   };
 
   const showDatePicker = () => {
@@ -198,20 +198,20 @@ const SetReminderScreen = ({ route, navigation }) => {
       hour: "2-digit",
       minute: "2-digit",
     });
-    console.log(selectedTime);
+    //console.log(selectedTime);
     hideDatePicker();
     setReminderTime(selectedTime);
   };
 
   const renderCardRow = (start, end) => {
-    console.log("data id:", cardData.id);
+    //console.log("data id:", cardData.id);
     // if (end == cardData.length) {
     //   return <SetReminderCard title={cardData.title} image={cardData.image} />;
     // } else {
     return (
       <View style={styles.cardContainer}>
         {cardData.slice(start, end).map((data) => {
-          console.log(data.id);
+          //console.log(data.id);
           if (data.id !== 5) {
             return (
               <TouchableOpacity
@@ -255,8 +255,8 @@ const SetReminderScreen = ({ route, navigation }) => {
     // const [checked, setChecked] = useState(false);
     // key = { reminderId };
     const check = () => {
-      console.log("hello");
-      console.log(image);
+      //console.log("hello");
+      //console.log(image);
     };
     return (
       <View style={styles.setReminderCardContainer}>

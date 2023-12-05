@@ -7,31 +7,35 @@ import {
   SafeAreaView,
 } from "react-native";
 //import color from "../../constants/colors";
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from "react-native-vector-icons/FontAwesome5";
 const GuidedJournalingTips = ({ navigation, route }) => {
   useEffect(() => {
     // const { journalName } = route.params;
     //send journal name in the api call and get the response back
   }, []);
-  
 
   React.useLayoutEffect(() => {
-    navigation.setOptions({      
+    navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate('JournalsTab')}>
-          <Icon name="clipboard-list" size={30} color="black" style={styles.copyIcon} />
+        <TouchableOpacity onPress={() => navigation.navigate("JournalsTab")}>
+          <Icon
+            name="clipboard-list"
+            size={30}
+            color="black"
+            style={styles.copyIcon}
+          />
         </TouchableOpacity>
       ),
     });
   }, [navigation]);
   const [tip1, setTip1] = useState(
-    "Reflect on the good things in your life that you are grateful for"
+    "Reflect on the good things in your life that you are grateful for",
   );
   const [tip2, setTip2] = useState(
-    "Gratitude is a powerful catalyst for happiness. It's the spark that lights a fire of joy in your soul"
+    "Gratitude is a powerful catalyst for happiness. It's the spark that lights a fire of joy in your soul",
   );
   const [tip3, setTip3] = useState(
-    "Gratitude makes sense of our past, brings peace for today, and creates a vision for tomorrow"
+    "Gratitude makes sense of our past, brings peace for today, and creates a vision for tomorrow",
   );
   const [tip4, setTip4] = useState("bye");
 
@@ -52,7 +56,7 @@ const GuidedJournalingTips = ({ navigation, route }) => {
             <TouchableOpacity
               style={styles.button}
               onPress={() => {
-                navigation.navigate('writeJournal');
+                navigation.navigate("writeJournal");
               }}
             >
               <Text style={styles.buttonText}>Next</Text>
@@ -69,7 +73,7 @@ const GuidedJournalingTips = ({ navigation, route }) => {
             <TouchableOpacity
               style={styles.button}
               onPress={() => {
-                navigation.navigate('writeJournal');
+                navigation.navigate("writeJournal");
               }}
             >
               <Text style={styles.buttonText}>Next</Text>
@@ -86,7 +90,7 @@ const GuidedJournalingTips = ({ navigation, route }) => {
             <TouchableOpacity
               style={styles.button}
               onPress={() => {
-                navigation.navigate('writeJournal');
+                navigation.navigate("writeJournal");
               }}
             >
               <Text style={styles.buttonText}>Next</Text>

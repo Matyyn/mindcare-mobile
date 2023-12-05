@@ -1,4 +1,4 @@
-import React,{ useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -13,10 +13,10 @@ import color from "../../constants/colors";
 const WelcomeScreen = ({ navigation }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate("Screen1"); 
-    }, 1500); 
+      navigation.navigate("Screen1");
+    }, 1500);
 
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, []);
   return (
     <SafeAreaView>
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     marginTop: 90,
   },
   text: {
-    marginTop:"20%",
+    marginTop: "20%",
     fontSize: 30,
     fontWeight: "bold",
     color: color.grey,

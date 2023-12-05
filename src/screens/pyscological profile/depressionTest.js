@@ -209,13 +209,13 @@ const DepressionScreen = ({ navigation }) => {
   useEffect("Depression Test");
   const { responseData } = useStore();
   const [responses, setResponses] = useState(
-    Array(questions.length).fill({ questionNumber: 0, response: -1 })
+    Array(questions.length).fill({ questionNumber: 0, response: -1 }),
   );
 
   const handleComplete = async () => {
     const score = calculateTotalScore();
-    // console.log('resp',responses)
-    // console.log('score',score)
+    // //console.log('resp',responses)
+    // //console.log('score',score)
     if (responses.some((response) => response.response === -1)) {
       // Check if any question is unanswered
       ToastAndroid.show("Please answer all questions.", ToastAndroid.SHORT);
@@ -226,11 +226,11 @@ const DepressionScreen = ({ navigation }) => {
       };
       const response = await axios.post(
         `/depression-test/${responseData._id}`,
-        object
+        object,
       );
-      //console.log(response)
+      ////console.log(response)
       setResponses(
-        Array(questions.length).fill({ questionNumber: 0, response: -1 })
+        Array(questions.length).fill({ questionNumber: 0, response: -1 }),
       );
       ToastAndroid.show("Depression Test Submitted", ToastAndroid.LONG);
       navigation.navigate("Depression Test Result", { score });
@@ -253,9 +253,9 @@ const DepressionScreen = ({ navigation }) => {
     // For now, let's assume each selected option contributes to the score
     const totalScore = responses.reduce(
       (total, response) => total + response.response,
-      0
+      0,
     );
-    //console.log('Total Score:', totalScore);
+    ////console.log('Total Score:', totalScore);
     return totalScore;
   };
 

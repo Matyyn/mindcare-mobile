@@ -95,10 +95,10 @@ const TextInputExample = () => {
     //navigation.navigate('Top Doctors')
     const response = await axios.get("/therapists");
     const responseFeatured = await axios.get(
-      "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/therapist/query/?verifiedAccount=true"
+      "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/therapist/query/?verifiedAccount=true",
     );
     setFeaturedTherapist(responseFeatured.data.data);
-    //console.log(response.data)
+    ////console.log(response.data)
     initializeItems(response.data.data);
   }, []);
   //content Recommendation
@@ -111,7 +111,7 @@ const TextInputExample = () => {
   //   documentId: 1,
   // });
 
-  // console.log(recommendedDocuments);
+  // //console.log(recommendedDocuments);
   //To display only 10 results
   const lessItems = items.slice(0, 10);
   // search
@@ -119,7 +119,7 @@ const TextInputExample = () => {
     const filteredItems = items.filter(
       (item) =>
         item.firstName.toLowerCase().includes(text.toLowerCase()) ||
-        item.lastName.toLowerCase().includes(text.toLowerCase())
+        item.lastName.toLowerCase().includes(text.toLowerCase()),
     );
     setSearchResults(text === "" ? items : filteredItems);
   };

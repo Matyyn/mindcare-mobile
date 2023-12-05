@@ -16,11 +16,15 @@ const ResultScreen = ({ navigation }) => {
       <Text style={styles.range}>
         • Keep in mind that the test can be attempted once every two weeks.
       </Text>
-      <Text style={styles.range}>• Please carefully read each item in the list.</Text>
       <Text style={styles.range}>
-        • Indicate how much you have been bothered by that symptom during the past month, including today, by selecting the number in the corresponding space in the column next to each symptom.
+        • Please carefully read each item in the list.
       </Text>
-      
+      <Text style={styles.range}>
+        • Indicate how much you have been bothered by that symptom during the
+        past month, including today, by selecting the number in the
+        corresponding space in the column next to each symptom.
+      </Text>
+
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={handleComplete}>
           <Text style={styles.buttonText}>Attempt</Text>

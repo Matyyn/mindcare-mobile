@@ -1,4 +1,3 @@
-
 import React from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -9,18 +8,18 @@ import GuidedJournalingMain from "./guidedJournalingMain";
 import GuiedJournalingHeader from "../headers/guiedJournalingHeader";
 import GuidedJournalingTips from "../screens/guided journaling/guidedJournalingTips";
 import SleepJournal from "../screens/guided journaling/sleepJournal";
-import WeeklyInsights from '../screens/pyscological profile/weeklyInsights'
-import MonthlyInsights from '../screens/pyscological profile/monthlyInsights'
+import WeeklyInsights from "../screens/pyscological profile/weeklyInsights";
+import MonthlyInsights from "../screens/pyscological profile/monthlyInsights";
 import WriteJournalScreen from "../screens/guided journaling/WritingJournal";
-import CompleteJournalScreen from "../screens/guided journaling/completionScreen"
-import InsightsTab from './InsightsTab'
-import JournalsTab from './JournalLogsTab'
+import CompleteJournalScreen from "../screens/guided journaling/completionScreen";
+import InsightsTab from "./InsightsTab";
+import JournalsTab from "./JournalLogsTab";
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>      
+      <Stack.Navigator>
         <Stack.Screen
           name="guided journaling main"
           component={GuidedJournalingMain}
@@ -28,8 +27,8 @@ const Navigation = () => {
             headerTitle: "Journals",
             // headerRight: () => <GuiedJournalingHeader />,
           }}
-        /> 
-         <Stack.Screen
+        />
+        <Stack.Screen
           name="guided journaling tips"
           component={GuidedJournalingTips}
         />
@@ -49,9 +48,9 @@ const Navigation = () => {
             // headerRight: () => <GuiedJournalingHeader />,
           }}
         />
-        <Stack.Screen name="Sleep Journal" component={SleepJournal} /> 
-        <Stack.Screen name="Insights" component={InsightsTab}/>
-        <Stack.Screen name="JournalsTab" component={JournalsTab}/>
+        <Stack.Screen name="Sleep Journal" component={SleepJournal} />
+        <Stack.Screen name="Insights" component={InsightsTab} />
+        <Stack.Screen name="JournalsTab" component={JournalsTab} />
         {/* <Stack.Screen
           name="welcome"
           component={WelcomeScreen}

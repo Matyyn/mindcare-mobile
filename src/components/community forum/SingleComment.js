@@ -32,13 +32,13 @@ const SingleComment = ({ comment, post }) => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    // //console.log("user id: ", userId);
-    //console.log("post in single comment: ", post);
-    //console.log("comment: ", comment);
-    //console.log("comment client id: ", comment.clientId);
-    //console.log("comment replies: ", comment.replies);
+    // ////console.log("user id: ", userId);
+    ////console.log("post in single comment: ", post);
+    ////console.log("comment: ", comment);
+    ////console.log("comment client id: ", comment.clientId);
+    ////console.log("comment replies: ", comment.replies);
   }, []);
-  //   //console.log("comment id: ", comment._id);
+  //   ////console.log("comment id: ", comment._id);
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
@@ -53,18 +53,18 @@ const SingleComment = ({ comment, post }) => {
     const seconds = date.getSeconds();
 
     const formattedDate = `${year}-${String(month).padStart(2, "0")}-${String(
-      day
+      day,
     )}`;
-    //console.log(formattedDate);
+    ////console.log(formattedDate);
     return formattedDate;
   };
   const deleteComment = (commentId) => {
-    //console.log("inside delete func");
+    ////console.log("inside delete func");
     axios
       .delete(`/comments/${commentId}`)
       .then(() => {
         setCommentData((prevData) =>
-          prevData.filter((comment) => comment._id !== commentId)
+          prevData.filter((comment) => comment._id !== commentId),
         );
       })
       .catch((error) => {
@@ -76,7 +76,7 @@ const SingleComment = ({ comment, post }) => {
     setIsModalVisible(!isModalVisible);
   };
   const addUpvote = async (commentId) => {
-    //console.log("HWyyyyy");
+    ////console.log("HWyyyyy");
     const commentSelected = {
       commentId: commentId,
       clientId: userId,
@@ -85,11 +85,11 @@ const SingleComment = ({ comment, post }) => {
       .post(`/upvote-comments/${commentId}`, commentSelected)
       .then((response) => {
         trackEvent("Comment Upvoted");
-        //console.log("response: ", response.data);
+        ////console.log("response: ", response.data);
       });
   };
   const addDownvote = async (commentId) => {
-    //console.log("HWyyyyy");
+    ////console.log("HWyyyyy");
     const commentSelected = {
       commentId: commentId,
       clientId: userId,
@@ -99,7 +99,7 @@ const SingleComment = ({ comment, post }) => {
       .then((response) => {
         trackEvent("Comment Downvoted");
 
-        //console.log("response: ", response.data);
+        ////console.log("response: ", response.data);
       });
   };
 
@@ -109,13 +109,13 @@ const SingleComment = ({ comment, post }) => {
         return upvote._id;
       }
     });
-    //console.log("upvote Id after: ", upvoteId._id);
+    ////console.log("upvote Id after: ", upvoteId._id);
     axios
       .delete(`/upvote-comment/${commentId}/${upvoteId._id}`)
       .then((response) => {
         const deletedComment = response.data;
         trackEvent("Upvote from Comment removed");
-        //console.log("upvote undone: ", deletedComment);
+        ////console.log("upvote undone: ", deletedComment);
       });
   };
 
@@ -125,20 +125,20 @@ const SingleComment = ({ comment, post }) => {
         return downvote._id;
       }
     });
-    //console.log("downvote Id after: ", downvoteId._id);
+    ////console.log("downvote Id after: ", downvoteId._id);
     axios
       .delete(`/downvote-comment/${commentId}/${downvoteId._id}`)
       .then((response) => {
         const deletedComment = response.data;
         trackEvent("Downvote from Comment removed");
 
-        //console.log("downvote undone: ", deletedComment);
+        ////console.log("downvote undone: ", deletedComment);
       });
   };
   const getUpvoteStatus = (comment) => {
-    //console.log("get upvote status function");
-    //console.log("comment: ", comment);
-    //console.log("comment.upvotes: ", comment.upvotes);
+    ////console.log("get upvote status function");
+    ////console.log("comment: ", comment);
+    ////console.log("comment.upvotes: ", comment.upvotes);
 
     const hasUpvoted = comment.upvotes.some((upvote) => {
       if (upvote.clientId) {
@@ -147,14 +147,14 @@ const SingleComment = ({ comment, post }) => {
       return false;
     });
 
-    //console.log("hasUpvoted status: ", hasUpvoted);
+    ////console.log("hasUpvoted status: ", hasUpvoted);
     return hasUpvoted;
   };
 
   const getDownvoteStatus = (comment) => {
-    //console.log("get downvote status function");
-    //console.log("commentt: ", comment);
-    //console.log("comment.downvotes: ", comment.upvotes);
+    ////console.log("get downvote status function");
+    ////console.log("commentt: ", comment);
+    ////console.log("comment.downvotes: ", comment.upvotes);
 
     const hasDownvoted = comment.downvotes.some((downvote) => {
       if (downvote.clientId) {
@@ -163,7 +163,7 @@ const SingleComment = ({ comment, post }) => {
       return false;
     });
 
-    //console.log("hasDownvoted status: ", hasDownvoted);
+    ////console.log("hasDownvoted status: ", hasDownvoted);
     return hasDownvoted;
   };
   return (

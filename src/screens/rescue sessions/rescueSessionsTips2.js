@@ -17,25 +17,34 @@ const GuidedJournalingTips = ({ navigation, route }) => {
     navigation.setOptions({
       title: journalTitle,
       headerLeft: () => (
-        <TouchableOpacity onPress={() => navigation.navigate("rescue sessions main")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("rescue sessions main")}
+        >
           <Ionicons
             name="close"
             size={30}
             color="black"
-            style={{marginRight:10}}
+            style={{ marginRight: 10 }}
           />
         </TouchableOpacity>
       ),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate('RescueSessionsTab')}>
-          <Icon name="clipboard-list" size={30} color="black" style={styles.copyIcon} />
+        <TouchableOpacity
+          onPress={() => navigation.navigate("RescueSessionsTab")}
+        >
+          <Icon
+            name="clipboard-list"
+            size={30}
+            color="black"
+            style={styles.copyIcon}
+          />
         </TouchableOpacity>
       ),
     });
   }, [navigation, journalTitle]);
 
   const [tip1, setTip1] = useState(
-    "Put your earphones on and press play when you’re ready!"
+    "Put your earphones on and press play when you’re ready!",
   );
 
   return (
@@ -96,7 +105,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 50,
     paddingLeft: 2,
-    paddingRight:2
+    paddingRight: 2,
   },
 });
 

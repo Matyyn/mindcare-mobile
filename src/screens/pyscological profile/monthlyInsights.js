@@ -296,9 +296,9 @@ const dailyInsights = () => {
   useEffect(async () => {
     trackEvent("Monthly Insights");
     const response = await axios.get(
-      `/psychological-profile/${responseData._id}`
+      `/psychological-profile/${responseData._id}`,
     );
-    console.log(response.data.data.profile);
+    //console.log(response.data.data.profile);
     const rawData = response.data.data.profile;
 
     const emojiMapping = {
@@ -352,7 +352,7 @@ const dailyInsights = () => {
       }
     });
 
-    console.log("Most frequent stressTimeline:", mostFrequentStressTimeline);
+    //console.log("Most frequent stressTimeline:", mostFrequentStressTimeline);
     setStress(mostFrequentStressTimeline);
     setData(processedData);
   }, []);

@@ -67,10 +67,10 @@ const dailyInsights = () => {
               sliderValue === "Low"
                 ? 0
                 : sliderValue === "Medium"
-                ? 33
-                : sliderValue === "High"
-                ? 66
-                : 100
+                  ? 33
+                  : sliderValue === "High"
+                    ? 66
+                    : 100
             }
             onValueChange={handleSliderChange}
             minimumTrackTintColor="red" // Adjust the color as needed
@@ -87,9 +87,9 @@ const dailyInsights = () => {
   useEffect(async () => {
     trackEvent("Daily Insights");
     const response = await axios.get(
-      `/psychological-profile/${responseData._id}`
+      `/psychological-profile/${responseData._id}`,
     );
-    console.log(response.data.data.profile);
+    //console.log(response.data.data.profile);
     const rawData = response.data.data.profile;
 
     const emojiMapping = {
@@ -141,7 +141,7 @@ const dailyInsights = () => {
         maxFrequency = stressTimelineMap[stressTimeline];
       }
     });
-    console.log("Most frequent stressTimeline:", mostFrequentStressTimeline);
+    //console.log("Most frequent stressTimeline:", mostFrequentStressTimeline);
     setStress(mostFrequentStressTimeline);
     setData(processedData);
   }, []);

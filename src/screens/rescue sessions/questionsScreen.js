@@ -19,7 +19,7 @@ const GuidedJournalingTips = ({ navigation, route }) => {
   const [questions, setQuestions] = useState([]);
   const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(true);
 
-  useEffect(() => {    
+  useEffect(() => {
     let journalQuestions = [];
 
     switch (journalTitle) {
@@ -83,7 +83,7 @@ const GuidedJournalingTips = ({ navigation, route }) => {
     };
     const isAnyInputEmpty = newAnswers.some((answer) => !answer.trim());
 
-    setIsNextButtonDisabled(isAnyInputEmpty);    
+    setIsNextButtonDisabled(isAnyInputEmpty);
     setRescueSessionData(journalTitle, questionAndAnswer);
   };
 
@@ -132,9 +132,10 @@ const GuidedJournalingTips = ({ navigation, route }) => {
           <Ionicons name="chevron-back" size={40} color="black" />
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.iconButton
-            ,isNextButtonDisabled && styles.disabledButtonStyle,
-        ]}
+          style={[
+            styles.iconButton,
+            isNextButtonDisabled && styles.disabledButtonStyle,
+          ]}
           onPress={() => {
             navigation.navigate("Completion", { journalTitle });
           }}
@@ -143,7 +144,6 @@ const GuidedJournalingTips = ({ navigation, route }) => {
           <Ionicons name="chevron-forward-outline" size={40} color="black" />
         </TouchableOpacity>
       </View>
-
     </SafeAreaView>
   );
 };
@@ -169,18 +169,20 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 20,
-    textAlignVertical: 'top',
+    textAlignVertical: "top",
     marginBottom: 10,
     marginBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: color.grey,
     paddingTop: 15,
   },
-  disabledButtonStyle :{backgroundColor: "lightgray", 
-  borderRadius: 50,
-  paddingLeft: 2,
-  paddingRight: 2,
-  opacity: 0.7,},
+  disabledButtonStyle: {
+    backgroundColor: "lightgray",
+    borderRadius: 50,
+    paddingLeft: 2,
+    paddingRight: 2,
+    opacity: 0.7,
+  },
   bottom: {
     flexDirection: "row",
     justifyContent: "space-between",

@@ -25,16 +25,16 @@ const TextInputExample = () => {
     async function gettingAppointment() {
       try {
         const response = await axios.get(
-          `/appointments-client/${responseData._id}`
+          `/appointments-client/${responseData._id}`,
         );
         const approvedAppointments = response.data.data.filter(
-          (appointment) => appointment.status === "Completed"
+          (appointment) => appointment.status === "Completed",
         );
 
-        console.log("Approved Appointments:", approvedAppointments);
+        //console.log("Approved Appointments:", approvedAppointments);
         setAppointments(approvedAppointments);
       } catch (err) {
-        console.log(err);
+        //console.log(err);
       }
     }
     gettingAppointment();
@@ -63,10 +63,14 @@ const TextInputExample = () => {
             onPress={() => onCallPress(item)}
             style={{ marginRight: 20 }}
           >
-             <Icon name="star" size={25} color="gold" 
+            <Icon
+              name="star"
+              size={25}
+              color="gold"
               onPress={() => {
                 navigation.navigate("Review");
-              }}/>
+              }}
+            />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => onChatPress(item)}>
             {/* <Text style={styles.buttonText}>Chat</Text> */}

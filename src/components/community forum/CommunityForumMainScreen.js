@@ -16,9 +16,9 @@ const CommunityForumMainScreen = () => {
   useEffect(() => {
     trackEvent("Community Forum Posts");
     axios.get("/posts").then((response) => {
-      // //console.log("response: ", response);
-      // //console.log("response data: ", response.data);
-      // //console.log("post: ", response.data.data);
+      // ////console.log("response: ", response);
+      // ////console.log("response data: ", response.data);
+      // ////console.log("post: ", response.data.data);
 
       setPostData(response.data.data);
       setLoading(false);
@@ -38,7 +38,7 @@ const CommunityForumMainScreen = () => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
           {postData.map((post) => {
             if (post) {
-              ////console.log("single post: ", post);
+              //////console.log("single post: ", post);
 
               return <SinglePost key={post._id} post={post} />;
             }

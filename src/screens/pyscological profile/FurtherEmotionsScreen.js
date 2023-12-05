@@ -2,41 +2,41 @@ import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 const moods = [
-    { id: 1, title: "Family", emoji: "👪" },
-    { id: 2, title: "Friends", emoji: "👯‍♂️" },
-    { id: 3, title: "Partner", emoji: "💑" },
-    { id: 4, title: "Work", emoji: "💼" },
-    { id: 5, title: "School", emoji: "🎓" },
-    { id: 6, title: "Exercise", emoji: "🏋️‍♀️" },
-    { id: 7, title: "Health", emoji: "🏥" },
-    { id: 8, title: "News", emoji: "📰" },
-    { id: 9, title: "Music", emoji: "🎵" },
-    { id: 10, title: "Hobbies", emoji: "🎨" },
-    { id: 11, title: "Weather", emoji: "☀️" },
-    { id: 12, title: "Finances", emoji: "💰" },];
+  { id: 1, title: "Family", emoji: "👪" },
+  { id: 2, title: "Friends", emoji: "👯‍♂️" },
+  { id: 3, title: "Partner", emoji: "💑" },
+  { id: 4, title: "Work", emoji: "💼" },
+  { id: 5, title: "School", emoji: "🎓" },
+  { id: 6, title: "Exercise", emoji: "🏋️‍♀️" },
+  { id: 7, title: "Health", emoji: "🏥" },
+  { id: 8, title: "News", emoji: "📰" },
+  { id: 9, title: "Music", emoji: "🎵" },
+  { id: 10, title: "Hobbies", emoji: "🎨" },
+  { id: 11, title: "Weather", emoji: "☀️" },
+  { id: 12, title: "Finances", emoji: "💰" },
+];
 
-const MoodSelectorScreen = ({ route ,navigation}) => {
-  const { specificEmotion,emotion } = route.params;
-  
+const MoodSelectorScreen = ({ route, navigation }) => {
+  const { specificEmotion, emotion } = route.params;
+
   const [selectedMood, setSelectedMood] = useState(null);
 
   const handleMoodSelection = (id) => {
     setSelectedMood(id);
   };
-  const handleBackward =()=>{
+  const handleBackward = () => {
     navigation.goBack();
-  }
+  };
   const handleForward = () => {
     if (selectedMood) {
       navigation.navigate("Mood Reason", {
         emotion,
         specificEmotion,
-        reasonOfEmotion: moods.find(mood => mood.id === selectedMood).title,
+        reasonOfEmotion: moods.find((mood) => mood.id === selectedMood).title,
       });
     }
   };
-  
-    
+
   const renderMoodRow = (start, end) => {
     return (
       <View style={styles.moodRow}>
@@ -47,7 +47,8 @@ const MoodSelectorScreen = ({ route ,navigation}) => {
               styles.moodButton,
               selectedMood === mood.id && styles.selectedMoodButton,
             ]}
-            onPress={() => handleMoodSelection(mood.id)}>
+            onPress={() => handleMoodSelection(mood.id)}
+          >
             <Text style={styles.emoji}>{mood.emoji}</Text>
             <Text style={styles.moodTitle}>{mood.title}</Text>
             {selectedMood === mood.id && (
@@ -58,7 +59,7 @@ const MoodSelectorScreen = ({ route ,navigation}) => {
       </View>
     );
   };
-  
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>You are feeling tis way because....</Text>
@@ -66,12 +67,16 @@ const MoodSelectorScreen = ({ route ,navigation}) => {
       {renderMoodRow(0, 3)}
       {renderMoodRow(3, 6)}
       {renderMoodRow(6, 9)}
-      {renderMoodRow(9, 12)}      
+      {renderMoodRow(9, 12)}
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={handleBackward}>
           <AntDesign name="left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, !selectedMood && styles.disabledButton]} onPress={handleForward} disabled={!selectedMood}>
+        <TouchableOpacity
+          style={[styles.button, !selectedMood && styles.disabledButton]}
+          onPress={handleForward}
+          disabled={!selectedMood}
+        >
           <AntDesign name="right" size={24} color="#FFFFFF" />
         </TouchableOpacity>
       </View>
@@ -83,14 +88,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginTop: '10%',
+    marginTop: "10%",
   },
-  paragraph:{
-    fontSize:18,
-    textAlign:'left',
+  paragraph: {
+    fontSize: 18,
+    textAlign: "left",
     marginBottom: 25,
-  }
-,  header: {
+  },
+  header: {
     textAlign: "left",
     fontSize: 25,
     marginBottom: 20,
@@ -118,12 +123,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-  },currentSelectionText: {
+  },
+  currentSelectionText: {
     fontSize: 12,
     color: "blue",
     marginTop: 5,
   },
-  
+
   selectedMoodButton: {
     backgroundColor: "#FFD700",
   },
@@ -133,7 +139,7 @@ const styles = StyleSheet.create({
   moodTitle: {
     marginTop: 10,
     textAlign: "center",
-    marginBottom:5
+    marginBottom: 5,
   },
   buttonContainer: {
     position: "absolute",

@@ -11,25 +11,24 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 
 const GuidedJournalingTips = ({ navigation }) => {
-
   React.useLayoutEffect(() => {
-    navigation.setOptions({  
-      title:'Five Senses Grounding Technique Tip',
+    navigation.setOptions({
+      title: "Five Senses Grounding Technique Tip",
       headerLeft: () => (
         <TouchableOpacity onPress={() => navigation.navigate("Daily Tasks")}>
           <Ionicons
             name="close"
             size={30}
             color="black"
-            style={{marginRight:10}}
+            style={{ marginRight: 10 }}
           />
         </TouchableOpacity>
-      ),      
+      ),
     });
   }, [navigation]);
 
   const [tip1, setTip1] = useState(
-    "When you're feeling overwhelmed, you're likely to feel trapped in your emotions"
+    "When you're feeling overwhelmed, you're likely to feel trapped in your emotions",
   );
 
   return (
@@ -47,9 +46,12 @@ const GuidedJournalingTips = ({ navigation }) => {
         >
           <Ionicons name="chevron-back" size={40} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton}  onPress={() => {
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={() => {
             navigation.navigate("five sense grounding technique audio");
-          }}>
+          }}
+        >
           <Ionicons name="chevron-forward-outline" size={40} color="black" />
         </TouchableOpacity>
       </View>
@@ -87,7 +89,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 50,
     paddingLeft: 2,
-    paddingRight:2
+    paddingRight: 2,
   },
 });
 

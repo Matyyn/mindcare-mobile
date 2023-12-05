@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -97,4 +96,3 @@ const styles = StyleSheet.create({
 });
 
 export default DeepBreathingExerciseGoodWork;
-

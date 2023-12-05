@@ -16,12 +16,11 @@ const GuidedJournalCard = ({ key, image, title }) => {
     <View key={key} style={styles.cardContainer}>
       <TouchableOpacity
         onPress={() => {
-          {            
-              navigation.navigate("guided journaling tips", {
-                journalTitle: title,
-              });            
+          {
+            navigation.navigate("guided journaling tips", {
+              journalTitle: title,
+            });
           }
-
         }}
       >
         <Card>

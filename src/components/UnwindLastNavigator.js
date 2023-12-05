@@ -6,15 +6,14 @@ import UnplugAndUnwindTip from "../screens/dailyReminder/unplugAndUnwind/unplugA
 import UnplugAndUnwindLastTip from "../screens/dailyReminder/unplugAndUnwind/unpluAndUnwindLastTip";
 import UnplugAndUnwindAudio from "../screens/dailyReminder/unplugAndUnwind/unplugAndUnwindAudio";
 import UnplugAndUnwindOverview from "../screens/dailyReminder/unplugAndUnwind/unplugAndUnwindOverview";
-import InsightsTab from './InsightsTab'
-import JournalsTab from './JournalLogsTab'
+import InsightsTab from "./InsightsTab";
+import JournalsTab from "./JournalLogsTab";
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   return (
-    
-      <Stack.Navigator>              
-              <Stack.Screen
+    <Stack.Navigator>
+      <Stack.Screen
         name="unplug and unwind"
         component={UnplugAndUnwindTip}
         options={{ headerShown: false }}
@@ -34,8 +33,7 @@ const Navigation = () => {
         component={UnplugAndUnwindLastTip}
         options={{ headerShown: false }}
       />
-      </Stack.Navigator>
-    
+    </Stack.Navigator>
   );
 };
 

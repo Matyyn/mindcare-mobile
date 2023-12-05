@@ -57,7 +57,7 @@ const WriteJournalScreen = ({ navigation, route }) => {
   const handleComplete = async () => {
     const now = new Date();
     const filled = journalText.every((text) => text.trim().length > 0);
-    console.log(responseData);
+    //console.log(responseData);
     var date = new Date().toISOString();
     if (filled) {
       const journalEntry = {
@@ -66,7 +66,7 @@ const WriteJournalScreen = ({ navigation, route }) => {
         createdAt: date,
         clientId: responseData._id,
       };
-      console.log("Journal Entry:", journalEntry);
+      //console.log("Journal Entry:", journalEntry);
       if (journalType === "openJournal") {
         await axios.post("/open-journal", journalEntry);
         navigation.navigate("completeJournal");
@@ -112,7 +112,7 @@ const WriteJournalScreen = ({ navigation, route }) => {
       }
     } else {
       // Display an error message or perform any other desired action
-      console.log("Please fill in all journal entries.");
+      //console.log("Please fill in all journal entries.");
     }
   };
 

@@ -22,10 +22,10 @@ const DailyTasks = ({ navigation }) => {
   useEffect(() => {
     async function getData() {
       const Breathing = await axios.get(
-        `breathing-excercise/${responseData._id}`
+        `breathing-excercise/${responseData._id}`,
       );
       const newData = Breathing.data.data;
-      console.log(newData)
+      //console.log(newData);
       if (
         newData.createdAt.split("T")[0] ===
         new Date().toISOString().split("T")[0]
@@ -35,7 +35,7 @@ const DailyTasks = ({ navigation }) => {
     }
     async function getFiveSenses() {
       const FiveSenses = await axios.get(
-        `five-senses-excercise/${responseData._id}`
+        `five-senses-excercise/${responseData._id}`,
       );
       const newData = FiveSenses.data.data;
       if (
@@ -47,7 +47,7 @@ const DailyTasks = ({ navigation }) => {
     }
     async function getUPUW() {
       const Unplug = await axios.get(
-        `unplug-unwind-excercise/${responseData._id}`
+        `unplug-unwind-excercise/${responseData._id}`,
       );
       const newData = Unplug.data.data;
       if (
@@ -59,7 +59,7 @@ const DailyTasks = ({ navigation }) => {
     }
     async function getJournal() {
       const open = await axios.get(`open-journal/${responseData._id}`);
-      const openJournal = open.data.data
+      const openJournal = open.data.data;
       const currentDate = new Date().toISOString().split("T")[0];
       let foundMatch = false;
 
@@ -69,12 +69,12 @@ const DailyTasks = ({ navigation }) => {
           break;
         }
       }
-      console.log(foundMatch)
+      //console.log(foundMatch);
       if (foundMatch) {
         setJournal(true);
       }
     }
-    console.log(journal);
+    //console.log(journal);
     getJournal();
     getData();
     getFiveSenses();
@@ -205,9 +205,11 @@ const DailyTasks = ({ navigation }) => {
             style={[styles.taskCard, { backgroundColor: "lightgreen" }]}
           >
             <View>
-              <Text style={styles.subHeading}>Plan breaks to reduce distractions - Completed</Text>
+              <Text style={styles.subHeading}>
+                Plan breaks to reduce distractions - Completed
+              </Text>
               <Text style={styles.content}>
-              Stay focused on your taks by taking intentional breaks
+                Stay focused on your taks by taking intentional breaks
               </Text>
             </View>
           </TouchableOpacity>
@@ -218,8 +220,8 @@ const DailyTasks = ({ navigation }) => {
             }}
           >
             <TaskCard
-            title="Plan breaks to reduce distractions"
-            content="Stay focused on your taks by taking intentional breaks"
+              title="Plan breaks to reduce distractions"
+              content="Stay focused on your taks by taking intentional breaks"
             />
           </TouchableOpacity>
         )}
@@ -274,7 +276,7 @@ const DailyTasks = ({ navigation }) => {
               A 1-minute meditation will help you unplug and let go
             </Text>
           </View>
-        </TouchableOpacity>        
+        </TouchableOpacity>
         {journal ? (
           <TouchableOpacity
             onPress={() => {
@@ -286,7 +288,8 @@ const DailyTasks = ({ navigation }) => {
             <View>
               <Text style={styles.subHeading}>Journal - Completed</Text>
               <Text style={styles.content}>
-              Our dreams can help us process our lives and be arich source of inspiration
+                Our dreams can help us process our lives and be arich source of
+                inspiration
               </Text>
             </View>
           </TouchableOpacity>
@@ -297,8 +300,8 @@ const DailyTasks = ({ navigation }) => {
             }}
           >
             <TaskCard
-                title="Journal"
-                content="Our dreams can help us process our lives and be arich source of inspiration"
+              title="Journal"
+              content="Our dreams can help us process our lives and be arich source of inspiration"
             />
           </TouchableOpacity>
         )}

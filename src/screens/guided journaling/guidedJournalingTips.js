@@ -7,43 +7,48 @@ import {
   SafeAreaView,
 } from "react-native";
 import color from "../../constants/colors";
-import Icon from 'react-native-vector-icons/FontAwesome5';
-const GuidedJournalingTips = ({ navigation, route }) => {  
+import Icon from "react-native-vector-icons/FontAwesome5";
+const GuidedJournalingTips = ({ navigation, route }) => {
   const { journalTitle } = route.params;
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: journalTitle,
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate('JournalsTab')}>
-          <Icon name="clipboard-list" size={30} color="black" style={styles.copyIcon} />
+        <TouchableOpacity onPress={() => navigation.navigate("JournalsTab")}>
+          <Icon
+            name="clipboard-list"
+            size={30}
+            color="black"
+            style={styles.copyIcon}
+          />
         </TouchableOpacity>
       ),
     });
   }, [navigation, journalTitle]);
   const [tip1, setTip1] = useState(
-    "Reflect on the good things in your life that you are grateful for"
-  );  
+    "Reflect on the good things in your life that you are grateful for",
+  );
 
   return (
-    <SafeAreaView>    
-        <View>
-          <View style={styles.container}>
-            <Text style={styles.text}>{tip1}</Text>
-          </View>
-
-          <View style={styles.buttonParent}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                navigation.navigate('writeJournal', { journalTitle });
-              }}
-            >
-              <Text style={styles.buttonText}>Next</Text>
-            </TouchableOpacity>
-          </View>
+    <SafeAreaView>
+      <View>
+        <View style={styles.container}>
+          <Text style={styles.text}>{tip1}</Text>
         </View>
-      </SafeAreaView>      
+
+        <View style={styles.buttonParent}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate("writeJournal", { journalTitle });
+            }}
+          >
+            <Text style={styles.buttonText}>Next</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 };
 

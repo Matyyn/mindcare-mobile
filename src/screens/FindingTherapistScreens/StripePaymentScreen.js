@@ -25,7 +25,7 @@ const CongratulationsScreen = () => {
     selectedAppointmentDate,
     selectedAppointmentTimeIndex,
   } = useStore();
-  //console.log('pay link',paymentLink)
+  ////console.log('pay link',paymentLink)
   function convertToTimestamp(timeStr) {
     const [hours, minutes] = timeStr.split(":");
     const timestamp = (parseInt(hours) * 60 + parseInt(minutes)) * 60 * 1000; // Convert to milliseconds
@@ -66,9 +66,9 @@ const CongratulationsScreen = () => {
             Linking.openURL(`${paymentLink}`);
             ////////////      Time Conversion Code //////////////////
             // let timee = convertToTimestamp(selectedAppointmentTimeIndex)
-            //  console.log('response',timee)
+            //  //console.log('response',timee)
             // const timezoneOffsetMinutes = 0;
-            //  console.log('new Time',timestampToTime(timee,timezoneOffsetMinutes))
+            //  //console.log('new Time',timestampToTime(timee,timezoneOffsetMinutes))
             //////////////////// ends here //////////////////
           }}
         >

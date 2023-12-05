@@ -41,18 +41,18 @@ const SetReminderScreen = ({ navigation }) => {
 
   const setReminder = () => {
     // alert();
-    console.log("inside set reminder");
-    console.log(reminderTime);
-    console.log("reminder type: ", reminderType);
-    console.log("daily reminder:", dailyReminder);
+    //console.log("inside set reminder");
+    //console.log(reminderTime);
+    //console.log("reminder type: ", reminderType);
+    //console.log("daily reminder:", dailyReminder);
   };
 
   const onToggleDailyReminder = (title) => {
     setDailyReminder(!dailyReminder);
-    console.log("switch:", dailyReminder);
-    // console.log(title);
+    //console.log("switch:", dailyReminder);
+    // //console.log(title);
     setReminderType(title);
-    console.log(reminderType);
+    //console.log(reminderType);
     setIsButtonDisabled(!dailyReminder); // Enable the button when the switch is true
   };
 
@@ -69,7 +69,7 @@ const SetReminderScreen = ({ navigation }) => {
       hour: "2-digit",
       minute: "2-digit",
     });
-    console.log(selectedTime);
+    //console.log(selectedTime);
     hideDatePicker();
     setReminderTime(selectedTime);
   };

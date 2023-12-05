@@ -25,16 +25,16 @@ const TextInputExample = () => {
     async function gettingAppointment() {
       try {
         const response = await axios.get(
-          `/appointments-client/${responseData._id}`
+          `/appointments-client/${responseData._id}`,
         );
         const approvedAppointments = response.data.data.filter(
-          (appointment) => appointment.status === "Approved"
+          (appointment) => appointment.status === "Approved",
         );
 
-        console.log("Approved Appointments:", approvedAppointments);
+        //console.log("Approved Appointments:", approvedAppointments);
         setAppointments(approvedAppointments);
       } catch (err) {
-        console.log(err);
+        //console.log(err);
       }
     }
     gettingAppointment();

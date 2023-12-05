@@ -14,11 +14,11 @@ const Report = ({ route }) => {
 
   useEffect(() => {
     trackEvent("Report");
-    //console.log("clientId: ", clientId);
-    //console.log("id: ", id);
+    ////console.log("clientId: ", clientId);
+    ////console.log("id: ", id);
   }, []);
   const submitReport = async () => {
-    //console.log("checked: ", checked);
+    ////console.log("checked: ", checked);
 
     if (type == "comment") {
       const reportObject = {
@@ -27,7 +27,7 @@ const Report = ({ route }) => {
         violation: checked,
       };
       const response = await axios.post(`/report-comments/${id}`, reportObject);
-      //console.log("report response: ", response);
+      ////console.log("report response: ", response);
     } else if (type == "post") {
       const reportObject = {
         postId: id,
@@ -35,7 +35,7 @@ const Report = ({ route }) => {
         violation: checked,
       };
       const response = await axios.post(`/report-post/${id}`, reportObject);
-      //console.log("report response: ", response);
+      ////console.log("report response: ", response);
     }
   };
 

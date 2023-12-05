@@ -1,266 +1,163 @@
-// // DailyWebView.js
-// import React from 'react';
-// import { WebView } from 'react-native-webview';
-
-// const DailyWebView = () => {
-//   const dailyCoUrl = 'https://mindcare.daily.co/mindcare';
-
-//   return (
-//     <WebView
-//       source={{ uri: dailyCoUrl }}
-//       style={{ flex: 1 }}
-//     />
-//   );
-// };
-// import React, { useEffect } from 'react';
-// import { View } from 'react-native';
-// import { WebView } from 'react-native-webview';
-// import * as Permissions from 'expo-permissions';
-
-// const requestPermissions = async () => {
-//   const { status } = await Permissions.askAsync(Permissions.CAMERA, Permissions.AUDIO_RECORDING);
-//   if (status !== 'granted') {
-//     alert('Sorry, we need camera and audio permissions to make this work!');
-//   }
-// };
-
-// const App = () => {
-//   useEffect(() => {
-//     requestPermissions();
-//   }, []);
-
-//   return (
-//     <View style={{ flex: 1 }}>
-//       <WebView
-//         source={{ uri: 'https://mindcare.daily.co/mindcare' }}
-//         style={{ flex: 1, height: 20 }}
-//       />
-//     </View>
-//   );
-// };
-
-// export default App;
-
-// import React, { useState } from 'react';
-// import { View, Text, TouchableOpacity } from 'react-native';
-// import { AntDesign } from '@expo/vector-icons';
-
-// const ReviewScreen = () => {
-//   const [starCount, setStarCount] = useState(0);
-
-//   const handleStarPress = (count) => {
-//     setStarCount(count);
-//   };
-
-//   return (
-//     <>
-//       <View style={{ flexDirection: 'row', marginTop: 50 ,justifyContent:"space-evenly",marginHorizontal:20}}>
-//         {[1, 2, 3, 4, 5].map((index) => (
-//           <TouchableOpacity key={index} onPress={() => handleStarPress(index)}>
-//             <AntDesign
-//               name={index <= starCount ? 'star' : 'staro'}
-//               size={40}
-//               color={index <= starCount ? 'gold' : 'black'}
-//             />
-//           </TouchableOpacity>
-//         ))}
-//       </View>
-//       <Text>Selected Star Count: {starCount}</Text>
-//     </>
-//   );
-// };
-
-// export default ReviewScreen;
-
-import React, { useState, useEffect } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { TextInput, Text } from "react-native-paper";
-import { Formik } from "formik";
-import StarRating from "react-native-star-rating";
-import * as yup from "yup";
-import useStore from "../zustand/store";
-import { useNavigation } from "@react-navigation/native";
-const validationSchema = yup.object().shape({
-  description: yup.string().required("Description is required"),
-});
+import React, { useRef, useEffect, useState } from "react";
+import { WebView } from "react-native-webview";
+import { View, Button, Image } from "react-native";
+import * as FileSystem from "expo-file-system";
 import axios from "axios";
-import { trackEvent } from "@aptabase/react-native";
+import useStore from "../../screens/zustand/store";
+const App = () => {  
+  const { responseData } = useStore();
+  console.log(responseData)
+  const webViewRef = useRef(null);
+  const [capturedImage, setCapturedImage] = useState ( null);
+  const [webViewLoaded, setWebViewLoaded] = useState(false);
+  
+  const postImage = async () => {
+    const apiUrlTest = "http://192.168.100.19:8000/process_image/";
 
-const App = () => {
+    try {
+      // GET request
+        const getResponse = await axios.get("http://192.168.100.19:8000/test");
+      //console.log(getResponse.data.test);
+
+      // POST request
+      let formData = new FormData();
+      formData.append("files", {
+        uri: capturedImage,
+        name: "image.jpg",
+        type: "image/jpeg",
+      });
+      const postResponse = await axios.post(apiUrlTest, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });      
+      //const postResponse = { data: "Anxiety" };
+      let counts = { total: 0, anxiety: 0, depression: 0 };
+      let Emotion= ''
+      let EmotionPercentage=0
+      counts.total++;
+
+      if (typeof postResponse.data === "string") {
+        if (postResponse.data === "Anxiety") {
+          counts.anxiety++;
+        } else if (postResponse.data === "Depression") {
+          counts.depression++;
+        }
+      }
+      if(counts.anxiety>counts.depression){
+         Emotion='Anxiety'
+         EmotionPercentage = (counts.anxiety/counts.total)*100
+      }
+      else if(counts.anxiety<counts.depression){
+        Emotion='Depression'
+        EmotionPercentage = (counts.depression/counts.total)*100
+      }
+      console.log(Emotion);
+      console.log(EmotionPercentage)      
+      console.log(counts); 
+      const diagnosed = {
+        diagnosedResult:Emotion,
+        diagnosedResultPercentage: EmotionPercentage,    
+      } 
+      // console.log(diagnosed)
+      // console.log(responseData._id)
+      const responseBack= await axios.post(`diagnosed-result/${responseData._id}`, diagnosed);
+       //console.log(responseBack.data.data)
+      // { total: ..., anxiety: ..., depression: ... }
+      // const postResponse = {
+      //   data:"Anxiety"
+      // }
+      // if((typeof(postResponse.data)==="string")&&(postResponse.data==='Anxiety')){        
+      //   console.log(postResponse.data);
+      // }
+      // else if((typeof(postResponse.data)==="string")&&(postResponse.data==='Anxiety')){
+      //   console.log("depression")
+      // }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const getVideoScreenshot = () => {
+    if (webViewRef.current) {
+      webViewRef.current.injectJavaScript(`
+      (function() {
+        window.ReactNativeWebView.postMessage('Injected JavaScript started');
+        try {
+          const video = document.querySelector('video');
+          if (!video) {
+            window.ReactNativeWebView.postMessage('No video element found');
+            return;
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const dataUrl = canvas.toDataURL('image/jpeg', 1.0);
+          window.ReactNativeWebView.postMessage(dataUrl);
+        } catch (error) {
+          window.ReactNativeWebView.postMessage('Error: ' + error.message);
+        }
+        window.ReactNativeWebView.postMessage('Injected JavaScript finished');
+      })();
+    `);
+    }
+  };
   useEffect(() => {
-    trackEvent("Call Screen");
-  }, []);
-  const TherapistDetails = useStore((state) => state.selectedItem);
-  const navigation = useNavigation();
-  const description = useStore((state) => state.problemDesciption);
-  const [starCount, setStarCount] = useState(1); // set initial star count to 1
+    if (webViewLoaded) {
+      const interval = setInterval(() => {
+        getVideoScreenshot();
+        postImage(capturedImage);
+      }, 5000);
 
-  const handleStarPress = (rating) => {
-    setStarCount(rating);
-  };
-
-  const headers = {
-    "Content-Type": "application/json",
-  };
-
-  const onSubmit = async (values, { setSubmitting }) => {
-    const object = {
-      review: values.description,
-      rating: values.stars,
-    };
-    const id = "6568eb75090f3ade761638dc";
-    const response = await axios.patch(`/therapist-review/${id}`, object);
-    console.log(response.status);
-    navigation.goBack();
-    // setSubmitting(false);
-  };
-
+      return () => clearInterval(interval);
+    }
+  }, [webViewLoaded]);
   return (
-    <View style={styles.container}>
-      <Formik
-        initialValues={{
-          description: "",
-          stars: 1,
+    <View style={{ flex: 1 }}>
+      <WebView
+        ref={webViewRef}
+        javaScriptEnabled={true}
+        onLoad={() => setWebViewLoaded(true)}
+        source={{ uri: "https://mindcare.daily.co/mindcare" }}
+        onMessage={async (event) => {
+          if (event.nativeEvent.data.startsWith("Error:")) {
+            console.error(event.nativeEvent.data);
+          } else if (
+            event.nativeEvent.data.startsWith("No video element found")
+          ) {
+            console.warn(event.nativeEvent.data);
+          } else if (
+            event.nativeEvent.data.startsWith("data:image/jpeg;base64")
+          ) {
+            const base64Data = event.nativeEvent.data.split(",")[1];
+            const filename = `${FileSystem.documentDirectory}${Date.now()}.jpg`;
+            await FileSystem.writeAsStringAsync(filename, base64Data, {
+              encoding: FileSystem.EncodingType.Base64,
+            });
+            setCapturedImage(filename);
+            //console.log(filename);
+          }
         }}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-      >
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          values,
-          errors,
-          touched,
-          isSubmitting,
-          setFieldValue,
-        }) => (
-          <View>
-            <Text style={{ fontSize: 22, fontWeight: 700, marginBottom: 25 }}>
-              Rate Your Experience:
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-evenly",
-                marginBottom: 25,
-              }}
-            >
-              <StarRating
-                disabled={false}
-                maxStars={5}
-                minStars={1}
-                rating={values.stars}
-                selectedStar={(rating) => {
-                  setFieldValue("stars", rating);
-                  handleStarPress(rating);
-                }}
-                starSize={40}
-                fullStarColor="gold"
-                starStyle={{ marginRight: 20 }}
-              />
-            </View>
-            <Text style={{ fontSize: 22, fontWeight: 700, marginBottom: 15 }}>
-              Review:
-            </Text>
-            <TextInput
-              onChangeText={(text) => {
-                const wordCount = text.trim().split(/\s+/).length;
-                if (wordCount <= 30) {
-                  handleChange("description")(text);
-                }
-              }}
-              onBlur={handleBlur("description")}
-              value={values.description}
-              multiline
-              numberOfLines={5}
-              style={{ fontSize: 22, backgroundColor: "#d3d3d3" }}
-              error={touched.description && errors.description}
-            />
-            <Text style={styles.wordCount}>
-              {values.description.trim().split(/\s+/).length}/30 words
-            </Text>
-            <TouchableOpacity
-              mode="contained"
-              onPress={handleSubmit}
-              disabled={!values.description.trim() || isSubmitting}
-              style={[
-                styles.button,
-                {
-                  backgroundColor:
-                    !values.description.trim() || isSubmitting
-                      ? "#696B81"
-                      : "#2D3748",
-                },
-              ]}
-            >
-              <Text
-                style={{ color: "white", fontWeight: "bold", fontSize: 22 }}
-              >
-                Next
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </Formik>
+        style={{ flex: 1, height: 20 }}
+      />
+      {/* <Button
+        title="Get Video Screenshot"
+        onPress={async () => {
+          getVideoScreenshot();
+          postImage(capturedImage);
+        }}
+        disabled={!webViewLoaded}
+      /> */}
+      {/* {capturedImage && (
+        <Image
+          source={{ uri: capturedImage }}
+          style={{ width: 200, height: 200, marginVertical: 20 }}
+        />
+      )} */}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  button: {
-    marginTop: 20,
-    textAlign: "center",
-    alignItems: "center",
-    paddingVertical: 16,
-    borderRadius: 8,
-  },
-  wordCount: {
-    alignSelf: "flex-end",
-    marginTop: 5,
-    color: "#999",
-  },
-});
-
 export default App;
-
-// DailyWebView.js
-// import React, { useEffect } from 'react';
-// import { WebView } from 'react-native-webview';
-// import { request, PERMISSIONS } from 'react-native-permissions';
-
-// const DailyWebView = () => {
-//   const dailyCoUrl = 'https://mindcare.daily.co/mindcare';
-
-//   useEffect(() => {
-//     const requestPermissions = async () => {
-//       try {
-//         const cameraPermission = await request(PERMISSIONS.IOS.CAMERA);
-//         const micPermission = await request(PERMISSIONS.IOS.MICROPHONE);
-
-//         if (cameraPermission === 'granted' && micPermission === 'granted') {
-//           console.log('Camera and microphone permissions granted');
-//         } else {
-//           console.log('Camera and/or microphone permissions not granted');
-//         }
-//       } catch (error) {
-//         console.error('Error requesting permissions:', error);
-//       }
-//     };
-
-//     requestPermissions();
-//   }, []);
-
-//   return (
-//     <WebView
-//       source={{ uri: dailyCoUrl }}
-//       style={{ flex: 1 }}
-//     />
-//   );
-// };
-
-// export default DailyWebView;

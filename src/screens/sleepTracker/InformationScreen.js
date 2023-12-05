@@ -51,7 +51,7 @@ const App = () => {
   const [currentProgress1, setCurrentProgress1] = useState(0);
   const [currentProgress2, setCurrentProgress2] = useState(0);
   const [quality, setQuality] = useState(0);
-  const [sleepTime,setSleepTime] = useState(0)
+  const [sleepTime, setSleepTime] = useState(0);
   const [efficiency, setEfficiency] = useState(0);
   const { responseData } = useStore();
 
@@ -59,14 +59,17 @@ const App = () => {
     const fetchData = async () => {
       try {
         const progress1 = await axios.get(`/sleep-quality/${responseData._id}`);
-        const progress2 = await axios.get(`/sleep-efficiency/${responseData._id}`);
-       // const stats = await axios.get(`/sleep-stats/${responseData._id}`)
-        console.log(progress1.data.data);
-        console.log(progress2.data.data);
+        //console.log('sleep',progress1.data)
+        const progress2 = await axios.get(
+          `/sleep-efficiency/${responseData._id}`,
+        );
+        // const stats = await axios.get(`/sleep-stats/${responseData._id}`)
+        // console.log(progress1.data.data);
+        // console.log(progress2.data.data);
         //console.log(stats.sleepSchedule.totalSleepTime)
         //const daysOfWeek = getDayOfWeek(stats.sleepSchedule.logDate)
         //console.log(daysOfWeek)
-       // setSleepTime(stats.sleepSchedule.totalSleepTime)
+        // setSleepTime(stats.sleepSchedule.totalSleepTime)
         setQuality(progress1.data.data);
         setEfficiency(progress2.data.data);
       } catch (error) {
@@ -75,7 +78,7 @@ const App = () => {
     };
 
     fetchData();
-  }, [responseData]); 
+  }, [responseData]);
 
   useEffect(() => {
     const animationInterval1 = setInterval(() => {
@@ -109,7 +112,7 @@ const App = () => {
     { day: "Sat", hours: 6 },
     { day: "Sun", hours: 5 },
   ];
-  
+
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
@@ -161,11 +164,11 @@ const App = () => {
         </View>
         <View style={styles.paragaphContainer}>
           <Text style={styles.paragraph}>
-            A sleep efficiency of 21% indicates that out of the total time spent
-            in bed, only 21% of that time was actually spent asleep. This means
+            A sleep efficiency of {efficiency.toFixed()}% indicates that out of the total time spent
+            in bed, only {efficiency.toFixed()}% of that time was actually spent asleep. This means
             that the person had a very low amount of actual sleep during the
-            time they were in bed. A sleep efficiency of 21% indicates that out
-            of the total time spent in bed, only 21% of that time was actually
+            time they were in bed. A sleep efficiency of {efficiency.toFixed()}% indicates that out
+            of the total time spent in bed, only {efficiency.toFixed()}% of that time was actually
             spent asleep. This means that the person had a very low amount of
             actual sleep during the time they were in bed.
           </Text>

@@ -11,24 +11,23 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 
 const GuidedJournalingTips = ({ navigation }) => {
-
   React.useLayoutEffect(() => {
-    navigation.setOptions({  
+    navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity onPress={() => navigation.navigate("Daily Tasks")}>
           <Ionicons
             name="close"
             size={30}
             color="black"
-            style={{marginRight:10}}
+            style={{ marginRight: 10 }}
           />
         </TouchableOpacity>
-      ),      
+      ),
     });
   }, [navigation]);
 
   const [tip1, setTip1] = useState(
-    "This deep breathing exercise lowers the heart rate, making you feel composed and focused. A great way to start your morning."
+    "This deep breathing exercise lowers the heart rate, making you feel composed and focused. A great way to start your morning.",
   );
 
   return (
@@ -46,9 +45,12 @@ const GuidedJournalingTips = ({ navigation }) => {
         >
           <Ionicons name="chevron-back" size={40} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton}  onPress={() => {
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={() => {
             navigation.navigate("Breathing Exercises Audio");
-          }}>
+          }}
+        >
           <Ionicons name="chevron-forward-outline" size={40} color="black" />
         </TouchableOpacity>
       </View>
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 50,
     paddingLeft: 2,
-    paddingRight:2
+    paddingRight: 2,
   },
 });
 

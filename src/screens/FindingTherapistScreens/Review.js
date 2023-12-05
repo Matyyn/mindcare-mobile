@@ -10,7 +10,7 @@ import { trackEvent } from "@aptabase/react-native";
 import axios from "axios";
 
 const validationSchema = yup.object().shape({
-description: yup.string().required("Description is required"),
+  description: yup.string().required("Description is required"),
 });
 
 const App = () => {
@@ -37,7 +37,7 @@ const App = () => {
     };
     const id = "6568eb75090f3ade761638dc";
     const response = await axios.patch(`/therapist-review/${id}`, object);
-    console.log(response.status);
+    //console.log(response.status);
     navigation.goBack();
     // setSubmitting(false);
   };

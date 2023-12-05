@@ -20,26 +20,26 @@ export default function Comment({ postId, clientId, type }) {
 
   useEffect(() => {
     trackEvent("Create Comment");
-    //console.log(responseData);
-    //console.log("user iddddd: ", userId);
+    ////console.log(responseData);
+    ////console.log("user iddddd: ", userId);
   }, []);
   const postComment = async () => {
-    //console.log("comment body: ", commentBody);
-    //console.log("post id for comment: ", postId);
+    ////console.log("comment body: ", commentBody);
+    ////console.log("post id for comment: ", postId);
     // Assuming you are using some API for posting comments in React Native
     // Adjust the API call accordingly
     // const response = await YourApi.postComment(postId, userId, commentBody);
-    // //console.log('comment response: ', response);
+    // ////console.log('comment response: ', response);
     const commentObject = {
       postId: postId,
       clientId: userId,
       body: commentBody,
     };
 
-    //console.log("comment object: ", commentObject.clientId);
+    ////console.log("comment object: ", commentObject.clientId);
 
     const response = await axios.post(`/comments/${postId}`, commentObject);
-    //console.log("comment response: ", response);
+    ////console.log("comment response: ", response);
     setCommentBody("");
     setIsReplying(false);
   };

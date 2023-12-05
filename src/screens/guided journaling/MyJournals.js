@@ -15,14 +15,14 @@
 //   const { responseData, setJournalsCount } = useStore();
 //   const [journalsData, setJournalsData] = useState([]);
 
-//   useEffect(() => {    
+//   useEffect(() => {
 //     getJournals();
 //   }, []);
 //   async function getJournals() {
 //     try {
 //       const response = await axios.get(`/journals/${responseData._id}`);
 //       setJournalsData(response.data.data);
-//       //console.log('res', response.data.data);
+//       ////console.log('res', response.data.data);
 //       const objects = [];
 //       const countsByDate = {};
 //       headings.forEach((item, index) => {
@@ -50,8 +50,8 @@
 //           });
 //         }
 //       }
-//       //console.log('cs',countsByDateArray);        
-//       setJournalsCount(countsByDateArray);        
+//       ////console.log('cs',countsByDateArray);
+//       setJournalsCount(countsByDateArray);
 //     } catch (error) {
 //       console.error("Error fetching data:", error);
 //     }
@@ -125,7 +125,7 @@
 //           endpoint = "/planning-the-day-ahead";
 //           break;
 //         default:
-//           console.log("Unknown journal type:", item);
+//           //console.log("Unknown journal type:", item);
 //           break;
 //       }
 
@@ -257,7 +257,6 @@ function YourComponent() {
     try {
       const response = await axios.get(`/journals/${responseData._id}`);
       setJournalsData(response.data.data);
-      
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -309,7 +308,7 @@ function YourComponent() {
           endpoint = "/planning-the-day-ahead";
           break;
         default:
-          console.log("Unknown journal type:", item);
+          //console.log("Unknown journal type:", item);
           break;
       }
 
@@ -320,8 +319,8 @@ function YourComponent() {
         setJournalsData(updatedData);
         ToastAndroid.show(`One ${item} Deleted`, ToastAndroid.LONG);
         await getJournals();
-      }   
-     } catch (error) {
+      }
+    } catch (error) {
       console.error("Error deleting journal:", error);
     }
   }
@@ -355,9 +354,15 @@ function YourComponent() {
                   </View>
                   <View style={styles.footer}>
                     <TouchableOpacity
-                      onPress={() => handleDelete(getJournalType(index), valueItem)}
+                      onPress={() =>
+                        handleDelete(getJournalType(index), valueItem)
+                      }
                     >
-                      <Icon name="trash" size={25} style={styles.deleteButton} />
+                      <Icon
+                        name="trash"
+                        size={25}
+                        style={styles.deleteButton}
+                      />
                     </TouchableOpacity>
                     <Text style={styles.date}>
                       {formatDate(valueItem.createdAt)}

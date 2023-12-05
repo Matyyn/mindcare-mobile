@@ -49,18 +49,18 @@ const ForgotPassword = () => {
           //     },
           //     body: JSON.stringify(values),
           //   });
-          Alert.alert(
-            null,
-            "A reset link has been sent to your email account",
-            [
-              {
-                text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"),
-                style: "cancel",
-              },
-              { text: "OK", onPress: () => console.log("Ok") },
-            ]
-          );
+          // Alert.alert(
+          //   null,
+          //   "A reset link has been sent to your email account",
+          //   [
+          //     {
+          //       text: "Cancel",
+          //       onPress: () => //console.log("Cancel Pressed"),
+          //       style: "cancel",
+          //     },
+          //     { text: "OK", onPress: () => //console.log("Ok") },
+          //   ],
+          // );
         }}
       >
         {({

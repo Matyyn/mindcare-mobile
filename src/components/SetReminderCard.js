@@ -6,8 +6,8 @@ const SetReminderCard = ({ title, image, radioBox }) => {
   const [isSelected, setSelection] = useState(false);
 
   const check = () => {
-    console.log("hello");
-    console.log(image);
+    //console.log("hello");
+    //console.log(image);
   };
   return (
     <View style={styles.cardContainer}>

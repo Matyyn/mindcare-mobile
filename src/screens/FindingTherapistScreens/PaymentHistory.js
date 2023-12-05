@@ -20,9 +20,9 @@ const PaymentList = () => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `/payments-clients/${responseData._id}`
+          `/payments-clients/${responseData._id}`,
         );
-        console.log(response.data.data);
+        //console.log(response.data.data);
         setPayments(response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -1,26 +1,33 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import color from "../../constants/colors";
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from "react-native-vector-icons/FontAwesome5";
 const CompleteJournalScreen = ({ navigation }) => {
   const [journalText, setJournalText] = useState("");
 
   const handleComplete = () => {
     const now = new Date();
-    const currentTime = `${now.getHours()}:${now.getMinutes()}`;    
+    const currentTime = `${now.getHours()}:${now.getMinutes()}`;
     navigation.goBack();
   };
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <TouchableOpacity onPress={() => navigation.navigate('guided journaling main')}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("guided journaling main")}
+        >
           <Icon name="times" size={30} color="black" style={styles.closeIcon} />
         </TouchableOpacity>
       ),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate('JournalsTab')}>
-          <Icon name="clipboard-list" size={30} color="black" style={styles.copyIcon} />
+        <TouchableOpacity onPress={() => navigation.navigate("JournalsTab")}>
+          <Icon
+            name="clipboard-list"
+            size={30}
+            color="black"
+            style={styles.copyIcon}
+          />
         </TouchableOpacity>
       ),
     });
@@ -28,18 +35,18 @@ const CompleteJournalScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-        <Text style={styles.heading}>Well Done 🎉</Text>
-        <Text style={styles.subHeading}>
-          You can find your past entries under Journal Logs.
-        </Text>
-        <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                navigation.navigate('JournalsTab')
-              }}
-            >
-              <Text style={styles.buttonText}>Complete</Text>
-        </TouchableOpacity>
+      <Text style={styles.heading}>Well Done 🎉</Text>
+      <Text style={styles.subHeading}>
+        You can find your past entries under Journal Logs.
+      </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("JournalsTab");
+        }}
+      >
+        <Text style={styles.buttonText}>Complete</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -71,8 +78,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     width: "90%",
-    marginTop:20,
-    marginBottom:30
+    marginTop: 20,
+    marginBottom: 30,
   },
   buttonText: {
     color: "white",

@@ -23,51 +23,54 @@ import GuidedJournalingMain from "../screens/guided journaling/guidedJournalingM
 import GuiedJournalingHeader from "../headers/guiedJournalingHeader";
 //import GuidedJournalingTips from "../screens/guided journaling/guidedJournalingTips";
 import SleepJournal from "../screens/guided journaling/sleepJournal";
-import WeeklyInsights from '../screens/pyscological profile/weeklyInsights'
-import MonthlyInsights from '../screens/pyscological profile/monthlyInsights'
+import WeeklyInsights from "../screens/pyscological profile/weeklyInsights";
+import MonthlyInsights from "../screens/pyscological profile/monthlyInsights";
 import WriteJournalScreen from "../screens/guided journaling/MorningJournal/WriteJournal";
-import CompleteJournalScreen from "../screens/guided journaling/MorningJournal/CompletionScreen"
-import InsightsTab from './InsightsTab'
-import GuidedJournalingTips from '../screens/guided journaling/MorningJournal/MorningJournalTips'
+import CompleteJournalScreen from "../screens/guided journaling/MorningJournal/CompletionScreen";
+import InsightsTab from "./InsightsTab";
+import GuidedJournalingTips from "../screens/guided journaling/MorningJournal/MorningJournalTips";
 //import WriteJournalScreen from '../screens/guided journaling/WritingJournal'
 //import CompleteJournalScreen from '../screens/guided journaling/WritingJournal'
-import SelectMood from './MoodsNavigator'
-import JournalsTab from './JournalLogsTab'
+import SelectMood from "./MoodsNavigator";
+import JournalsTab from "./JournalLogsTab";
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
-  return (    
-      <Stack.Navigator>              
+  return (
+    <Stack.Navigator>
       <Stack.Screen
-          name="guided journaling tips"
-          component={GuidedJournalingTips}
-          options={{
-            headerTitle: "Morning Journals Tips",
-            // headerRight: () => <GuiedJournalingHeader />,
-          }}
-        />
-        <Stack.Screen
-          name="writeJournal"
-          component={WriteJournalScreen}
-          options={{
-            headerTitle: "Write Journals",
-            // headerRight: () => <GuiedJournalingHeader />,
-          }}
-        />
-        <Stack.Screen
-          name="completeJournal"
-          component={CompleteJournalScreen}
-          options={{
-            headerTitle: "Complete Journal",
-            // headerRight: () => <GuiedJournalingHeader />,
-          }}
-        />
-        <Stack.Screen name="Insights" component={InsightsTab}/>
-        <Stack.Screen name="JournalsTab" options={{
-            headerTitle: "Journals Logs",        
-          }} component={JournalsTab}/>        
-      </Stack.Navigator>
-    
+        name="guided journaling tips"
+        component={GuidedJournalingTips}
+        options={{
+          headerTitle: "Morning Journals Tips",
+          // headerRight: () => <GuiedJournalingHeader />,
+        }}
+      />
+      <Stack.Screen
+        name="writeJournal"
+        component={WriteJournalScreen}
+        options={{
+          headerTitle: "Write Journals",
+          // headerRight: () => <GuiedJournalingHeader />,
+        }}
+      />
+      <Stack.Screen
+        name="completeJournal"
+        component={CompleteJournalScreen}
+        options={{
+          headerTitle: "Complete Journal",
+          // headerRight: () => <GuiedJournalingHeader />,
+        }}
+      />
+      <Stack.Screen name="Insights" component={InsightsTab} />
+      <Stack.Screen
+        name="JournalsTab"
+        options={{
+          headerTitle: "Journals Logs",
+        }}
+        component={JournalsTab}
+      />
+    </Stack.Navigator>
   );
 };
 

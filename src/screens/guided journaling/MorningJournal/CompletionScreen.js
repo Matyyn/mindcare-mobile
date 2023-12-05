@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 //import color from "../../constants/colors";
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from "react-native-vector-icons/FontAwesome5";
 const CompleteJournalScreen = ({ navigation }) => {
   const [journalText, setJournalText] = useState("");
 
@@ -15,7 +15,7 @@ const CompleteJournalScreen = ({ navigation }) => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <TouchableOpacity onPress={() => navigation.navigate('Daily Tasks')}>
+        <TouchableOpacity onPress={() => navigation.navigate("Daily Tasks")}>
           <Icon name="times" size={30} color="black" style={styles.closeIcon} />
         </TouchableOpacity>
       ),
@@ -29,18 +29,18 @@ const CompleteJournalScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-        <Text style={styles.heading}>Well Done 🎉</Text>
-        <Text style={styles.subHeading}>
-          You can find your past entries under Journal Logs.
-        </Text>
-        <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                navigation.navigate('JournalsTab')
-              }}
-            >
-              <Text style={styles.buttonText}>Complete</Text>
-        </TouchableOpacity>
+      <Text style={styles.heading}>Well Done 🎉</Text>
+      <Text style={styles.subHeading}>
+        You can find your past entries under Journal Logs.
+      </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("JournalsTab");
+        }}
+      >
+        <Text style={styles.buttonText}>Complete</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -67,13 +67,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: '#2D3748',
+    backgroundColor: "#2D3748",
     alignItems: "center",
     padding: 10,
     borderRadius: 10,
     width: "90%",
-    marginTop:20,
-    marginBottom:30
+    marginTop: 20,
+    marginBottom: 30,
   },
   buttonText: {
     color: "white",

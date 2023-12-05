@@ -77,13 +77,13 @@ export default function App() {
   useEffect(() => {
     async function getBMI() {
       const response = await axios.get(`/fitness-tracker/${responseData._id}`);
-      //console.log(response.data.data)
+      ////console.log(response.data.data)
       const array = response.data.data;
       const firstBmi = array[0].bmi;
       const firstWeight = array[0].weight;
       setBmi(firstBmi.toFixed(2));
       setWeight(firstWeight.toFixed(2));
-      // console.log(firstBmi)
+      // //console.log(firstBmi)
     }
     getBMI();
   }, []);

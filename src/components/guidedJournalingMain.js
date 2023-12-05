@@ -1,23 +1,23 @@
 import React from "react";
 import { useState } from "react";
-import { View, StyleSheet, FlatList,TouchableOpacity } from "react-native";
+import { View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import GuiedJournalingHeader from "../headers/guiedJournalingHeader";
 import GuidedJournalCard from "./GuidedJournalCard";
 import journalingData from "../data/guidedJournalingData";
 //import { FlashList } from "@shopify/flash-list";
-import Icon from 'react-native-vector-icons/FontAwesome';
-const GuidedJournalingMain = ({navigation}) => {
+import Icon from "react-native-vector-icons/FontAwesome";
+const GuidedJournalingMain = ({ navigation }) => {
   const [numColumns, setNumColumns] = useState(2);
   React.useLayoutEffect(() => {
-    navigation.setOptions({     
+    navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate('JournalsTab')}>
+        <TouchableOpacity onPress={() => navigation.navigate("JournalsTab")}>
           <Icon name="copy" size={25} color="black" style={styles.copyIcon} />
         </TouchableOpacity>
       ),
     });
   }, [navigation]);
-  return (    
+  return (
     <View>
       <FlatList
         data={journalingData}

@@ -211,7 +211,7 @@ const DepressionScreen = ({ navigation }) => {
 
   const { responseData } = useStore();
   const [responses, setResponses] = useState(
-    Array(questions.length).fill({ questionNumber: 0, response: -1 })
+    Array(questions.length).fill({ questionNumber: 0, response: -1 }),
   );
 
   const handleComplete = async () => {
@@ -225,11 +225,11 @@ const DepressionScreen = ({ navigation }) => {
       };
       const response = await axios.post(
         `/anxiety-test/${responseData._id}`,
-        object
+        object,
       );
 
       setResponses(
-        Array(questions.length).fill({ questionNumber: 0, response: -1 })
+        Array(questions.length).fill({ questionNumber: 0, response: -1 }),
       );
       ToastAndroid.show("Anxiety Test Submitted", ToastAndroid.LONG);
       navigation.navigate("Anxiety Test Result", { score });
@@ -252,9 +252,9 @@ const DepressionScreen = ({ navigation }) => {
     // For now, let's assume each selected option contributes to the score
     const totalScore = responses.reduce(
       (total, response) => total + response.response,
-      0
+      0,
     );
-    //console.log('Total Score:', totalScore);
+    ////console.log('Total Score:', totalScore);
     return totalScore;
   };
 

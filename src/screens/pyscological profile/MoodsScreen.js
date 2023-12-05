@@ -1,15 +1,46 @@
 import React, { useState } from "react";
-import { View, StyleSheet, ImageBackground, Text, TouchableOpacity, Dimensions } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ImageBackground,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 const moods = [
-  { value: 1, title: "Awesome", image: "https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2F3.png?alt=media&token=06d26615-e224-45f8-9ee5-64edfe072874" },
-  { value: 2, title: "Happy", image: "https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2F2.png?alt=media&token=57be424f-357f-4730-8e50-ebdee240a5e8" },
-  { value: 3, title: "Neutral", image: "https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2F1.png?alt=media&token=f6d1b7b1-40b6-4cd5-96fd-44b2f3591923" },
-  { value: 4, title: "Bad", image: "https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2F4.png?alt=media&token=869b54be-621f-422b-90c9-3808419fca64" },
-  { value: 5, title: "Griefed", image: "https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2F5.png?alt=media&token=cf5034a5-27fa-445a-87d5-99f592003a8e" },
+  {
+    value: 1,
+    title: "Awesome",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2F3.png?alt=media&token=06d26615-e224-45f8-9ee5-64edfe072874",
+  },
+  {
+    value: 2,
+    title: "Happy",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2F2.png?alt=media&token=57be424f-357f-4730-8e50-ebdee240a5e8",
+  },
+  {
+    value: 3,
+    title: "Neutral",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2F1.png?alt=media&token=f6d1b7b1-40b6-4cd5-96fd-44b2f3591923",
+  },
+  {
+    value: 4,
+    title: "Bad",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2F4.png?alt=media&token=869b54be-621f-422b-90c9-3808419fca64",
+  },
+  {
+    value: 5,
+    title: "Griefed",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2F5.png?alt=media&token=cf5034a5-27fa-445a-87d5-99f592003a8e",
+  },
 ];
-
 
 const DailyInsights = ({ navigation }) => {
   const [selectedMood, setSelectedMood] = useState(null);
@@ -18,9 +49,7 @@ const DailyInsights = ({ navigation }) => {
     setSelectedMood(value);
   };
 
-  const handleBackward = () => {
-
-  };
+  const handleBackward = () => {};
 
   const handleForward = () => {
     if (selectedMood) {
@@ -44,7 +73,11 @@ const DailyInsights = ({ navigation }) => {
         ]}
         onPress={() => handleMoodSelection(mood.value)}
       >
-        <ImageBackground source={{ uri: mood.image }} style={styles.circleImage} imageStyle={styles.circleImageStyle} />
+        <ImageBackground
+          source={{ uri: mood.image }}
+          style={styles.circleImage}
+          imageStyle={styles.circleImageStyle}
+        />
       </TouchableOpacity>
     );
   };
@@ -56,7 +89,11 @@ const DailyInsights = ({ navigation }) => {
     const selectedMoodObj = moods.find((mood) => mood.value === selectedMood);
     return (
       <View style={styles.selectedMoodContainer}>
-        <ImageBackground source={{ uri: selectedMoodObj.image }} style={styles.selectedMoodImage} imageStyle={styles.selectedMoodImageStyle} />
+        <ImageBackground
+          source={{ uri: selectedMoodObj.image }}
+          style={styles.selectedMoodImage}
+          imageStyle={styles.selectedMoodImageStyle}
+        />
         <Text style={styles.selectedMoodTitle}>{selectedMoodObj.title}</Text>
       </View>
     );
@@ -66,12 +103,22 @@ const DailyInsights = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.header}>Hello! How are you feeling today?</Text>
       <View style={styles.selectedMoodWrapper}>{renderSelectedMood()}</View>
-      <View style={styles.circleContainer}>{moods.map((mood) => renderMoodCircle(mood))}</View>
+      <View style={styles.circleContainer}>
+        {moods.map((mood) => renderMoodCircle(mood))}
+      </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={[styles.disabledButton,styles.button]} onPress={handleBackward} disabled={true}>
+        <TouchableOpacity
+          style={[styles.disabledButton, styles.button]}
+          onPress={handleBackward}
+          disabled={true}
+        >
           <AntDesign name="left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, !selectedMood && styles.disabledButton]} onPress={handleForward} disabled={!selectedMood}>
+        <TouchableOpacity
+          style={[styles.button, !selectedMood && styles.disabledButton]}
+          onPress={handleForward}
+          disabled={!selectedMood}
+        >
           <AntDesign name="right" size={24} color="#FFFFFF" />
         </TouchableOpacity>
       </View>

@@ -37,10 +37,10 @@ const SinglePost = ({ post }) => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    ////console.log("user id: ", userId);
-    ////console.log("post1: ", post);
+    //////console.log("user id: ", userId);
+    //////console.log("post1: ", post);
   }, []);
-  ////console.log("post id: ", post._id);
+  //////console.log("post id: ", post._id);
 
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
@@ -56,7 +56,7 @@ const SinglePost = ({ post }) => {
     const seconds = date.getSeconds();
 
     const formattedDate = `${year}-${String(month).padStart(2, "0")}-${String(
-      day
+      day,
     )}`;
     return formattedDate;
   };
@@ -68,7 +68,7 @@ const SinglePost = ({ post }) => {
       .delete(`/posts/${postId}`)
       .then(() => {
         setPostData((prevData) =>
-          prevData.filter((post) => post._id !== postId)
+          prevData.filter((post) => post._id !== postId),
         );
       })
       .catch((error) => {
@@ -94,7 +94,7 @@ const SinglePost = ({ post }) => {
       clientId: userId,
     };
     axios.post(`/downvote-post/${postId}`, postSelected).then((response) => {
-      ////console.log("response: ", response.data);
+      //////console.log("response: ", response.data);
     });
   };
 
@@ -105,11 +105,11 @@ const SinglePost = ({ post }) => {
       }
     });
 
-    //////console.log("upvote Id after: ", upvoteId._id);
+    ////////console.log("upvote Id after: ", upvoteId._id);
     axios.delete(`/upvote-post/${postId}/${upvoteId._id}`).then((response) => {
       const deletedPost = response.data;
       trackEvent("Upvote removed from post");
-      //////console.log("upvote undone: ", deletedPost);
+      ////////console.log("upvote undone: ", deletedPost);
     });
     setUpvoted(false);
   };
@@ -121,20 +121,20 @@ const SinglePost = ({ post }) => {
       }
     });
 
-    //////console.log("upvote Id after: ", downvoteId._id);
+    ////////console.log("upvote Id after: ", downvoteId._id);
     axios
       .delete(`/downvote-post/${postId}/${downvoteId._id}`)
       .then((response) => {
         const deletedPost = response.data;
         trackEvent("Downvote removed from post");
 
-        ////console.log("downvote undone: ", deletedPost);
+        //////console.log("downvote undone: ", deletedPost);
       });
   };
   const getUpvoteStatus = (post) => {
-    ////console.log("get upvote status function");
-    ////console.log("postttttttt: ", post);
-    ////console.log("post.upvotes: ", post.upvotes);
+    //////console.log("get upvote status function");
+    //////console.log("postttttttt: ", post);
+    //////console.log("post.upvotes: ", post.upvotes);
 
     const hasUpvoted = post.upvotes.some((upvote) => {
       if (upvote.clientId) {
@@ -143,14 +143,14 @@ const SinglePost = ({ post }) => {
       return false;
     });
     // setUpvoted(hasUpvoted);
-    //////console.log("hasUpvoted status: ", hasUpvoted);
+    ////////console.log("hasUpvoted status: ", hasUpvoted);
     return hasUpvoted;
   };
 
   const getDownvoteStatus = (post) => {
-    ////console.log("get downvote status function");
-    ////console.log("posttttt: ", post);
-    ////console.log("post.downvotes: ", post.downvotes);
+    //////console.log("get downvote status function");
+    //////console.log("posttttt: ", post);
+    //////console.log("post.downvotes: ", post.downvotes);
 
     const hasDownvoted = post.downvotes.some((downvote) => {
       if (downvote.clientId) {
@@ -160,9 +160,9 @@ const SinglePost = ({ post }) => {
     });
     // setDownvoted(hasDownvoted);
 
-    //////console.log("hasDownvoted status: ", hasDownvoted);
+    ////////console.log("hasDownvoted status: ", hasDownvoted);
 
-    ////console.log("hasDownvoted status: ", hasDownvoted);
+    //////console.log("hasDownvoted status: ", hasDownvoted);
 
     return hasDownvoted;
   };

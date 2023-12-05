@@ -6,15 +6,14 @@ import InsightsTab from "./InsightsTab";
 import MoodsScreen from "./MoodsScreensNavigator";
 import SetReminderScreen from "../screens/dailyReminder/setReminderScreen";
 import Reminders from "../screens/dailyReminder/reminders";
-import SleepTracker from "./SleepTrackerNavigator"
-
+import SleepTracker from "./SleepTrackerNavigator";
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   return (
     //    <NavigationContainer>
-    <Stack.Navigator>      
+    <Stack.Navigator>
       <Stack.Screen
         name="Set Reminder"
         component={SetReminderScreen}

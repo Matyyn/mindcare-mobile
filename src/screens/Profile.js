@@ -46,7 +46,7 @@ const Profile = () => {
       quality: 1,
     });
 
-    //console.log(result);
+    ////console.log(result);
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
@@ -56,14 +56,14 @@ const Profile = () => {
   const uploadImage = async () => {
     const picRef = ref(storage, "images/sample.jpg");
     const response = await fetch(image);
-    console.log(response);
+    //console.log(response);
     const blob = await response.blob();
     const result = await uploadBytes(picRef, blob);
     const url = await getDownloadURL(result.ref);
-    console.log(url);
+    //console.log(url);
   };
   const onChange = (event, selectedDate) => {
-    console.log(event, selectedDate.toLocaleDateString());
+    //console.log(event, selectedDate.toLocaleDateString());
   };
 
   const showMode = (currentMode) => {

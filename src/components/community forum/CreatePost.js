@@ -27,10 +27,10 @@ const CreatePost = () => {
   }, []);
 
   const uploadData = () => {
-    //console.log("client OSAASA: ", responseData._id);
-    //console.log("client id: ", responseData._id);
-    //console.log(postTitle);
-    //console.log(postBody, "postBody");
+    ////console.log("client OSAASA: ", responseData._id);
+    ////console.log("client id: ", responseData._id);
+    ////console.log(postTitle);
+    ////console.log(postBody, "postBody");
 
     setPostData({
       title: postTitle,
@@ -39,18 +39,18 @@ const CreatePost = () => {
       clientId: responseData._id,
     });
 
-    // //console.log(postData, "postBody");
+    // ////console.log(postData, "postBody");
 
-    // //console.log("post data: ", postData);
+    // ////console.log("post data: ", postData);
   };
 
   const fetchData = async () => {
-    // //console.log("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNNNNNNNNNNnnn");
+    // ////console.log("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNNNNNNNNNNnnn");
 
     try {
-      //console.log("post data: ", postData);
+      ////console.log("post data: ", postData);
       const response = await axios.post("/posts", postData);
-      console.log("response: ", response);
+      //console.log("response: ", response);
     } catch (error) {
       console.error(error);
     }
@@ -64,17 +64,17 @@ const CreatePost = () => {
 
   const setTags = (tag) => {
     const found = selectedTags.find((button) => button == tag);
-    //console.log("found: ", found);
+    ////console.log("found: ", found);
     if (!found) {
-      //console.log("hello");
+      ////console.log("hello");
       setSelectedTags([...selectedTags, tag]);
     }
-    //console.log("Selected button:", selectedTags);
+    ////console.log("Selected button:", selectedTags);
   };
 
   const removeTag = (tag) => {
     setSelectedTags((prevTags) => prevTags.filter((object) => object != tag));
-    //console.log("selected tags after removal: ", selectedTags);
+    ////console.log("selected tags after removal: ", selectedTags);
   };
 
   return (

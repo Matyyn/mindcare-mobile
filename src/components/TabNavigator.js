@@ -14,7 +14,7 @@ import DailyTasks from "./DailyTaskStack";
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
-  const [selectedTab, setSelectedTab] = useState("Home"); 
+  const [selectedTab, setSelectedTab] = useState("Home");
 
   const getTabImage = (routeName) => {
     switch (routeName) {
@@ -33,20 +33,21 @@ const TabNavigator = () => {
     }
   };
 
-  return (    
+  return (
     <Tab.Navigator
       initialRouteName="Home"
       tabBarOptions={{
-        showLabel: false, 
+        showLabel: false,
       }}
       screenOptions={({ route }) => ({
         tabBarButton: ({ onPress }) => {
           const isHomeTab = route.name === "Home";
-          const iconSize = selectedTab === route.name ? 36 : isHomeTab ? 24 : 24;
-      
+          const iconSize =
+            selectedTab === route.name ? 36 : isHomeTab ? 24 : 24;
+
           let iconType;
           let iconName;
-          
+
           switch (route.name) {
             case "Home":
               iconType = MaterialCommunityIcons;
@@ -72,7 +73,7 @@ const TabNavigator = () => {
               iconType = MaterialCommunityIcons;
               iconName = "home-variant";
           }
-      
+
           return (
             <TouchableOpacity
               onPress={() => {
@@ -84,7 +85,7 @@ const TabNavigator = () => {
                 selectedTab === route.name && styles.selectedTabBarButton,
               ]}
             >
-               {isHomeTab ? (
+              {isHomeTab ? (
                 <View style={styles.homeButton}>
                   <Image
                     source={getTabImage(route.name)}
@@ -101,16 +102,15 @@ const TabNavigator = () => {
           );
         },
       })}
-      
     >
-       <Tab.Screen
+      <Tab.Screen
         name="Forum"
         component={Navigation}
         options={{
           headerShown: false,
         }}
       />
-      <Tab.Screen name="Therapy" component={Therapy}/>
+      <Tab.Screen name="Therapy" component={Therapy} />
       <Tab.Screen
         name="Home"
         component={MainScreen}
@@ -118,15 +118,14 @@ const TabNavigator = () => {
           headerShown: false,
         }}
       />
-      <Tab.Screen name="Task" component={DailyTasks} 
-      options={{
-        headerShown: false,
-      }}
-      />
       <Tab.Screen
-        name="Insight Profile"
-        component={InsightsProfile}
+        name="Task"
+        component={DailyTasks}
+        options={{
+          headerShown: false,
+        }}
       />
+      <Tab.Screen name="Insight Profile" component={InsightsProfile} />
     </Tab.Navigator>
   );
 };
@@ -149,10 +148,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
-    top: -30, 
+    top: -30,
   },
   tabImage: {
-    width: 40, 
+    width: 40,
     height: 40,
   },
 });

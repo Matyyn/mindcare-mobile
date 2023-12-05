@@ -6,8 +6,8 @@ import InsightsTab from "./InsightsTab";
 import MoodsScreen from "./MoodsScreensNavigator";
 import SetReminderScreen from "../screens/dailyReminder/setReminderScreen";
 import Reminders from "../screens/dailyReminder/reminders";
-import SleepTracker from "./SleepTrackerNavigator"
-import ReminderNavigator from "./ReminderNavigator"
+import SleepTracker from "./SleepTrackerNavigator";
+import ReminderNavigator from "./ReminderNavigator";
 
 const Stack = createNativeStackNavigator();
 
@@ -60,10 +60,9 @@ const Navigation = () => {
         component={ReminderNavigator}
         options={{
           title: "Reminder",
-          headerShown:false
+          headerShown: false,
         }}
       />
-
     </Stack.Navigator>
   );
 };

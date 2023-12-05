@@ -1,48 +1,55 @@
 import React, { useState } from "react";
-import {ToastAndroid, View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import color from '../../../constants/colors'
+import {
+  ToastAndroid,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import color from "../../../constants/colors";
 
-import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import useStore from "../../zustand/store";
 
-const CompleteJournalScreen = ({ navigation}) => {    
-  const{isDPEValue,setDPEData,responseData} = useStore()
+const CompleteJournalScreen = ({ navigation }) => {
+  const { isDPEValue, setDPEData, responseData } = useStore();
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title:'Completion',
+      title: "Completion",
       headerLeft: () => (
         <TouchableOpacity onPress={() => navigation.navigate("Daily Tasks")}>
-        <Ionicons
-          name="close"
-          size={30}
-          color="black"
-          style={{marginRight:10}}
-        />
+          <Ionicons
+            name="close"
+            size={30}
+            color="black"
+            style={{ marginRight: 10 }}
+          />
         </TouchableOpacity>
-      ),            
+      ),
     });
   }, [navigation]);
 
-  const handleSubmit = async() => {    
+  const handleSubmit = async () => {
     const data = {
-      createdAt:Date.now(),
-      completed:true
-    }    
-    const response = await axios.post(`/breathing-excercise/${responseData._id}`,data)
-    console.log(response.data.data)
-    setDPEData(data)
-    ToastAndroid.show(
-      "Deep Breathing Exercises Completed",
-      ToastAndroid.LONG
+      createdAt: Date.now(),
+      completed: true,
+    };
+    const response = await axios.post(
+      `/breathing-excercise/${responseData._id}`,
+      data,
     );
-    navigation.navigate('Daily Tasks')
-  };  
+    //console.log(response.data.data);
+    setDPEData(data);
+    ToastAndroid.show("Deep Breathing Exercises Completed", ToastAndroid.LONG);
+    navigation.navigate("Daily Tasks");
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Well Done 🎉</Text>
       <Text style={styles.subHeading}>
-     Setting your goals daily centers your focus and increase your productivity. Come back tomorrow morning!
+        Setting your goals daily centers your focus and increase your
+        productivity. Come back tomorrow morning!
       </Text>
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Complete</Text>

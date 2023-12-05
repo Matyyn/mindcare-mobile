@@ -20,7 +20,7 @@ const CarouselCardItem = ({ item, index }) => {
       <TouchableOpacity
         onPress={() => {
           // navigation.navigate(`${item.screenName}`);
-          // console.log("item: ", item.screenName);
+          // //console.log("item: ", item.screenName);
         }}
       >
         <Text style={styles.header}>{item.title}</Text>

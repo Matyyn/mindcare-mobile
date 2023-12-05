@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { ToastAndroid,View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import Slider from '@react-native-community/slider';
+import {
+  ToastAndroid,
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import Slider from "@react-native-community/slider";
 import { AntDesign } from "@expo/vector-icons";
-import axios from 'axios'
+import axios from "axios";
 import useStore from "../zustand/store";
 
 const SliderScreen = ({ navigation, route }) => {
-  const {responseData} = useStore();
-  const { specificEmotion,emotion,reasonOfEmotion ,elaborationText } = route.params;
+  const { responseData } = useStore();
+  const { specificEmotion, emotion, reasonOfEmotion, elaborationText } =
+    route.params;
   const [sliderValue, setSliderValue] = useState(0);
 
   const handleSliderChange = (value) => {
@@ -21,22 +28,22 @@ const SliderScreen = ({ navigation, route }) => {
   const handleForward = async () => {
     var date = new Date().toISOString();
     const stressTimeline = getSliderTitle(sliderValue);
-    clientId= responseData._id
-    var result ;
+    clientId = responseData._id;
+    var result;
     const values = {
       checkinDate: date,
       stressTimeline: stressTimeline,
       specificEmotion: specificEmotion,
       emotion: emotion,
       reasonOfEmotion: reasonOfEmotion,
-      elaborationText: elaborationText,      
-    }    
-    result =await axios.post(`/psychological-profile/${responseData._id}`,values)    
-    ToastAndroid.show(
-      "Today's Data is Saved",
-      ToastAndroid.LONG
+      elaborationText: elaborationText,
+    };
+    result = await axios.post(
+      `/psychological-profile/${responseData._id}`,
+      values,
     );
-    navigation.navigate("Home")
+    ToastAndroid.show("Today's Data is Saved", ToastAndroid.LONG);
+    navigation.navigate("Home");
   };
 
   const getSliderTitle = (value) => {
@@ -67,7 +74,7 @@ const SliderScreen = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>What is the level of Stress Today?</Text>
-       <Slider
+      <Slider
         style={styles.slider}
         minimumValue={0}
         maximumValue={1}
@@ -78,7 +85,7 @@ const SliderScreen = ({ navigation, route }) => {
         step={0.25}
         value={sliderValue}
         onValueChange={handleSliderChange}
-      /> 
+      />
       <View style={styles.sliderValueContainer}>
         {renderSliderValue(0, "Low")}
         {renderSliderValue(0.33, "Medium")}
@@ -89,10 +96,7 @@ const SliderScreen = ({ navigation, route }) => {
         <TouchableOpacity style={styles.button} onPress={handleBackward}>
           <AntDesign name="left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleForward}
-        >
+        <TouchableOpacity style={styles.button} onPress={handleForward}>
           <AntDesign name="right" size={24} color="#FFFFFF" />
         </TouchableOpacity>
       </View>
@@ -105,7 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     paddingHorizontal: 20,
-    marginTop: '10%'
+    marginTop: "10%",
   },
   sliderValueContainer: {
     flexDirection: "row",

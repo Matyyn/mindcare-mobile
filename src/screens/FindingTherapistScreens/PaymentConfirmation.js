@@ -27,7 +27,7 @@ const CongratulationsScreen = () => {
     selectedAppointmentDate,
     selectedAppointmentTimeIndex,
   } = useStore();
-  //console.log('pay link',paymentLink)
+  ////console.log('pay link',paymentLink)
   function convertToTimestamp(timeStr) {
     const [hours, minutes] = timeStr.split(":");
     const timestamp = (parseInt(hours) * 60 + parseInt(minutes)) * 60 * 1000; // Convert to milliseconds
@@ -64,22 +64,22 @@ const CongratulationsScreen = () => {
         <TouchableOpacity
           style={styles.button}
           onPress={async () => {
-            //console.log('id',paymentId)
+            ////console.log('id',paymentId)
             const paymentResponse = await axios.get(
-              `/payments-confirm/${paymentId}`
+              `/payments-confirm/${paymentId}`,
             );
-            //console.log('pr',paymentResponse.data.data)
+            ////console.log('pr',paymentResponse.data.data)
             if (paymentLink === "") {
               ToastAndroid.show(
                 "Payment is already Confirmed",
-                ToastAndroid.LONG
+                ToastAndroid.LONG,
               );
               navigation.navigate("Sessions");
             } else {
               if (paymentResponse.data.data == "paid") {
                 ToastAndroid.show(
                   "Appoinment Booked Successfully",
-                  ToastAndroid.LONG
+                  ToastAndroid.LONG,
                 );
                 const response = await axios.post("/appointments", {
                   therapistId: selectedItem._id,
@@ -88,12 +88,12 @@ const CongratulationsScreen = () => {
                     parseInt(selectedItem.sessionCharges) / 100,
                   appointmentDate: selectedAppointmentDate,
                   appointmentTime: convertToTimestamp(
-                    selectedAppointmentTimeIndex
+                    selectedAppointmentTimeIndex,
                   ),
                   problemDescription: problemDescription,
                   status: "pending",
                 });
-                //console.log(response.data.data);
+                ////console.log(response.data.data);
                 const responsePayment = await axios.post("/payments-save", {
                   clientId: response.data.data.clientId,
                   therapistId: response.data.data.therapistId,
@@ -103,7 +103,7 @@ const CongratulationsScreen = () => {
                   appointmentId: response.data.data._id,
                 });
                 setPaymentLink("");
-                console.log(selectedItem._id);
+                //console.log(selectedItem._id);
                 const notificationResponse = await axios.post(
                   `https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/therapist/notification/${selectedItem._id}`,
                   {
@@ -112,14 +112,14 @@ const CongratulationsScreen = () => {
                     notificationTitle: "Appointment Booked",
                     notificationBody: `Appointment Booked by ${responseData.firstName} ${responseData.lastName}`,
                     notificationTime: Date.now(),
-                  }
+                  },
                 );
-                console.log(notificationResponse);
+                //console.log(notificationResponse);
                 navigation.navigate("Congratulations");
               } else {
                 ToastAndroid.show(
                   "Appointment Booking Failed, Please try again",
-                  ToastAndroid.LONG
+                  ToastAndroid.LONG,
                 );
                 navigation.navigate("Finding Therapist");
               }

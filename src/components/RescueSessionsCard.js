@@ -28,7 +28,7 @@ const RescueSessionCard = ({ key, image, title }) => {
         </Card>
       </TouchableOpacity>
 
-      <Text style={{ margin: 5, fontWeight: 500,fontSize:18 }}>{title}</Text>
+      <Text style={{ margin: 5, fontWeight: 500, fontSize: 18 }}>{title}</Text>
     </View>
   );
 };

@@ -1,8 +1,8 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Unwind from './UnwindLastNavigator'
+import Unwind from "./UnwindLastNavigator";
 import MorningJournals from "../components/MorningJournalStack";
-import SleepJournal from "./SleepJournalStack"
+import SleepJournal from "./SleepJournalStack";
 import DailyTasks from "../screens/dailyReminder/dailyTasks";
 import SetReminderScreen from "../screens/dailyReminder/setReminderScreen";
 import Reminders from "../screens/dailyReminder/reminders";
@@ -37,8 +37,8 @@ const Navigation = () => {
           name="guided journaling tips"
           component={GuidedJournalingTips}
         /> */}
-     
-      <Stack.Screen name="Daily Tasks" component={DailyTasks}/>
+
+      <Stack.Screen name="Daily Tasks" component={DailyTasks} />
       <Stack.Screen name="Daily Reminder" component={DailyReminderScreen} />
       <Stack.Screen
         name="Set Reminder"
@@ -70,32 +70,28 @@ const Navigation = () => {
       />
       <Stack.Screen
         name="Deep Breathing Exercise Tip"
-        component={DeepBreathingExerciseLastTip}        
+        component={DeepBreathingExerciseLastTip}
       />
       <Stack.Screen
         name="five senses grounding technique tip1"
-        component={FiveSensesGroundingTechniqueTip1}        
+        component={FiveSensesGroundingTechniqueTip1}
       />
       <Stack.Screen
         name="five sense grounding technique audio"
         component={FiveSensesGroundingTechniqueAudio}
-        
-      />      
+      />
       <Stack.Screen
         name="five senses grounding technique last tip"
-        component={FiveSenseGroundingTechniqueLastTip}        
+        component={FiveSenseGroundingTechniqueLastTip}
       />
-        <Stack.Screen
-          name="UnwindLast"
-          component={Unwind}        
-          />  
+      <Stack.Screen name="UnwindLast" component={Unwind} />
       <Stack.Screen
         name="unplugunwind audio"
-        component={UnplugAndUnwindAudio}        
-      />      
+        component={UnplugAndUnwindAudio}
+      />
       <Stack.Screen
         name="unplugunwindlast tip"
-        component={UnplugAndUnwindTip}        
+        component={UnplugAndUnwindTip}
       />
       <Stack.Screen
         name="Sleep Journal"

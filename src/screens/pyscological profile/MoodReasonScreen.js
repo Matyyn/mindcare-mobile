@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-const QuestionScreen = ({navigation,route}) => {
-  const { specificEmotion,emotion,reasonOfEmotion } = route.params;  
+const QuestionScreen = ({ navigation, route }) => {
+  const { specificEmotion, emotion, reasonOfEmotion } = route.params;
   const [answer, setAnswer] = useState("");
   const [selectedMood, setSelectedMood] = useState(false);
 
@@ -20,11 +26,11 @@ const QuestionScreen = ({navigation,route}) => {
 
   const handleForward = () => {
     navigation.navigate("Stress Screen", {
-        emotion,
-        specificEmotion,
-        reasonOfEmotion,
-        elaborationText:answer,
-      });
+      emotion,
+      specificEmotion,
+      reasonOfEmotion,
+      elaborationText: answer,
+    });
   };
 
   return (
@@ -96,7 +102,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingVertical: 20, // Updated to paddingVertical
-
   },
   button: {
     backgroundColor: "black",

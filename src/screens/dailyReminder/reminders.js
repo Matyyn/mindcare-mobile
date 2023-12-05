@@ -27,17 +27,17 @@ const Reminders = ({ navigation }) => {
 
   useEffect(() => {
     trackEvent("Reminders");
-    console.log("inside reminders useeffect");
+    //console.log("inside reminders useeffect");
     axios.get(`/reminders/${responseData._id}`).then((response) => {
-      console.log("reminders response: ", response);
-      console.log("reminders response data ", response.data.data);
+      //console.log("reminders response: ", response);
+      //console.log("reminders response data ", response.data.data);
       setReminders(response.data.data);
     });
   }, []);
   useEffect(() => {}, [reminders]);
   const toggleBottomNavigationView = () => {
     setVisible(!visible);
-    console.log("reminder id inside bottom van view2: ", selectedReminderId);
+    //console.log("reminder id inside bottom van view2: ", selectedReminderId);
   };
   // const onToggleReminderMode = () => switchReminderMode(!reminderMode);
   const onToggleReminderMode = (reminderId) => {
@@ -45,26 +45,26 @@ const Reminders = ({ navigation }) => {
       prevReminders.map((reminder) =>
         reminder._id === reminderId
           ? { ...reminder, turnOn: !reminder.turnOn }
-          : reminder
-      )
+          : reminder,
+      ),
     );
     const found = reminders.find((reminder) => reminder._id == reminderId);
-    console.log("found: ", found.turnOn);
+    //console.log("found: ", found.turnOn);
     axios
       .patch(`/reminders/${reminderId}`, { turnOn: !found.turnOn })
       .then((response) => {
-        console.log("response: ", response.data);
+        //console.log("response: ", response.data);
       });
   };
 
   const test = (reminderId) => {
-    console.log("inside test");
-    console.log("reminder id: ", reminderId);
+    //console.log("inside test");
+    //console.log("reminder id: ", reminderId);
     setSelectedReminderId(reminderId);
-    console.log("selectedReminderId: ", selectedReminderId);
+    //console.log("selectedReminderId: ", selectedReminderId);
   };
   useEffect(() => {
-    console.log("selectedReminderId changed: ", selectedReminderId);
+    //console.log("selectedReminderId changed: ", selectedReminderId);
     if (selectedReminderId != "id") {
       toggleBottomNavigationView();
     }
@@ -73,7 +73,7 @@ const Reminders = ({ navigation }) => {
   const Item = ({ reminderType, reminderTime, reminderSwitch, reminderId }) => {
     // setReminderType(reminderType);
     // setReminderTime(reminderTime);
-    // console.log("Item. ReminderId: ", reminderId);
+    // //console.log("Item. ReminderId: ", reminderId);
     return (
       <View style={styles.item}>
         <View style={{ flexDirection: "row", marginTop: 8 }}>
@@ -105,7 +105,7 @@ const Reminders = ({ navigation }) => {
   };
 
   const renderItem = ({ item }) => {
-    // console.log("item id: ", item._id);
+    // //console.log("item id: ", item._id);
     return (
       <Item
         reminderTime={item.time}
@@ -117,13 +117,13 @@ const Reminders = ({ navigation }) => {
   };
 
   const deleteReminder = () => {
-    console.log("inside delete func");
-    console.log("reminder id: ", selectedReminderId);
+    //console.log("inside delete func");
+    //console.log("reminder id: ", selectedReminderId);
     axios
       .delete(`/reminders/${selectedReminderId}`)
       .then(() => {
         setReminders((prevData) =>
-          prevData.filter((reminder) => reminder._id !== selectedReminderId)
+          prevData.filter((reminder) => reminder._id !== selectedReminderId),
         );
         ToastAndroid.show("Reminder Deleted!", ToastAndroid.LONG);
       })

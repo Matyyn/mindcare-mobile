@@ -17,25 +17,34 @@ const GuidedJournalingTips = ({ navigation, route }) => {
     navigation.setOptions({
       title: journalTitle,
       headerLeft: () => (
-        <TouchableOpacity onPress={() => navigation.navigate("rescue sessions main")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("rescue sessions main")}
+        >
           <Ionicons
             name="close"
             size={30}
             color="black"
-            style={{marginRight:10}}
+            style={{ marginRight: 10 }}
           />
         </TouchableOpacity>
       ),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate('RescueSessionsTab')}>
-          <Icon name="clipboard-list" size={30} color="black" style={styles.copyIcon} />
+        <TouchableOpacity
+          onPress={() => navigation.navigate("RescueSessionsTab")}
+        >
+          <Icon
+            name="clipboard-list"
+            size={30}
+            color="black"
+            style={styles.copyIcon}
+          />
         </TouchableOpacity>
       ),
     });
   }, [navigation, journalTitle]);
 
   const [tip1, setTip1] = useState(
-    "Optimize audio rescue sessions: Use quality headphones, find a quiet space, manage distractions, and set a comfortable listening volume."
+    "Optimize audio rescue sessions: Use quality headphones, find a quiet space, manage distractions, and set a comfortable listening volume.",
   );
 
   return (
@@ -53,9 +62,12 @@ const GuidedJournalingTips = ({ navigation, route }) => {
         >
           <Ionicons name="chevron-back" size={40} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton}  onPress={() => {
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={() => {
             navigation.navigate("rescue sessions tips2", { journalTitle });
-          }}>
+          }}
+        >
           <Ionicons name="chevron-forward-outline" size={40} color="black" />
         </TouchableOpacity>
       </View>
@@ -93,7 +105,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 50,
     paddingLeft: 2,
-    paddingRight:2
+    paddingRight: 2,
   },
 });
 

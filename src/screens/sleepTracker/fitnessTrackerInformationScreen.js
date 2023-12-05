@@ -31,22 +31,22 @@ const Signup = ({ navigation }) => {
           const heightInMeters = values.height / 100;
           const weightInKg = values.weight;
           const bmi = weightInKg / (heightInMeters * heightInMeters);
-          console.log("Height:", values.height);
-          console.log("Weight:", values.weight);
-          console.log("BMI:", bmi);
+          //console.log("Height:", values.height);
+          //console.log("Weight:", values.weight);
+          //console.log("BMI:", bmi);
 
           const object = {
             height: values.height,
             weight: values.weight,
             bmi: bmi,
-            logDate:Date.now()
+            logDate: Date.now(),
           };
 
           const response = await axios.post(
             `/fitness-tracker/${responseData._id}`,
-            object
+            object,
           );
-          console.log(response.data.data)
+          //console.log(response.data.data);
           ToastAndroid.show("Data Posted Successfully", ToastAndroid.LONG);
           navigation.navigate("Fitness Information Screen");
         }}
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     marginTop: "10%",
     alignItems: "center",
   },
-   button: {
+  button: {
     backgroundColor: color.grey,
     alignItems: "center",
     padding: 10,

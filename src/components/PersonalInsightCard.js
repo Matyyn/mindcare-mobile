@@ -1,4 +1,3 @@
-
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,7 +10,7 @@ const PersonalInsightCard = ({ title, icon, marginBottom }) => {
   return (
     // <SafeAreaView style={{ backgroundColor: "#FFEBEB", height: 500 }}>
     <View>
-      <TouchableOpacity onPress={()=>navigation.navigate(title)}>
+      <TouchableOpacity onPress={() => navigation.navigate(title)}>
         <View style={[styles.container, { marginBottom: marginBottom }]}>
           <Text
             style={{

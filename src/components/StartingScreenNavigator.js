@@ -96,10 +96,7 @@ const Navigation = () => {
           component={SigninSplash}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="Create Account"
-          component={CreateAccount}          
-        />
+        <Stack.Screen name="Create Account" component={CreateAccount} />
         <Stack.Screen
           name="Sign in"
           component={Signin}
