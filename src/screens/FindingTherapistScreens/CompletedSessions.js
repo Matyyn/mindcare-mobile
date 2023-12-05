@@ -63,7 +63,10 @@ const TextInputExample = () => {
             onPress={() => onCallPress(item)}
             style={{ marginRight: 20 }}
           >
-            <Icons name="phone-call" size={25} color="green" />
+             <Icon name="star" size={25} color="gold" 
+              onPress={() => {
+                navigation.navigate("Review");
+              }}/>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => onChatPress(item)}>
             {/* <Text style={styles.buttonText}>Chat</Text> */}
@@ -72,7 +75,7 @@ const TextInputExample = () => {
               size={25}
               color="black"
               onPress={() => {
-                navigation.navigate("Chat");
+                navigation.navigate("Chat", { item });
               }}
             />
           </TouchableOpacity>

@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import UpcomingAppointment from '../screens/FindingTherapistScreens/UpcomingSessions'
+import CompletedSessions from '../screens/FindingTherapistScreens/CompletedSessions'
 import ChatScreen from '../screens/FindingTherapistScreens/chatScreen'
 import ReviewScreen from '../screens/FindingTherapistScreens/Review'
 import CallScreen from '../screens/FindingTherapistScreens/CallScreen'
@@ -9,8 +9,8 @@ const Navigation = ({navigation}) => {
   return (
       <Stack.Navigator>    
         <Stack.Screen
-          name="Upcoming Sessions"
-          component={UpcomingAppointment}
+          name="Completed Sessions"
+          component={CompletedSessions}
           options={{headerShown:false}}
         />
         <Stack.Screen

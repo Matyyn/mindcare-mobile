@@ -3,7 +3,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import UpcomingSessions from './AppointmentNavigator';
 import CancelledSessions from '../screens/FindingTherapistScreens/CancelledSessions';
 import { StatusBar } from 'react-native';
-import CompletedSessions from '../screens/FindingTherapistScreens/CompletedSessions';
+import CompletedSessions from './CompletedSessionsNavigator';
 const Tab = createMaterialTopTabNavigator();
 
 const TopTabsScreen = () => {
