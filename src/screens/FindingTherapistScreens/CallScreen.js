@@ -8,15 +8,15 @@ const App = () => {
   const { responseData } = useStore();
   console.log(responseData)
   const webViewRef = useRef(null);
-  const [capturedImage, setCapturedImage] = useState ( null);
+  const [capturedImage, setCapturedImage] = useState ('');
   const [webViewLoaded, setWebViewLoaded] = useState(false);
   
   const postImage = async () => {
-    const apiUrlTest = "http://192.168.100.19:8000/process_image/";
+    //const apiUrlTest = "http://192.168.100.19:8000/process_image/";
 
     try {
       // GET request
-        const getResponse = await axios.get("http://192.168.100.19:8000/test");
+      //  const getResponse = await axios.get("http://192.168.100.19:8000/test");
       //console.log(getResponse.data.test);
 
       // POST request
@@ -26,12 +26,12 @@ const App = () => {
         name: "image.jpg",
         type: "image/jpeg",
       });
-      const postResponse = await axios.post(apiUrlTest, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });      
-      //const postResponse = { data: "Anxiety" };
+      // const postResponse = await axios.post(apiUrlTest, formData, {
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // });      
+      const postResponse = { data: "Anxiety" };
       let counts = { total: 0, anxiety: 0, depression: 0 };
       let Emotion= ''
       let EmotionPercentage=0

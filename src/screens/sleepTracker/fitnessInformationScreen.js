@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
   locationButtonText: {
     fontWeight: "bold",
     color: "white",
+    backgroundColor:'#2D3748',
     fontSize: 18,
   },
   errorText: {

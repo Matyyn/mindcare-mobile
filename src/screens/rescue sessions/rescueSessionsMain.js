@@ -34,7 +34,8 @@ const GuidedJournalingMain = ({ navigation }) => {
     <ScrollView style={{ margin: 10 }}>
       <>
         <RecommendedScreen />
-        <Text style={{ fontSize: 18, margin: 10 }}>Rescue Sessions</Text>
+        <Text style={{ fontSize: 18, margin: 10,fontWeight:'bold' }}>
+          Rescue Sessions</Text>
         <FlatList
           data={rescueData}
           key={numColumns}

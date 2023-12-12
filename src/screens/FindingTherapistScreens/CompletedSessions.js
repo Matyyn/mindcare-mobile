@@ -53,11 +53,12 @@ const TextInputExample = () => {
           Dr. {item.therapistId.firstName} {item.therapistId.lastName}
         </Text>
         <Text style={styles.cardSubtitle}>
-          Date: {item.appointmentDate.split("T")[0]}
+           {item.appointmentDate.split("T")[0]}
         </Text>
         <Text style={styles.cardSubtitle}>
-          Time: {item.appointmentTime.split("T")[1]}
+           {item.appointmentTime.split("T")[1]}
         </Text>
+      </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() => onCallPress(item)}
@@ -84,7 +85,6 @@ const TextInputExample = () => {
             />
           </TouchableOpacity>
         </View>
-      </View>
     </View>
   );
 
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     fontWeight: 700,
   },
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FBFCf8",
     borderRadius: 20,
     elevation: 3,
     marginBottom: 20,
@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
   },
   rightContainer: {
     flex: 1,
+    justifyContent:'space-evenly'
   },
   cardImage: {
     width: 80,
@@ -160,7 +161,7 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: "normal",
   },
   cardSubtitle: {
     fontSize: 18,

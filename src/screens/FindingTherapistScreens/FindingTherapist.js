@@ -26,8 +26,8 @@ const TextInputExample = () => {
       onPress={onPress}
       style={{
         width: "auto",
-        borderColor: "black",
-        borderWidth: 2,
+        elevation: 5,
+        backgroundColor:'#fbfcf8',
         margin: 5,
         borderRadius: 20,
         padding: 20,
@@ -73,7 +73,7 @@ const TextInputExample = () => {
     );
   };
   const renderItemFeatured = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
+    const backgroundColor = item.id === selectedId ? "#fbfcf8" : "#fbfcf8";
     const color = item.id === selectedId ? "white" : "black";
 
     return (
@@ -176,7 +176,7 @@ const TextInputExample = () => {
         keyExtractor={(item) => item.id}
         extraData={selectedId}
         horizontal={true}
-        style={{ marginLeft: "4%", marginRight: "4%" }}
+        style={{ marginLeft: "4%", marginRight: "4%"}}
       />
 
       <View

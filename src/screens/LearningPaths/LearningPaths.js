@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    backgroundColor: "grey",
+    backgroundColor: "#FBFCf8",
     justifyContent: "center",
     alignItems: "center",
     margin: 30,
@@ -51,12 +51,12 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 24,
-    color: "#fff",
+    color: "#2D3748",
     marginBottom: 10,
   },
   cardInfo: {
     fontSize: 16,
-    color: "#fff",
+    color: "#2D3748",
     textAlign: "center",
   },
 });

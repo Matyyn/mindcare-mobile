@@ -95,12 +95,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#FBFCf8",
   },
   cardContainer: {
     marginBottom: 16,
     padding: 16,
-    backgroundColor: "white",
+    backgroundColor: "#FBFCf8",
     borderRadius: 8,
     elevation: 4,
   },

@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
     height: 170,
     alignItems: "center",
     marginBottom: 10,
-    backgroundColor: "grey",
+    backgroundColor: "#FBFCf8",
     borderRadius: 15,
     padding: 10,
     shadowColor: "#000",
@@ -307,11 +307,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 10,
     fontWeight: "bold",
-    color: "white",
+    color: "#2D3748",
   },
   cardAdditionalText: {
     fontSize: 18,
-    color: "white",
+    color: "#2D3748",
     marginBottom: 25,
     marginBottom: 5,
   },
@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   buttonText: {
-    color: "#fff",
+    color: "#2D3748",
     fontSize: 14,
     fontWeight: "bold",
   },
@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
   leftContainer: {
     padding: 10,
     aspectRatio: 1,
-    backgroundColor: "grey",
+    backgroundColor: "#FBFCf8",
   },
   rightContainer: {
     flex: 1,

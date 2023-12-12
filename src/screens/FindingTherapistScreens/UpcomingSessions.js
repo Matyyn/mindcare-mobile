@@ -53,11 +53,12 @@ const TextInputExample = () => {
           Dr. {item.therapistId.firstName} {item.therapistId.lastName}
         </Text>
         <Text style={styles.cardSubtitle}>
-          Date: {item.appointmentDate.split("T")[0]}
+          {item.appointmentDate.split("T")[0]}
         </Text>
         <Text style={styles.cardSubtitle}>
-          Time: {item.appointmentTime.split("T")[1]}
+           {item.appointmentTime.split("T")[1]}
         </Text>
+      </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() => navigation.navigate("Call")}
@@ -65,19 +66,18 @@ const TextInputExample = () => {
           >
             <Icons name="phone-call" size={25} color="green" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => onChatPress(item)}>
+          {/* <TouchableOpacity onPress={() => onChatPress(item)}> */}
             {/* <Text style={styles.buttonText}>Chat</Text> */}
-            <Icon
+            {/* <Icon
               name="chat"
               size={25}
               color="black"
               onPress={() => {
                 navigation.navigate("Chat", { item });
               }}
-            />
-          </TouchableOpacity>
+            /> */}
+          {/* </TouchableOpacity> */}
         </View>
-      </View>
     </View>
   );
 
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     fontWeight: 700,
   },
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FBFCf8",
     borderRadius: 20,
     elevation: 3,
     marginBottom: 20,
@@ -140,9 +140,11 @@ const styles = StyleSheet.create({
   },
   leftContainer: {
     marginRight: 16,
+
   },
   rightContainer: {
     flex: 1,
+    justifyContent:'space-evenly'
   },
   cardImage: {
     width: 80,
@@ -153,7 +155,7 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: "normal",
   },
   cardSubtitle: {
     fontSize: 18,

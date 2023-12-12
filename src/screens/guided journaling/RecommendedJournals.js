@@ -30,7 +30,8 @@ const RecommendedScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text style={{ fontSize: 18, margin: 10 }}>Recommended Journals</Text>
+      <Text style={{ fontSize: 18, margin: 10,fontWeight:'bold' }}>
+        Recommended Journals</Text>
       <FlatList
         data={recommendedData}
         key={numColumns}

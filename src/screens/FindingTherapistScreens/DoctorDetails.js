@@ -27,7 +27,7 @@ const ProfileScreen = () => {
   const { selectedItem } = useStore();
   return (
     <ScrollView style={styles.container}>
-      <Card style={{ padding: 10, borderRadius: 10 }}>
+      <Card style={{ padding: 10, borderRadius: 10,backgroundColor:'#fbfcf8' }}>
         <Text style={styles.name}>Therapist Profile</Text>
         <View style={styles.header}>
           <Image
@@ -57,12 +57,12 @@ const ProfileScreen = () => {
               $ {selectedItem.sessionCharges / 100}{" "}
             </Text>
           </View>
-        </View>
         <View style={styles.workingTime}>
           <Text style={styles.detailSubHeading}>Working Time: </Text>
           <Text style={styles.detailText}>
             {selectedItem.dateOfAvailability}
           </Text>
+        </View>
         </View>
         <TouchableOpacity
           style={styles.reviewsTouchable}
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "white",
+    backgroundColor: "#fbfcf8",
   },
   header: {
     alignItems: "center",
@@ -123,6 +123,8 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 700,
     marginBottom: 40,
+    textAlign: "center",
+    marginTop:10
   },
   professionalDetails: {
     marginBottom: 16,

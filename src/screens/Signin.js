@@ -1,36 +1,209 @@
+// import {
+//   View,
+//   Text,
+//   StyleSheet,
+//   Image,
+//   ScrollView,
+//   TouchableOpacity,
+//   ToastAndroid,
+//   KeyboardAvoidingView,
+// } from "react-native";
+// import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+// import React from "react";
+// import axios from "axios";
+// import { useState } from "react";
+// import { TextInput, Checkbox, Button } from "react-native-paper";
+// import { SafeAreaView } from "react-native-safe-area-context";
+// import { Formik } from "formik";
+// import * as yup from "yup";
+// import color from "../constants/colors";
+// const splashImage = require("../../assets/images/splash.png");
+// import useStore from "../screens/zustand/store";
+// import { trackEvent } from "@aptabase/react-native";
+
+// const Signin = ({ navigation }) => {
+//   const { setResponseData } = useStore();
+//   const [checked, setChecked] = useState(false);
+//   const [secureTextEntry, setSecureTextEntry] = useState(true);
+//   // //console.log(Constants.expoConfig.extra.apiUrl);
+
+//   const loginValidationSchema = yup.object().shape({
+//     email: yup
+//       .string()
+//       .email("Please enter valid email")
+//       .required("Email Address is Required"),
+//     password: yup
+//       .string()
+//       .min(8, ({ min }) => `Password must be at least ${min} characters`)
+//       .required("Password is required"),
+//   });
+
+//   return (
+//     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
+//       <Image
+//         resizeMode="cover"
+//         style={{
+//           height: "50%",
+//           width: "100%",
+//           alignSelf: "center",
+//         }}
+//         source={splashImage}
+//       />
+//       <Text style={styles.text}>Mind Care</Text>
+//       <Formik
+//         validationSchema={loginValidationSchema}
+//         initialValues={{ email: "", password: "" }}
+//         onSubmit={async (values) => {
+//           const response = await axios.post("/login", values);
+//           let value = response.data.data.data;
+//           //console.log("value", value);
+//           if (value.isBlocked == false) {
+//             setResponseData(value);
+//             trackEvent("Signin");
+//             ToastAndroid.show("Successful Sign In", ToastAndroid.LONG);
+//             navigation.navigate("Tabs");
+//           } else if (value.isBlocked == true) {
+//             navigation.navigate("Blocked");
+//           } else {
+//             ToastAndroid.show(
+//               "Please Enter Correct Credentials!",
+//               ToastAndroid.LONG,
+//             );
+//           }
+//         }}
+//       >
+//         {({
+//           handleChange,
+//           handleBlur,
+//           handleSubmit,
+//           values,
+//           errors,
+//           isValid,
+//         }) => (
+//           <KeyboardAwareScrollView>
+//             <View>
+//               <View style={styles.textInputContainer}>
+//                 <TextInput
+//                   onChangeText={handleChange("email")}
+//                   onBlur={handleBlur("email")}
+//                   value={values.email}
+//                   placeholder="Email"
+//                   style={styles.TextInput}
+//                   mode="outlined"
+//                   error={errors.email}
+//                   theme={{
+//                     colors: {
+//                       primary: color.lightGrey,
+//                     },
+//                   }}
+//                 />
+//                 {errors.email && (
+//                   <Text style={styles.errorText}>{errors.email}</Text>
+//                 )}
+//               </View>
+//               <View style={styles.textInputContainer}>
+//                 <TextInput
+//                   onChangeText={handleChange("password")}
+//                   onBlur={handleBlur("password")}
+//                   value={values.password}
+//                   placeholder="Password"
+//                   style={styles.TextInput}
+//                   mode="outlined"
+//                   error={errors.password}
+//                   theme={{
+//                     colors: {
+//                       primary: color.lightGrey,
+//                     },
+//                   }}
+//                   secureTextEntry={secureTextEntry}
+//                   right={
+//                     <TextInput.Icon
+//                       icon="eye"
+//                       onPress={() => {
+//                         setSecureTextEntry(!secureTextEntry);
+//                         return false;
+//                       }}
+//                       backgroundColor="white"
+//                     />
+//                   }
+//                 />
+//                 {errors.password && (
+//                   <Text style={styles.errorText}>{errors.password}</Text>
+//                 )}
+//               </View>
+//             </View>
+
+//             <View style={styles.checkboxParentContainer}>
+//               <View style={styles.checkboxContainer}>
+//                 {/* <Checkbox
+//                   status={checked ? "checked" : "unchecked"}
+//                   color={color.grey}
+//                   onPress={() => {
+//                     setChecked(!checked);
+//                   }}
+//                 /> */}
+//                 <Text></Text>
+//               </View>
+//               <View>
+//                 <Text style={{ fontWeight: "600" }}>Forgot Password?</Text>
+//               </View>
+//             </View>
+//             <View style={styles.buttonParent}>
+//               <TouchableOpacity
+//                 style={styles.button}
+//                 // onSubmit={handleSubmit}
+//                 onPress={handleSubmit}
+//                 disabled={!isValid}
+//               >
+//                 <Text
+//                   style={{
+//                     color: "white",
+//                     fontFamily: "Inter_700Bold",
+//                     fontSize: 20,
+//                   }}
+//                 >
+//                   Sign in
+//                 </Text>
+//               </TouchableOpacity>
+//             </View>
+//           </KeyboardAwareScrollView>
+//         )}
+//       </Formik>
+//     </SafeAreaView>
+//   );
+// };
+
+// export default Signin;
+import React, { useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   Image,
-  ScrollView,
   TouchableOpacity,
   ToastAndroid,
-  KeyboardAvoidingView,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import React from "react";
-import axios from "axios";
-import { useState } from "react";
-import { TextInput, Checkbox, Button } from "react-native-paper";
+import { TextInput, ActivityIndicator } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Formik } from "formik";
 import * as yup from "yup";
+import axios from "axios";
 import color from "../constants/colors";
-const splashImage = require("../../assets/images/splash.png");
 import useStore from "../screens/zustand/store";
 import { trackEvent } from "@aptabase/react-native";
 
+const splashImage = require("../../assets/images/splash.png");
+
 const Signin = ({ navigation }) => {
   const { setResponseData } = useStore();
-  const [checked, setChecked] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
-  // //console.log(Constants.expoConfig.extra.apiUrl);
+  const [loading, setLoading] = useState(false);
 
   const loginValidationSchema = yup.object().shape({
     email: yup
       .string()
-      .email("Please enter valid email")
+      .email("Please enter a valid email")
       .required("Email Address is Required"),
     password: yup
       .string()
@@ -54,21 +227,29 @@ const Signin = ({ navigation }) => {
         validationSchema={loginValidationSchema}
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values) => {
-          const response = await axios.post("/login", values);
-          let value = response.data.data.data;
-          //console.log("value", value);
-          if (value.isBlocked == false) {
-            setResponseData(value);
-            trackEvent("Signin");
-            ToastAndroid.show("Successful Sign In", ToastAndroid.LONG);
-            navigation.navigate("Tabs");
-          } else if (value.isBlocked == true) {
-            navigation.navigate("Blocked");
-          } else {
-            ToastAndroid.show(
-              "Please Enter Correct Credentials!",
-              ToastAndroid.LONG,
-            );
+          try {
+            setLoading(true);
+
+            const response = await axios.post("/login", values);
+            const value = response.data.data.data;
+
+            if (value.isBlocked === false) {
+              setResponseData(value);
+              trackEvent("Signin");
+              ToastAndroid.show("Successful Sign In", ToastAndroid.LONG);
+              navigation.navigate("Tabs");
+            } else if (value.isBlocked === true) {
+              navigation.navigate("Blocked");
+            } else {
+              ToastAndroid.show(
+                "Please Enter Correct Credentials!",
+                ToastAndroid.LONG,
+              );
+            }
+          } catch (error) {
+            console.error("Error during login:", error);
+          } finally {
+            setLoading(false);
           }
         }}
       >
@@ -133,38 +314,26 @@ const Signin = ({ navigation }) => {
               </View>
             </View>
 
-            <View style={styles.checkboxParentContainer}>
-              <View style={styles.checkboxContainer}>
-                {/* <Checkbox
-                  status={checked ? "checked" : "unchecked"}
-                  color={color.grey}
-                  onPress={() => {
-                    setChecked(!checked);
-                  }}
-                /> */}
-                <Text></Text>
-              </View>
-              <View>
-                <Text style={{ fontWeight: "600" }}>Forgot Password?</Text>
-              </View>
-            </View>
             <View style={styles.buttonParent}>
-              <TouchableOpacity
-                style={styles.button}
-                // onSubmit={handleSubmit}
-                onPress={handleSubmit}
-                disabled={!isValid}
-              >
-                <Text
-                  style={{
-                    color: "white",
-                    fontFamily: "Inter_700Bold",
-                    fontSize: 20,
-                  }}
+              {loading ? (
+                <ActivityIndicator size="large" color={color.grey} />
+              ) : (
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={handleSubmit}
+                  disabled={!isValid}
                 >
-                  Sign in
-                </Text>
-              </TouchableOpacity>
+                  <Text
+                    style={{
+                      color: "white",
+                      fontFamily: "Inter_700Bold",
+                      fontSize: 20,
+                    }}
+                  >
+                    Sign in
+                  </Text>
+                </TouchableOpacity>
+              )}
             </View>
           </KeyboardAwareScrollView>
         )}

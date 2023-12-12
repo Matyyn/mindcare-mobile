@@ -100,13 +100,13 @@ const styles = StyleSheet.create({
   heading: {
     marginTop: 10,
     marginBottom: 10,
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
   },
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: "#fbfcf8",
     borderRadius: 20,
-    elevation: 3,
+    elevation: 5,
     marginBottom: 20,
     padding: 16,
   },
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   cardTitle: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 10,

@@ -152,7 +152,7 @@ const DailyTasks = ({ navigation }) => {
             styles.taskCard,
             isDPECompleted
               ? { backgroundColor: "lightgreen" }
-              : { backgroundColor: color.lightGrey },
+              : { backgroundColor: '#fbfcf8' },
           ]}
         >
           <View>
@@ -236,7 +236,7 @@ const DailyTasks = ({ navigation }) => {
             styles.taskCard,
             isFSGCompleted
               ? { backgroundColor: "lightgreen" }
-              : { backgroundColor: color.lightGrey },
+              : { backgroundColor: '#fbfcf8' },
           ]}
         >
           <View>
@@ -264,7 +264,7 @@ const DailyTasks = ({ navigation }) => {
             styles.taskCard,
             isUPUWCompleted
               ? { backgroundColor: "lightgreen" }
-              : { backgroundColor: color.lightGrey },
+              : { backgroundColor: '#fbfcf8' },
           ]}
         >
           <View>
@@ -316,10 +316,11 @@ const styles = StyleSheet.create({
   },
   taskCard: {
     flexDirection: "row",
-    backgroundColor: color.lightGrey,
+    backgroundColor: '#fbfcf8',
     padding: 16,
     marginHorizontal: 15,
     borderRadius: 10,
+    elevation:5,
     marginBottom: 5,
   },
   heading: {

@@ -138,10 +138,10 @@ const styles = StyleSheet.create({
   },
   selectedTabBarButton: {
     borderBottomWidth: 4,
-    borderColor: "grey",
+    borderColor: "#7c6e7f",
   },
   homeButton: {
-    backgroundColor: "grey",
+    backgroundColor: "#7c6e7f",
     width: 70,
     height: 70,
     borderRadius: 35,
