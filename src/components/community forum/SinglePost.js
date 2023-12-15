@@ -11,11 +11,7 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Avatar, Button, Card } from "react-native-paper";
 import useStore from "../../screens/zustand/store";
-import { AntDesign } from "@expo/vector-icons";
 import { trackEvent } from "@aptabase/react-native";
-
-import { FontAwesome5 } from "@expo/vector-icons";
-
 import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
 import Comment from "./Comment";
@@ -35,13 +31,7 @@ const SinglePost = ({ post }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const navigation = useNavigation();
-
-  useEffect(() => {
-    //////console.log("user id: ", userId);
-    //////console.log("post1: ", post);
-  }, []);
-  //////console.log("post id: ", post._id);
-
+  
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
@@ -236,9 +226,11 @@ const SinglePost = ({ post }) => {
                 )}
               </Text>
             </TouchableOpacity>
+            <View style={{ alignItems: 'flex-end' }}>
+              <Comment postId={post._id} clientId={userId} />
+            </View>
           </Card.Content>
           <Card.Actions>
-            <Comment postId={post._id} clientId={userId} />
 
             {/* Upvote and Downvote buttons */}
             {getUpvoteStatus(post) ? (
@@ -408,11 +400,13 @@ const SinglePost = ({ post }) => {
                 )}
               </Text>
             </TouchableOpacity>
+            <View style={{ alignItems: 'flex-end' }}>
+              <Comment postId={post._id} clientId={userId} />
+            </View>
           </Card.Content>
           <Card.Actions>
-            <Comment postId={post._id} clientId={userId} />
-
-            {/* Upvote and Downvote buttons */}
+            {/* <Comment postId={post._id} clientId={userId} /> */}
+            
             {getUpvoteStatus(post) ? (
               <MaterialCommunityIcons
                 name="arrow-up-bold"

@@ -46,6 +46,14 @@ export default function Comment({ postId, clientId, type }) {
 
   return (
     <View style={styles.commentContainer}>
+      {isReplying && (
+        <TextInput
+          style={styles.input}
+          placeholder="What are your thoughts?"
+          value={commentBody}
+          onChangeText={(text) => setCommentBody(text)}
+        />
+      )}
       {isReplying ? (
         <View style={styles.replyContainer}>
           <TouchableOpacity style={styles.postButton} onPress={postComment}>
@@ -63,16 +71,35 @@ export default function Comment({ postId, clientId, type }) {
           <FontAwesome5 name="comment-alt" size={22} color="black" />
         </TouchableOpacity>
       )}
-
-      {isReplying && (
-        <TextInput
-          style={styles.input}
-          placeholder="What are your thoughts?"
-          value={commentBody}
-          onChangeText={(text) => setCommentBody(text)}
-        />
-      )}
     </View>
+  //   <View style={{...styles.commentContainer, justifyContent: 'center', alignItems: 'center'}}>
+  //   {isReplying && (
+  //     <View style={{width:'80%',marginLeft:10}}>
+  //       <TextInput
+  //         style={styles.input}
+  //         placeholder="What are your thoughts?"
+  //         value={commentBody}
+  //         onChangeText={(text) => setCommentBody(text)}
+  //       />
+  //       <View style={{...styles.commentContainer, justifyContent: 'center', alignItems: 'center'}}>
+  //         <TouchableOpacity style={styles.postButton} onPress={postComment}>
+  //           <Text style={styles.buttonText}>Post</Text>
+  //         </TouchableOpacity>
+  //         <TouchableOpacity
+  //           style={styles.cancelButton}
+  //           onPress={() => setIsReplying(false)}
+  //         >
+  //           <Text style={styles.buttonText}>Cancel</Text>
+  //         </TouchableOpacity>
+  //       </View>
+  //     </View>
+  //   )}
+  //   {!isReplying && (
+  //     <TouchableOpacity onPress={() => setIsReplying(true)}>
+  //       <FontAwesome5 name="comment-alt" size={22} color="black" />
+  //     </TouchableOpacity>
+  //   )}
+  // </View>
   );
 }
 
@@ -80,6 +107,7 @@ const styles = StyleSheet.create({
   commentContainer: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent:'space-evenly',
     marginVertical: 10,
   },
   replyContainer: {
@@ -89,6 +117,7 @@ const styles = StyleSheet.create({
   },
   postButton: {
     marginRight: 10,
+    marginLeft:5,
     backgroundColor: color.grey,
     paddingHorizontal: 15,
     paddingVertical: 8,
@@ -98,12 +127,10 @@ const styles = StyleSheet.create({
     color: "#FFFFFF", // Adjust the color as needed
   },
   input: {
-    flex: 1,
-    marginLeft: 10,
+    flex: 1,    
     borderWidth: 1,
     borderRadius: 5,
     borderColor: "#CCCCCC", // Adjust the color as needed
-
     paddingHorizontal: 10,
   },
   cancelButton: {

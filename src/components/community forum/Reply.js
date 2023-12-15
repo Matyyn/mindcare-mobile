@@ -47,6 +47,14 @@ export default function Reply({ postId, clientId, commentId }) {
 
   return (
     <View style={styles.commentContainer}>
+      {isReplying && (
+        <TextInput
+          style={styles.input}
+          placeholder="What are your thoughts?"
+          value={replyBody}
+          onChangeText={(text) => setReplyBody(text)}
+        />
+      )}
       {isReplying ? (
         <View style={styles.replyContainer}>
           <TouchableOpacity style={styles.postButton} onPress={postReply}>
@@ -65,14 +73,7 @@ export default function Reply({ postId, clientId, commentId }) {
         </TouchableOpacity>
       )}
 
-      {isReplying && (
-        <TextInput
-          style={styles.input}
-          placeholder="What are your thoughts?"
-          value={replyBody}
-          onChangeText={(text) => setReplyBody(text)}
-        />
-      )}
+      
     </View>
   );
 }
