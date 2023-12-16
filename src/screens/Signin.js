@@ -313,7 +313,13 @@ const Signin = ({ navigation }) => {
                 )}
               </View>
             </View>
-
+            <View style={{ flex: 1, alignItems: 'flex-end',marginRight:25,marginTop:5 }}>
+                <View>
+                    <Text style={{ fontWeight: "600" }} onPress={()=>{
+                      navigation.navigate("Forgot Password");
+                    }}>Forgot Password?</Text>
+                </View>
+            </View>             
             <View style={styles.buttonParent}>
               {loading ? (
                 <ActivityIndicator size="large" color={color.grey} />

@@ -41,7 +41,7 @@ const ForgotPassword = () => {
       <Text style={styles.text}>Forgot Password</Text>
       <Formik
         validationSchema={createAccountValidationSchema}
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: "" }}
         onSubmit={async (values) => {
           //   const response = await axios.post("http://localhost:5000/signin", {
           //     header: {
@@ -49,6 +49,11 @@ const ForgotPassword = () => {
           //     },
           //     body: JSON.stringify(values),
           //   });
+          console.log(values);
+          const response = await axios.post('/reset-password',{
+            email:values.email          
+          })
+          console.log(response)
           // Alert.alert(
           //   null,
           //   "A reset link has been sent to your email account",
@@ -126,18 +131,18 @@ const styles = StyleSheet.create({
     color: color.grey,
   },
   textInputContainer: {
-    marginBottom: 5,
-    marginTop: 10,
+    marginBottom: 5,    
   },
 
   TextInput: {
     borderRadius: 15,
     width: "90%",
+    marginTop: "10%",
     alignSelf: "center",
     backgroundColor: "white",
   },
   buttonParent: {
-    marginTop: "50%",
+    marginTop: "30%",
     alignItems: "center",
   },
   button: {
