@@ -206,7 +206,9 @@ const questions = [
 ];
 
 const DepressionScreen = ({ navigation }) => {
-  useEffect("Depression Test");
+  useEffect(() => {
+    trackEvent("Depression Test");
+  }, []);
   const { responseData } = useStore();
   const [responses, setResponses] = useState(
     Array(questions.length).fill({ questionNumber: 0, response: -1 }),
