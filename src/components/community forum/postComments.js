@@ -33,7 +33,9 @@ const PostComments = ({ route }) => {
       setLoading(false);
     });
   }, []);
-
+  const toggleReadMore = () => {
+    setIsReadMore(!isReadMore);
+  };  
   const dateConversion = (createdAt) => {
     const date = new Date(createdAt);
     const year = date.getFullYear();
