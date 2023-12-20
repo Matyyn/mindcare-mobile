@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "#CCCCCC", // Adjust the color as needed
     paddingHorizontal: 10,
+    height:37
   },
   cancelButton: {
     backgroundColor: "#DC3545", // Adjust the color as needed

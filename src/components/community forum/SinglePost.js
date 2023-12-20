@@ -168,7 +168,7 @@ const SinglePost = ({ post }) => {
                 style={styles.avatarIcon}
               />
               <View style={styles.textContainer}>
-                <Text style={styles.titleText}>
+                <Text style={styles.nameText}>
                   {`${post.therapistId.firstName} ${post.therapistId.lastName}`}
                 </Text>
                 <TouchableOpacity
@@ -279,7 +279,7 @@ const SinglePost = ({ post }) => {
                 style={styles.avatarIcon}
               />
               <View style={styles.textContainer}>
-                <Text style={styles.textContainer}>
+                <Text style={styles.nameText}>
                   {`${post.clientId.firstName} ${post.clientId.lastName}`}
                 </Text>
                 <Text style={styles.subtitleText}>
@@ -477,7 +477,13 @@ const styles = StyleSheet.create({
     marginTop: 3,
     fontSize: 15,
     fontWeight: "bold",
+    marginLeft:40
   },
+nameText:{
+  marginTop: 3,
+  fontSize: 15,
+  fontWeight: "bold",
+},
   subtitleText: {
     fontSize: 14,
     color: "gray",
@@ -487,6 +493,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     color: "black", // Adjust the color as needed
     marginVertical: 10,
+    marginLeft:40
   },
   readMoreText: {
     color: "rgb(192, 192, 192)",
