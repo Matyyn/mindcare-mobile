@@ -78,7 +78,7 @@ const SliderScreen = ({ navigation, route }) => {
         style={styles.slider}
         minimumValue={0}
         maximumValue={1}
-        minimumTrackTintColor="red"
+        minimumTrackTintColor="#FFC727"
         maximumTrackTintColor="white"
         thumbTintColor="black"
         thumbStyle={styles.thumbStyle}
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   slider: {
     width: "100%",
     height: 60,
-    backgroundColor: "orange",
+    backgroundColor: "#2D3748",
     borderRadius: 15,
   },
   thumbStyle: {

@@ -26,8 +26,8 @@ const CircularProgress = ({ radius, strokeWidth, progress, heading }) => {
         <Circle
           cx={radius}
           cy={radius}
-          r={radius - strokeWidth / 2}
-          stroke="orange"
+          r={radius - strokeWidth / 2}  
+          stroke="#FFC727"
           strokeWidth={strokeWidth}
           strokeDasharray={`${circumference} ${circumference}`}
           strokeDashoffset={strokeDashoffset}
@@ -156,7 +156,7 @@ const App = () => {
             data={barChartData}
             x="day"
             y="hours"
-            style={{ data: { fill: "orange" } }}
+            style={{ data: { fill: "#FFC727" } }}
           />
         </VictoryChart>
         <View style={styles.paragaphContainer}>
@@ -165,12 +165,7 @@ const App = () => {
         <View style={styles.paragaphContainer}>
           <Text style={styles.paragraph}>
             A sleep efficiency of {efficiency.toFixed()}% indicates that out of the total time spent
-            in bed, only {efficiency.toFixed()}% of that time was actually spent asleep. This means
-            that the person had a very low amount of actual sleep during the
-            time they were in bed. A sleep efficiency of {efficiency.toFixed()}% indicates that out
-            of the total time spent in bed, only {efficiency.toFixed()}% of that time was actually
-            spent asleep. This means that the person had a very low amount of
-            actual sleep during the time they were in bed.
+            in bed, only {efficiency.toFixed()}% of that time was actually spent asleep.
           </Text>
         </View>
       </View>

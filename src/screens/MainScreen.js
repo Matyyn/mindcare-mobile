@@ -50,7 +50,7 @@ const Card = ({ imageSource, title, cardTitle, cardText, navigation }) => {
             anchor={
               <TouchableOpacity onPress={openMenu}>
                 <Icon
-                  name="clipboard-list"
+                  name="bell"
                   size={30}
                   color="black"
                   style={styles.copyIcon}
@@ -103,7 +103,7 @@ const Carousel = ({ navigation }) => {
     {
       imageSource:
         "https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2FfindTherapist.png?alt=media&token=984f98c9-ea13-4e98-b230-5c63f70be984",
-      title: "View Pyschological Profile",
+      title: "Pyschological Profile",
       additionalText: "Attempt different types of Beck Inventory Tests",
       cardTitle: "Pyschological Profile ",
       cardText: "Attempt Tests",
@@ -237,7 +237,7 @@ const App = () => {
         }}
       />
       <Stack.Screen
-        name="View Pyschological Profile"
+        name="Pyschological Profile"
         component={MoodsScreen}
         options={{
           headerShown: false,
